@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Yönetim Paneli · Medya Reklam</title>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#0D70FA" />
+  <link rel="stylesheet" href="assets/styles.css?v=9" />
+  <link rel="stylesheet" href="assets/admin.css?v=1" />
+</head>
+<body class="admin-body">
+
+  <!-- ===================== Giriş ekranı ===================== -->
+  <div class="login" id="login">
+    <form class="login__card" id="loginForm">
+      <img src="assets/img/logo.png" alt="Medya Reklam" />
+      <h2>Yönetim Paneli</h2>
+      <p>Devam etmek için şifrenizi girin.</p>
+      <div class="field">
+        <label for="pw">Şifre</label>
+        <input type="password" id="pw" autocomplete="current-password" placeholder="••••••••" />
+      </div>
+      <div class="login__err" id="loginErr">Şifre hatalı. Tekrar deneyin.</div>
+      <button type="submit" class="btn btn--primary btn--block">Giriş Yap</button>
+      <p class="login__hint">Geçici şifre: <strong>medya2024</strong> · Gerçek giriş Supabase Auth ile gelecek.</p>
+    </form>
+  </div>
+
+  <!-- ===================== Panel ===================== -->
+  <div class="admin" id="admin" hidden>
+
+    <!-- ---- Kenar çubuğu ---- -->
+    <aside class="aside">
+      <div class="aside__brand">
+        <img src="assets/img/logo.png" alt="Medya Reklam" />
+        <span class="tag">ADMIN</span>
+      </div>
+      <nav class="aside__nav" id="nav">
+        <a class="aside__link is-active" data-panel="gallery" href="#gallery">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          İşler / Galeri
+        </a>
+        <a class="aside__link" data-panel="stats" href="#stats">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="6"/><rect x="12" y="7" width="3" height="10"/><rect x="17" y="13" width="3" height="4"/></svg>
+          İstatistikler
+        </a>
+        <a class="aside__link" data-panel="videos" href="#videos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m10 9 5 3-5 3z"/></svg>
+          Videolar
+        </a>
+        <a class="aside__link" data-panel="testimonials" href="#testimonials">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Yorumlar
+        </a>
+        <a class="aside__link" data-panel="genel" href="#genel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Sayfa &amp; Ayarlar
+        </a>
+      </nav>
+      <div class="aside__spacer"></div>
+      <div class="aside__foot">
+        <a class="aside__link" href="portfoy.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+          Siteyi Gör
+        </a>
+        <a class="aside__link" href="#" id="logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+          Çıkış Yap
+        </a>
+      </div>
+    </aside>
+
+    <!-- ---- Ana alan ---- -->
+    <div class="main">
+      <div class="topbar-adm">
+        <div style="display:flex;align-items:center;gap:14px;">
+          <button class="adm-burger" id="burger" aria-label="Menü">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          </button>
+          <h1 id="panelTitle">İşler / Galeri</h1>
+        </div>
+        <div class="topbar-adm__actions">
+          <a class="btn btn--ghost" href="portfoy.html" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+            <span>Önizle</span>
+          </a>
+          <button class="btn btn--primary" id="addBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+            <span id="addBtnLabel">Yeni İş</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="main__inner">
+
+        <!-- ===== Galeri ===== -->
+        <section class="panel is-active" id="panel-gallery">
+          <div class="panel__head">
+            <div>
+              <span class="eyebrow">Tamamlanan İşler</span>
+              <p>Portföydeki proje galerisini yönet. Sürükleyerek ya da oklarla sırala.</p>
+            </div>
+            <span class="panel__count" id="galleryCount"></span>
+          </div>
+          <div class="adm-filter" id="galleryFilter"></div>
+          <div class="adm-list" id="galleryList"></div>
+        </section>
+
+        <!-- ===== İstatistikler ===== -->
+        <section class="panel" id="panel-stats">
+          <div class="panel__head">
+            <div>
+              <span class="eyebrow">Sayı Bandı</span>
+              <p>Portföy üstündeki dört sayı (tamamlanan proje, yıl tecrübe…).</p>
+            </div>
+            <span class="panel__count" id="statsCount"></span>
+          </div>
+          <div class="adm-list" id="statsList"></div>
+        </section>
+
+        <!-- ===== Videolar ===== -->
+        <section class="panel" id="panel-videos">
+          <div class="panel__head">
+            <div>
+              <span class="eyebrow">İş Başında</span>
+              <p>Portföy sayfasındaki video galerisi.</p>
+            </div>
+            <span class="panel__count" id="videosCount"></span>
+          </div>
+          <div class="adm-list" id="videosList"></div>
+        </section>
+
+        <!-- ===== Yorumlar ===== -->
+        <section class="panel" id="panel-testimonials">
+          <div class="panel__head">
+            <div>
+              <span class="eyebrow">Müşteri Yorumları</span>
+              <p>Portföy sayfasındaki müşteri görüşleri.</p>
+            </div>
+            <span class="panel__count" id="testimonialsCount"></span>
+          </div>
+          <div class="adm-list" id="testimonialsList"></div>
+        </section>
+
+        <!-- ===== Genel / Ayarlar ===== -->
+        <section class="panel" id="panel-genel">
+          <div class="card">
+            <h3>Sayfa Başlığı &amp; Açıklama</h3>
+            <p class="sub">Portföy sayfasının üst kısmındaki başlık ve tanıtım metni.</p>
+            <form id="heroForm">
+              <div class="field">
+                <label for="heroTitle">Başlık</label>
+                <input type="text" id="heroTitle" />
+              </div>
+              <div class="field">
+                <label for="heroDesc">Açıklama</label>
+                <textarea id="heroDesc" style="min-height:90px;"></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary">Kaydet</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Yedek &amp; Geri Yükleme</h3>
+            <p class="sub">Supabase'e geçmeden önce içeriğini dosya olarak yedekleyebilirsin.</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn btn--ghost" id="exportBtn">İçeriği Dışa Aktar (.json)</button>
+              <button class="btn btn--ghost file-btn" id="importBtn">İçe Aktar (.json)<input type="file" id="importFile" accept="application/json,.json" /></button>
+              <button class="btn btn--ghost" id="resetBtn" style="color:var(--pale-red);border-color:var(--pale-red-bg);">Varsayılana Sıfırla</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Sonraki Adım: Supabase</h3>
+            <p class="sub">Bu panel canlı veritabanına hazır kuruldu.</p>
+            <div class="note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              <div>
+                Şu an değişiklikler yalnızca <strong>bu tarayıcıda</strong> saklanıyor (önizleme modu).
+                Canlıya almak için <code>assets/store.js</code> dosyasındaki <code>getContent</code> ve
+                <code>saveContent</code> fonksiyonlarını Supabase'e bağlaman yeterli — sayfaların geri kalanına
+                dokunmana gerek yok. Adımlar o dosyanın içinde yazılı.
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== Çekmece (ekle/düzenle) ===================== -->
+  <div class="drawer" id="drawer">
+    <div class="drawer__veil" data-close></div>
+    <div class="drawer__panel">
+      <div class="drawer__head">
+        <h3 id="drawerTitle">Düzenle</h3>
+        <button class="icon-btn" data-close aria-label="Kapat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form class="drawer__form" id="drawerForm"></form>
+      <div class="drawer__foot">
+        <button class="btn btn--ghost" data-close>Vazgeç</button>
+        <button class="btn btn--primary" id="drawerSave">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+
+  <script src="assets/store.js?v=1"></script>
+  <script src="assets/admin.js?v=1"></script>
+</body>
+</html>

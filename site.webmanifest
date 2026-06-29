@@ -1,0 +1,15 @@
+{
+  "name": "Medya Reklam",
+  "short_name": "Medya Reklam",
+  "description": "İstanbul Kağıthane — ışıklı harf, totem, kompozit cephe, araç giydirme ve dijital baskı tabela üretimi.",
+  "lang": "tr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FBFBFA",
+  "theme_color": "#0D70FA",
+  "icons": [
+    { "src": "assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "assets/img/favicon.png", "sizes": "any", "type": "image/png" }
+  ]
+}

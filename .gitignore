@@ -1,0 +1,19 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / tooling
+.claude/
+.vercel/
+*.log
+
+# Dependencies (yoksa da güvenli)
+node_modules/
+
+# Geçici / yardımcı betikler (statik sitenin parçası değil)
+/*.py
+
+# Ham kaynak medya indirmeleri (site tarafından kullanılmıyor)
+/Belgeler/
+/bad_words.txt
