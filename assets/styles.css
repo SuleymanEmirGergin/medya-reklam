@@ -480,6 +480,11 @@ p { color: var(--ink-soft); }
 .site-footer a { color: #c9c8c2; transition: color 0.2s; }
 .site-footer a:hover { color: #fff; }
 .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 44px; padding-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+@media (min-width: 1025px) {
+  /* Büyük footer logosunu yukarı al, link sütunlarını indir: "Medya" yazısı Kurumsal sütunuyla hizalansın */
+  .site-footer .brand__logo { margin-top: -40px; }
+  .site-footer .footer__col { margin-top: 47px; }
+}
 .footer__brand .brand__name { color: #fff; }
 .footer__brand p { color: #98978f; font-size: 0.92rem; margin-top: 18px; max-width: 24rem; }
 .footer__social { display: flex; gap: 12px; margin-top: 22px; }

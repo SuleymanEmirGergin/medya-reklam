@@ -20,8 +20,8 @@
      Aktif etmek için ikisini doldur (boşsa localStorage modu sürer).
      Bu değerler herkese açıktır (anon / publishable key).
      >>> GİZLİ service_role anahtarını BURAYA KOYMA. <<< */
-  var SUPABASE_URL = '';   // örn. 'https://xxxxx.supabase.co'
-  var SUPABASE_KEY = '';   // 'anon public' / 'publishable' anahtar
+  var SUPABASE_URL = 'https://noazvsxbhzuohnpxllgp.supabase.co';   // örn. 'https://xxxxx.supabase.co'
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vYXp2c3hiaHp1b2hucHhsbGdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NDgwNTYsImV4cCI6MjA5ODMyNDA1Nn0.cX0cA1OIQRuclm9xBJoe0mJZXTyJMzjAkT0mieVlCEY';   // 'anon public' / 'publishable' anahtar
   var SB_TABLE  = 'site_content';
   var SB_ROW_ID = 1;
 

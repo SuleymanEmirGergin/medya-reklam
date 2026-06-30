@@ -77,6 +77,12 @@
     var sbMode = !!(window.Store && Store.isSupabase && Store.isSupabase());
     if (sbMode && emailWrap) emailWrap.hidden = false;   // Supabase: e-posta alanını göster
     if (sbMode) { var hintEl = $('.login__hint'); if (hintEl) hintEl.hidden = true; }  // geçici şifre ipucunu gizle
+    if (sbMode) {  // Supabase bağlı: "yapılacak / önizleme" metinlerini güncel durumla değiştir
+      var lead = $('#loginLead'); if (lead) lead.textContent = 'E-posta ve şifrenizle giriş yapın.';
+      var dbT = $('#dbCardTitle'); if (dbT) dbT.textContent = 'Veritabanı: Supabase (Canlı) ✓';
+      var dbS = $('#dbCardSub'); if (dbS) dbS.textContent = 'Panel canlı Supabase veritabanına bağlı.';
+      var dbN = $('#dbCardNote'); if (dbN) dbN.innerHTML = 'Kaydettiğin içerik <strong>anında tüm ziyaretçilere</strong> yansır. İlk kurulumda aşağıdaki <strong>“Varsayılana Dön”</strong> ile mevcut içeriği Supabase’e bir kez tohumla, sonra düzenle.';
+    }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
