@@ -585,12 +585,11 @@ p { color: var(--ink-soft); }
 .brand__logo { height: 54px; width: auto; display: block; }
 .site-header .brand__logo { height: 48px; }
 .site-header .brand__name { color: #fff; font-size: 1.34rem; }
-.site-footer .brand__logo { height: 130px; }
+.site-footer .brand__logo { width: 100%; max-width: 24rem; height: auto; }
 @media (max-width: 560px) {
   .brand__logo { height: 44px; }
   .site-header .brand__logo { height: 42px; }
   .site-header .brand__name { font-size: 1.15rem; }
-  .site-footer .brand__logo { height: 104px; }
 }
 
 
