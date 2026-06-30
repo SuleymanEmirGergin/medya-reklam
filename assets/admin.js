@@ -73,9 +73,21 @@
 
   function initLogin() {
     var form = $('#loginForm'), pw = $('#pw'), err = $('#loginErr');
+    var emailWrap = $('#emailField'), email = $('#email');
+    var sbMode = !!(window.Store && Store.isSupabase && Store.isSupabase());
+    if (sbMode && emailWrap) emailWrap.hidden = false;   // Supabase: e-posta alanını göster
+    if (sbMode) { var hintEl = $('.login__hint'); if (hintEl) hintEl.hidden = true; }  // geçici şifre ipucunu gizle
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (pw.value === ADMIN_PW) {
+      if (sbMode) {
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) btn.disabled = true;
+        Store.signIn((email && email.value || '').trim(), pw.value)
+          .then(function () { err.classList.remove('show'); showApp(); })
+          .catch(function () { err.classList.add('show'); pw.value = ''; pw.focus(); })
+          .then(function () { if (btn) btn.disabled = false; });
+      } else if (pw.value === ADMIN_PW) {
         try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e2) {}
         err.classList.remove('show');
         showApp();
@@ -85,6 +97,7 @@
     });
     $('#logout').addEventListener('click', function (e) {
       e.preventDefault();
+      if (sbMode && Store.signOut) { Store.signOut().then(function () { location.reload(); }); return; }
       try { sessionStorage.removeItem(SESSION_KEY); } catch (e2) {}
       location.reload();
     });
@@ -550,8 +563,16 @@
     if (hash && SECTIONS[hash]) currentSection = hash;
     setPanel(currentSection);
 
-    if (isAuthed()) showApp();
-    else $('#pw').focus();
+    if (window.Store && Store.isSupabase && Store.isSupabase()) {
+      Store.hasSession().then(function (ok) {
+        if (ok) showApp();
+        else ($('#email') || $('#pw')).focus();
+      });
+    } else if (isAuthed()) {
+      showApp();
+    } else {
+      $('#pw').focus();
+    }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

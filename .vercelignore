@@ -1,0 +1,5 @@
+# Vercel'e yuklenmeyecek dosyalar (yalnizca yerel/kaynak)
+Belgeler/
+.claude/
+__pycache__/
+*.py

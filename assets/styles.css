@@ -583,8 +583,15 @@ p { color: var(--ink-soft); }
    Brand logo image
    ========================================================================== */
 .brand__logo { height: 54px; width: auto; display: block; }
-.site-footer .brand__logo { height: 72px; }
-@media (max-width: 560px) { .brand__logo { height: 44px; } }
+.site-header .brand__logo { height: 48px; }
+.site-header .brand__name { color: #fff; font-size: 1.34rem; }
+.site-footer .brand__logo { height: 130px; }
+@media (max-width: 560px) {
+  .brand__logo { height: 44px; }
+  .site-header .brand__logo { height: 42px; }
+  .site-header .brand__name { font-size: 1.15rem; }
+  .site-footer .brand__logo { height: 104px; }
+}
 
 
 /* ==========================================================================

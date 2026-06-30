@@ -1,25 +1,55 @@
 /* ==========================================================================
    Medya Reklam — İçerik Veri Katmanı (Store)
    --------------------------------------------------------------------------
-   Bu dosya, portföy sayfasının ve admin panelinin OKUDUĞU/YAZDIĞI tek
-   içerik kaynağıdır. Şu an veriler tarayıcıda (localStorage) tutulur.
+   Portföy sayfasının ve admin panelinin OKUDUĞU/YAZDIĞI tek içerik kaynağı.
 
-   >>> SUPABASE'E GEÇİŞ <<<
-   Sayfaların hiçbirine dokunmadan, SADECE aşağıdaki 4 fonksiyonun içini
-   değiştirerek canlı veritabanına geçebilirsin:
-       Store.getContent()      -> SELECT ile tüm içeriği çek
-       Store.saveContent(c)    -> UPSERT/DELETE ile kaydet
-       Store.resetToDefaults() -> (opsiyonel) tohum veriyi geri yükle
-   Fonksiyonlar zaten `async` (Promise döndürüyor); admin.js ve portfoy.html
-   hep `await Store...` ile çağırıyor. Yani imza aynı kaldığı sürece
-   çağrı yapan hiçbir kodu değiştirmen GEREKMEZ.
+   Varsayılan: tarayıcı (localStorage).
+   SUPABASE_URL + SUPABASE_KEY doldurulursa OTOMATİK olarak canlı Supabase
+   veritabanına geçer (kütüphane gerektiğinde dinamik yüklenir; boşken hiç
+   yüklenmez, hiçbir şeyi etkilemez).  Kurulum: SUPABASE-KURULUM.md
 
-   Supabase örnek iskeleti (yorum satırı olarak en altta verildi).
+   Çağıran kod (admin.js / portfoy.html) hep `await Store.xxx()` kullanır;
+   imzalar aynı kaldığı için onlarda değişiklik gerekmez.
    ========================================================================== */
 (function (global) {
   'use strict';
 
   var LS_KEY = 'MEDYA_CONTENT_V1';
+
+  /* ===== SUPABASE AYARLARI =================================================
+     Aktif etmek için ikisini doldur (boşsa localStorage modu sürer).
+     Bu değerler herkese açıktır (anon / publishable key).
+     >>> GİZLİ service_role anahtarını BURAYA KOYMA. <<< */
+  var SUPABASE_URL = '';   // örn. 'https://xxxxx.supabase.co'
+  var SUPABASE_KEY = '';   // 'anon public' / 'publishable' anahtar
+  var SB_TABLE  = 'site_content';
+  var SB_ROW_ID = 1;
+
+  var _client = null;
+  function client() {
+    if (!SUPABASE_URL || !SUPABASE_KEY) return null;
+    if (!global.supabase || !global.supabase.createClient) return null;
+    if (!_client) _client = global.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    return _client;
+  }
+  // Supabase JS kütüphanesini (yalnızca yapılandırılmışsa) gerektiğinde yükle.
+  var _libPromise = null;
+  function ensureLib() {
+    if (!SUPABASE_URL || !SUPABASE_KEY) return Promise.resolve(null);
+    var c = client();
+    if (c) return Promise.resolve(c);
+    if (_libPromise) return _libPromise;
+    _libPromise = new Promise(function (resolve) {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      s.async = true;
+      s.onload = function () { resolve(client()); };
+      s.onerror = function () { resolve(null); };
+      document.head.appendChild(s);
+    });
+    return _libPromise;
+  }
+  function isSupabase() { return !!(SUPABASE_URL && SUPABASE_KEY); }
 
   /* ---- Kategoriler (galeri filtresi ile birebir) ----------------------- */
   var CATEGORIES = [
@@ -115,40 +145,72 @@
   }
 
   /* ======================================================================
-     PUBLIC API  (Supabase'e geçerken yalnızca buranın İÇİNİ değiştir)
+     PUBLIC API  (Supabase modunda otomatik DB; değilse localStorage)
      ====================================================================== */
 
-  // Tüm içeriği oku.  Supabase: her tablodan SELECT yapıp aynı şekli döndür.
+  // Tüm içeriği oku.
   function getContent() {
-    try {
-      var raw = global.localStorage.getItem(LS_KEY);
-      return Promise.resolve(merge(raw ? JSON.parse(raw) : null));
-    } catch (e) {
-      return Promise.resolve(defaults());
-    }
+    return ensureLib().then(function (sb) {
+      if (sb) {
+        return sb.from(SB_TABLE).select('data').eq('id', SB_ROW_ID).maybeSingle()
+          .then(function (res) {
+            if (res.error) throw res.error;
+            return merge(res.data ? res.data.data : null);
+          });
+      }
+      try {
+        var raw = global.localStorage.getItem(LS_KEY);
+        return merge(raw ? JSON.parse(raw) : null);
+      } catch (e) { return defaults(); }
+    });
   }
 
-  // Tüm içeriği kaydet.  Supabase: ilgili tablolara UPSERT + silinenler için DELETE.
+  // Tüm içeriği kaydet.  Supabase modunda yalnızca giriş yapmış admin yazabilir (RLS).
   function saveContent(content) {
-    try {
+    return ensureLib().then(function (sb) {
+      if (sb) {
+        return sb.from(SB_TABLE)
+          .upsert({ id: SB_ROW_ID, data: content, updated_at: new Date().toISOString() })
+          .then(function (res) { if (res.error) throw res.error; return true; });
+      }
       global.localStorage.setItem(LS_KEY, JSON.stringify(content));
-      return Promise.resolve(true);
-    } catch (e) {
-      return Promise.reject(e);
-    }
+      return true;
+    });
   }
 
   // Tohum veriye dön (her şeyi sıfırla).
   function resetToDefaults() {
-    try {
-      global.localStorage.removeItem(LS_KEY);
-      return Promise.resolve(defaults());
-    } catch (e) {
-      return Promise.resolve(defaults());
-    }
+    var d = defaults();
+    return ensureLib().then(function (sb) {
+      if (sb) {
+        return sb.from(SB_TABLE)
+          .upsert({ id: SB_ROW_ID, data: d, updated_at: new Date().toISOString() })
+          .then(function () { return d; });
+      }
+      try { global.localStorage.removeItem(LS_KEY); } catch (e) {}
+      return d;
+    });
   }
 
-  /* ---- Kolaylık: dışa/içe aktarma (Supabase öncesi yedek için) --------- */
+  /* ---- Supabase Auth (admin girişi) ------------------------------------ */
+  function signIn(email, password) {
+    return ensureLib().then(function (sb) {
+      if (!sb) throw new Error('Supabase yapılandırılmadı.');
+      return sb.auth.signInWithPassword({ email: email, password: password })
+        .then(function (res) { if (res.error) throw res.error; return res.data; });
+    });
+  }
+  function signOut() {
+    return ensureLib().then(function (sb) { return sb ? sb.auth.signOut() : null; });
+  }
+  function hasSession() {
+    return ensureLib().then(function (sb) {
+      if (!sb) return false;
+      return sb.auth.getSession().then(function (res) { return !!(res.data && res.data.session); });
+    });
+  }
+
+  /* ---- Kolaylık: dışa/içe aktarma (yedek için, localStorage) ----------- */
   function exportJSON() {
     try {
       var raw = global.localStorage.getItem(LS_KEY);
@@ -180,48 +242,12 @@
     saveContent: saveContent,
     resetToDefaults: resetToDefaults,
     exportJSON: exportJSON,
-    importJSON: importJSON
+    importJSON: importJSON,
+    /* Supabase */
+    isSupabase: isSupabase,
+    signIn: signIn,
+    signOut: signOut,
+    hasSession: hasSession
   };
-
-  /* ======================================================================
-     SUPABASE İSKELETİ (hazır olduğunda yukarıdaki 3 fonksiyonun yerine koy)
-     ----------------------------------------------------------------------
-     1) <head>'e ekle:
-        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-     2) Bu dosyanın başında istemciyi oluştur:
-        var sb = supabase.createClient('https://XXX.supabase.co', 'PUBLISHABLE_KEY');
-     3) Önerilen tablolar: site_settings, stats, gallery, videos, testimonials
-        (her birinde sort_order sütunu; gallery için image, title, subtitle, category).
-
-     async function getContent() {
-       var [site, stats, gallery, videos, testimonials] = await Promise.all([
-         sb.from('site_settings').select('*').single(),
-         sb.from('stats').select('*').order('sort_order'),
-         sb.from('gallery').select('*').order('sort_order'),
-         sb.from('videos').select('*').order('sort_order'),
-         sb.from('testimonials').select('*').order('sort_order')
-       ]);
-       return {
-         site: site.data || defaults().site,
-         stats: stats.data || [],
-         gallery: gallery.data || [],
-         videos: videos.data || [],
-         testimonials: testimonials.data || []
-       };
-     }
-
-     async function saveContent(c) {
-       // sort_order'ı diziye göre yeniden numarala, sonra her tabloya upsert et:
-       c.gallery.forEach((r,i)=>r.sort_order=i);
-       await sb.from('gallery').upsert(c.gallery);
-       // ... diğer tablolar için de aynısı ...
-       // (silinenleri yakalamak için: önce mevcut id'leri çek, c'de olmayanları DELETE et)
-     }
-
-     NOT: Yazma işlemleri (saveContent) sadece giriş yapmış admin için çalışmalı.
-     Bunu Supabase Auth + Row Level Security (RLS) ile sağla:
-       - gallery vb. tablolara herkese SELECT izni,
-       - INSERT/UPDATE/DELETE yalnızca authenticated kullanıcıya.
-     ====================================================================== */
 
 })(window);
