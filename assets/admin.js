@@ -32,6 +32,7 @@
     ],
     videos: [
       { key: 'src',      label: 'Video dosyası / URL', type: 'text', required: true, ph: 'assets/video/video-1.mp4' },
+      { key: 'poster',   label: 'Kapak görseli',       type: 'image' },
       { key: 'title',    label: 'Başlık',              type: 'text', required: true },
       { key: 'subtitle', label: 'Alt başlık',          type: 'text' }
     ],
@@ -82,6 +83,10 @@
       var dbT = $('#dbCardTitle'); if (dbT) dbT.textContent = 'Veritabanı: Supabase (Canlı) ✓';
       var dbS = $('#dbCardSub'); if (dbS) dbS.textContent = 'Panel canlı Supabase veritabanına bağlı.';
       var dbN = $('#dbCardNote'); if (dbN) dbN.innerHTML = 'Kaydettiğin içerik <strong>anında tüm ziyaretçilere</strong> yansır. İlk kurulumda aşağıdaki <strong>“Varsayılana Dön”</strong> ile mevcut içeriği Supabase’e bir kez tohumla, sonra düzenle.';
+    } else {  // Supabase bağlı değil: önizleme (yerel) modu metinleri
+      var dbT0 = $('#dbCardTitle'); if (dbT0) dbT0.textContent = 'Veritabanı: Önizleme (yerel)';
+      var dbS0 = $('#dbCardSub'); if (dbS0) dbS0.textContent = 'Değişiklikler yalnızca bu tarayıcıda tutuluyor.';
+      var dbN0 = $('#dbCardNote'); if (dbN0) dbN0.innerHTML = 'Şu an değişiklikler yalnızca <strong>bu tarayıcıda</strong> saklanıyor (önizleme modu). Yayına almak için <code>assets/store.js</code> içine Supabase bilgilerini girmen yeterli.';
     }
 
     form.addEventListener('submit', function (e) {
@@ -370,7 +375,7 @@
             '<button type="button" class="btn btn--ghost btn--block file-btn">Bilgisayardan Yükle<input type="file" id="imgFile" accept="image/*" /></button>' +
           '</div>' +
         '</div>' +
-        '<input type="hidden" name="image" id="imgValue" value="' + esc(value) + '" />');
+        '<input type="hidden" name="' + f.key + '" id="imgValue" value="' + esc(value) + '" />');
     }
     return '';
   }

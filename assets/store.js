@@ -70,7 +70,10 @@
     'arac-skypool.jpg','arac-skypool-2.jpg','atolye.jpg','cephe-mahir.jpg','eczane-tabela.jpg',
     'f1-arac-16.jpg','f1-render.jpg','isikli-tabela-gece.jpg','kutu-harf-bigo.jpg',
     'kutu-harf-ddiamond.jpg','kutu-harf-ddiamond-2.jpg','kutu-harf-mavi-hayal.jpg','kutu-harf-vivo.jpg',
-    'lightbox-ddiamond.jpg','lightbox-ddiamond-2.jpg','pano-petrol-ofisi.jpg','spor-araba.jpg'
+    'lightbox-ddiamond.jpg','lightbox-ddiamond-2.jpg','pano-petrol-ofisi.jpg','spor-araba.jpg',
+    'cakiroglu-tuning.jpg','sinpas-is-modern.jpg','sinpas-kizilbuk-uretim.jpg','sinpas-isikli-pano.jpg',
+    'sinpas-koru-aura.jpg','sinpas-karsilama.jpg','sinpas-yapi-tasarruf.jpg','yenikoy-isikli-harf.jpg',
+    'kardesler-cam-vitrin.jpg','kizilbuk-wellness.jpg'
   ].map(function (f) { return 'assets/img/' + f; });
 
   /* ---- TOHUM VERİ (sitenin mevcut içeriği) ----------------------------- */
@@ -108,13 +111,23 @@
         { id: 'g19', image: 'assets/img/f1-render.jpg',                   title: 'Petrol Ofisi F1',    subtitle: 'Araç Giydirme Tasarım', category: 'arac' },
         { id: 'g20', image: 'assets/img/spor-araba.jpg',                  title: 'Spor Araç',          subtitle: 'Araç Giydirme',        category: 'arac' },
         { id: 'g21', image: 'assets/img/atolye.jpg',                      title: 'Atölyemizden',       subtitle: 'Üretim',               category: 'uretim' },
-        { id: 'g22', image: 'assets/img/arac-aktas-vinc-2.jpg',           title: 'Atölyede Uygulama',  subtitle: 'Araç Giydirme',        category: 'arac' }
+        { id: 'g22', image: 'assets/img/arac-aktas-vinc-2.jpg',           title: 'Atölyede Uygulama',  subtitle: 'Araç Giydirme',        category: 'arac' },
+        { id: 'g23', image: 'assets/img/cakiroglu-tuning.jpg',            title: 'Çakıroğlu Tuning',    subtitle: 'Cephe & Kutu Harf',        category: 'cephe' },
+        { id: 'g24', image: 'assets/img/sinpas-is-modern.jpg',            title: 'Sinpaş İş Modern',    subtitle: 'Işıklı Kutu Harf',         category: 'isikli' },
+        { id: 'g25', image: 'assets/img/sinpas-kizilbuk-uretim.jpg',      title: 'Sinpaş Kızılbük',     subtitle: 'Işıklı Kutu Harf Üretimi', category: 'isikli' },
+        { id: 'g26', image: 'assets/img/sinpas-isikli-pano.jpg',          title: 'Sinpaş Işıklı Pano',  subtitle: 'Işıklı Pano & Lightbox',   category: 'baski' },
+        { id: 'g27', image: 'assets/img/sinpas-koru-aura.jpg',            title: 'Sinpaş Koru Aura',    subtitle: 'Cephe & Kutu Harf',        category: 'cephe' },
+        { id: 'g28', image: 'assets/img/sinpas-karsilama.jpg',            title: 'Sinpaş Karşılama',    subtitle: 'Kurumsal İç Mekan',        category: 'cephe' },
+        { id: 'g29', image: 'assets/img/sinpas-yapi-tasarruf.jpg',        title: 'Sinpaş Yapı Tasarruf',subtitle: 'Cephe Giydirme',           category: 'cephe' },
+        { id: 'g30', image: 'assets/img/yenikoy-isikli-harf.jpg',         title: '464 Yeniköy',         subtitle: 'Işıklı Ferforje Harf',     category: 'isikli' },
+        { id: 'g31', image: 'assets/img/kardesler-cam-vitrin.jpg',        title: 'Kardeşler Cam',       subtitle: 'Vitrin & Cam Giydirme',    category: 'baski' },
+        { id: 'g32', image: 'assets/img/kizilbuk-wellness.jpg',           title: 'Kızılbük Wellness',   subtitle: 'İç Mekan Işıklı',          category: 'isikli' }
       ],
       videos: [
-        { id: 'v1', src: 'assets/video/video-1.mp4', title: 'Eminol Catering', subtitle: 'Araç Giydirme' },
-        { id: 'v2', src: 'assets/video/video-2.mp4', title: 'Petrol Ofisi F1', subtitle: 'Araç Giydirme Tasarım' },
-        { id: 'v3', src: 'assets/video/video-3.mp4', title: 'İç Mekan Neon',   subtitle: 'Işıklı Harf Tabela' },
-        { id: 'v4', src: 'assets/video/video-4.mp4', title: 'Petrol Ofisi F1', subtitle: 'Tasarım Render' }
+        { id: 'v1', src: 'assets/video/video-1.mp4', poster: 'assets/img/arac-eminol-yan.jpg', title: 'Eminol Catering', subtitle: 'Araç Giydirme' },
+        { id: 'v2', src: 'assets/video/video-2.mp4', poster: 'assets/img/f1-render.jpg',       title: 'Petrol Ofisi F1', subtitle: 'Araç Giydirme Tasarım' },
+        { id: 'v3', src: 'assets/video/video-3.mp4', poster: 'assets/img/arac-golf.jpg',        title: 'VW Golf',          subtitle: 'Özel Araç Giydirme' },
+        { id: 'v4', src: 'assets/video/video-4.mp4', poster: 'assets/img/f1-arac-16.jpg',       title: 'Petrol Ofisi F1', subtitle: 'Tasarım Render' }
       ],
       testimonials: [
         { id: 't1', stars: 5, quote: 'Işıklı kutu harf tabelamız söz verdikleri gün, kusursuz bir montajla yerindeydi. İşçilik son derece temiz; dükkân akşamları çok daha dikkat çekici oldu.', name: 'Mehmet K.', role: 'Restoran Sahibi · Kağıthane' },

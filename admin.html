@@ -175,24 +175,23 @@
 
           <div class="card">
             <h3>Yedek &amp; Geri Yükleme</h3>
-            <p class="sub">Supabase'e geçmeden önce içeriğini dosya olarak yedekleyebilirsin.</p>
+            <p class="sub">Büyük bir değişiklik yapmadan önce içeriğini dosya olarak yedekleyebilirsin.</p>
             <div style="display:flex;gap:10px;flex-wrap:wrap;">
               <button class="btn btn--ghost" id="exportBtn">İçeriği Dışa Aktar (.json)</button>
               <button class="btn btn--ghost file-btn" id="importBtn">İçe Aktar (.json)<input type="file" id="importFile" accept="application/json,.json" /></button>
-              <button class="btn btn--ghost" id="resetBtn" style="color:var(--pale-red);border-color:var(--pale-red-bg);">Varsayılana Sıfırla</button>
+              <button class="btn btn--ghost" id="resetBtn" style="color:var(--pale-red);border-color:var(--pale-red-bg);">Varsayılana Dön</button>
             </div>
           </div>
 
           <div class="card">
-            <h3 id="dbCardTitle">Sonraki Adım: Supabase</h3>
-            <p class="sub" id="dbCardSub">Bu panel canlı veritabanına hazır kuruldu.</p>
+            <h3 id="dbCardTitle">Veritabanı: Supabase (Canlı) ✓</h3>
+            <p class="sub" id="dbCardSub">Panel canlı Supabase veritabanına bağlı.</p>
             <div class="note">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
               <div id="dbCardNote">
-                Şu an değişiklikler yalnızca <strong>bu tarayıcıda</strong> saklanıyor (önizleme modu).
-                Canlıya almak için <code>assets/store.js</code> dosyasındaki <code>getContent</code> ve
-                <code>saveContent</code> fonksiyonlarını Supabase'e bağlaman yeterli — sayfaların geri kalanına
-                dokunmana gerek yok. Adımlar o dosyanın içinde yazılı.
+                Kaydettiğin her değişiklik <strong>anında tüm ziyaretçilere</strong> yansır. Yeni görselleri veya
+                video kapaklarını görmek için bir kez yukarıdaki <strong>“Varsayılana Dön”</strong> ile mevcut
+                içeriği Supabase'e tohumla; sonrasında her şeyi buradan düzenleyebilirsin.
               </div>
             </div>
           </div>
@@ -222,7 +221,7 @@
 
   <div class="toasts" id="toasts"></div>
 
-  <script src="assets/store.js?v=2"></script>
-  <script src="assets/admin.js?v=2"></script>
+  <script src="assets/store.js?v=4"></script>
+  <script src="assets/admin.js?v=4"></script>
 </body>
 </html>
