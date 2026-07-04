@@ -36,7 +36,9 @@
   /* Type */
   --sans: 'Poppins', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;
   --serif: 'Poppins', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', 'SF Mono', ui-monospace, 'Courier New', monospace;
+  /* Tum yazilar tek tip (Poppins). Eski mono etiketler de artik siteyle ayni fonta doner.
+     LED serit (.ledmarquee__item) 'Handjet' pixel fontunu ayrica kullanir. */
+  --mono: 'Poppins', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;
 
   /* Rhythm */
   --maxw: 1536px;   /* içerik genişliği: 1920px ekranda ~%80 kullanım */
@@ -468,7 +470,7 @@ p { color: var(--ink-soft); }
 .folio__cap { position: absolute; inset: auto 0 0 0; padding: 36px 18px 15px; background: linear-gradient(transparent, rgba(18,18,16,0.85)); color: #fff; opacity: 1; transition: background 0.3s var(--ease); }
 .folio__item:hover .folio__cap { background: linear-gradient(transparent, rgba(13,112,250,0.22), rgba(18,18,16,0.92)); }
 .folio__cap b { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; }
-.folio__cap span { display: block; font-size: 0.78rem; color: #cfceca; margin-top: 3px; font-family: var(--mono); letter-spacing: 0.04em; }
+.folio__cap span { display: block; font-size: 0.8rem; color: #cfceca; margin-top: 3px; font-family: var(--sans); letter-spacing: 0.01em; }
 
 /* Filter chips */
 .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
@@ -1054,7 +1056,7 @@ p { color: var(--ink-soft); }
 /* ===================== Portfolio: filter · lightbox · testimonials ===================== */
 .folio-filter { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 28px; }
 .folio-filter__btn {
-  font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;
+  font-family: var(--sans); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase;
   padding: 9px 17px; border-radius: 9999px; border: 1px solid var(--line);
   background: var(--surface); color: var(--ink-soft);
   transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
