@@ -13,6 +13,7 @@ node_modules/
 
 # Geçici / yardımcı betikler (statik sitenin parçası değil)
 /*.py
+/scratch/
 
 # Ham kaynak medya indirmeleri (site tarafından kullanılmıyor)
 /Belgeler/

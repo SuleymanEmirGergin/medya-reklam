@@ -125,9 +125,8 @@
       ],
       videos: [
         { id: 'v1', src: 'assets/video/video-1.mp4', poster: 'assets/img/arac-eminol-yan.jpg', title: 'Eminol Catering', subtitle: 'Araç Giydirme' },
-        { id: 'v2', src: 'assets/video/video-2.mp4', poster: 'assets/img/f1-render.jpg',       title: 'Petrol Ofisi F1', subtitle: 'Araç Giydirme Tasarım' },
-        { id: 'v3', src: 'assets/video/video-3.mp4', poster: 'assets/img/arac-golf.jpg',        title: 'VW Golf',          subtitle: 'Özel Araç Giydirme' },
-        { id: 'v4', src: 'assets/video/video-4.mp4', poster: 'assets/img/f1-arac-16.jpg',       title: 'Petrol Ofisi F1', subtitle: 'Tasarım Render' }
+        { id: 'v3', src: 'assets/video/video-3.mp4', poster: 'assets/img/video-3-poster.jpg',   title: 'Işıklı Kutu Harf', subtitle: 'Atölyemizden' },
+        { id: 'v2', src: 'assets/video/video-2.mp4', poster: 'assets/img/f1-render.jpg',       title: 'Petrol Ofisi F1', subtitle: 'Araç Giydirme Tasarım' }
       ],
       testimonials: [
         { id: 't1', stars: 5, quote: 'Işıklı kutu harf tabelamız söz verdikleri gün, kusursuz bir montajla yerindeydi. İşçilik son derece temiz; dükkân akşamları çok daha dikkat çekici oldu.', name: 'Mehmet K.', role: 'Restoran Sahibi · Kağıthane' },

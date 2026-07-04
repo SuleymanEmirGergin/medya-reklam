@@ -8,13 +8,12 @@
   <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#0D70FA" />
-  <link rel="stylesheet" href="assets/styles.css?v=13" />
+  <link rel="stylesheet" href="assets/styles.css?v=25" />
   <style>
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 40px; }
     .gallery-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); transition: transform 0.3s ease; cursor: pointer; }
@@ -92,30 +91,17 @@
 </head>
 <body>
 
-  <!-- ===================== Top bar ===================== -->
-  <div class="topbar">
-    <div class="container">
-      <div class="topbar__left">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Ücretsiz Keşif &amp; Teklif</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> İstanbul Geneli Montaj</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg> Kendi Atölyemizde Üretim</span>
-      </div>
-      <nav class="topbar__links" aria-label="Hızlı bağlantılar">
-        <a href="rehber.html">Rehber</a>
-        <a href="sirket-politikasi.html">Şirket Politikası</a>
-        <a href="gizlilik.html">KVKK</a>
-      </nav>
-      <div class="topbar__social">
-        <a href="https://www.instagram.com/medya_reklam34/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
-      </div>
+  <!-- Preloader -->
+  <div id="preloader" class="preloader">
+    <div class="preloader__spinner">
+      <img src="assets/img/logo-icon.png" alt="Medya Reklam Yükleniyor" class="preloader__logo" />
     </div>
   </div>
-
   <!-- ===================== Header ===================== -->
   <header class="site-header">
     <div class="container">
       <nav class="nav" aria-label="Ana menü">
-        <a class="brand" href="index.html"><img class="brand__logo" src="assets/img/logo-icon.png" alt="Medya Reklam" /><span class="brand__name">Medya Reklam</span></a>
+        <a class="brand" href="index.html"><img class="brand__logo" src="assets/img/logo.png?v=3" alt="Medya Reklam" /></a>
         <ul class="nav__menu">
           <li class="nav__item"><a class="nav__link" href="index.html">Ana Sayfa</a></li>
           <li class="nav__item nav__item--has-drop">
@@ -139,7 +125,7 @@
   </header>
 
   <!-- ===================== Page hero ===================== -->
-  <section class="pagehero-angled">
+  <section class="pagehero-angled" style="--hero-img:url('img/f1-arac-16.jpg')">
     <div class="container">
       <nav class="crumbs"><a href="index.html">Ana Sayfa</a><span>/</span> <a href="urunlerimiz.html">Ürünlerimiz</a> <span>/</span> Özel Araç Kaplama</nav>
       <h1>Özel Araç Kaplama</h1>
@@ -208,6 +194,78 @@
               Kompozit Oyma Tabela
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
             </a>
+            <a href="urun-cam-kaplama.html" class="sidebar-menu__link ">
+              Cam Kaplama & One Way Vision
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-isikli-pano-billboard.html" class="sidebar-menu__link ">
+              Işıklı Pano & Billboard
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-paslanmaz-harf.html" class="sidebar-menu__link ">
+              Paslanmaz Harf Tabela
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-led-harf.html" class="sidebar-menu__link ">
+              LED Aydınlatmalı Harf
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-karsilama-bankosu.html" class="sidebar-menu__link ">
+              Karşılama Bankosu Tabelası
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-otobus-minibus-giydirme.html" class="sidebar-menu__link ">
+              Otobüs & Minibüs Giydirme
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-santiye-insaat-tabelasi.html" class="sidebar-menu__link ">
+              Şantiye & İnşaat Tabelası
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-is-makinesi-giydirme.html" class="sidebar-menu__link ">
+              İş Makinesi Giydirme
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-ticari-arac-kaplama.html" class="sidebar-menu__link ">
+              Ticari Araç & Kamyonet Kaplama
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-pleksi-kutu-harf.html" class="sidebar-menu__link ">
+              Pleksi Kutu Harf Tabela
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-yonlendirme-otopark.html" class="sidebar-menu__link ">
+              Yönlendirme ve Otopark Tabelaları
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-cati-tabelasi.html" class="sidebar-menu__link ">
+              Çatı Tabelası
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-kurumsal-cephe.html" class="sidebar-menu__link ">
+              Kurumsal Dış Cephe Tabela
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-ppf-arac-koruma.html" class="sidebar-menu__link ">
+              Şeffaf PPF Araç Koruma
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-tuning-folyo.html" class="sidebar-menu__link ">
+              Tuning ve Özel Kesim Folyo
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-kumas-lightbox.html" class="sidebar-menu__link ">
+              Kumaş Baskı Lightbox
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-fuar-standi.html" class="sidebar-menu__link ">
+              Fuar Standı & Display Ürünleri
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
+            <a href="urun-filo-arac-giydirme.html" class="sidebar-menu__link ">
+              Filo Araç Giydirme
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            </a>
 
             <a href="urunlerimiz.html" class="sidebar-menu__link " style="font-weight: 600; color: var(--accent);">
               Tüm Ürünleri Gör
@@ -220,45 +278,72 @@
     </div>
   </section>
 
-  <!-- ===================== CTA ===================== -->
-  <section class="cta-section">
-    <div class="container">
-      <div class="cta reveal">
-        <h2>Bu ürünle ilgileniyor musunuz?</h2>
-        <p>Projeniz için ücretsiz keşif ve fiyat teklifi almak üzere bizimle hemen iletişime geçin.</p>
-        <div class="cta__actions">
-          <a class="btn btn--light" href="https://wa.me/905324868260?text=Merhaba%2C%20%C3%96zel%20Ara%C3%A7%20Kaplama%20hakk%C4%B1nda%20%C3%BCcretsiz%20ke%C5%9Fif%20ve%20teklif%20almak%20istiyorum." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.06 24l1.69-6.16a11.87 11.87 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.68-1.45L.06 24z"/></svg> WhatsApp'tan Teklif Al</a>
-          <a class="btn btn--ghost" style="background:transparent;border-color:rgba(255,255,255,0.25);color:#fff;" href="iletisim.html">İletişime Geçin</a>
-          <a class="btn btn--ghost" style="background:transparent;border-color:rgba(255,255,255,0.25);color:#fff;" href="urunlerimiz.html">Tüm Ürünlere Dön</a>
+  <!-- ===================== Footer Wrapper ===================== -->
+  <div class="footer-wrapper">
+    <!-- ===================== CTA ===================== -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta reveal">
+          <span class="eyebrow" style="justify-content:center;color:#d9a328;">Reklama yapılan yatırım</span>
+          <h2>Geri dönüşü en hızlı yatırımdır</h2>
+          <p>Tabela ihtiyacınızı bizimle paylaşın; keşif, ölçü ve fiyat teklifini hızla hazırlayalım.</p>
+          <div class="cta__actions">
+            <a class="btn btn--light" href="tel:+905324868260">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              0532 486 82 60
+            </a>
+            <a class="btn btn--ghost" style="background:transparent;border-color:rgba(255,255,255,0.25);color:#fff;" href="iletisim.html">Teklif formu</a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===================== Footer ===================== -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer__grid">
+    <!-- ===================== Footer ===================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer__grid">
         <div class="footer__brand">
-          <a class="brand" href="index.html"><img class="brand__logo" src="assets/img/logo.png" alt="Medya Reklam" /></a>
+          <a class="brand" href="index.html"><img class="brand__logo brand__logo--footer" src="assets/img/logo-footer.png?v=2" alt="Medya Reklam" /></a>
           <p>Güvenilir reklam ve tabela hizmetlerinin adresi. Tasarım, üretim ve montaj tek çatı altında.</p>
           <div class="footer__social">
             <a href="https://www.instagram.com/medya_reklam34/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+            <a href="https://wa.me/905324868260" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.06 24l1.69-6.16a11.87 11.87 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.68-1.45L.06 24zM6.6 20.13c1.68 1 3.28 1.6 5.4 1.6 5.45 0 9.9-4.43 9.9-9.88a9.85 9.85 0 0 0-2.9-7A9.82 9.82 0 0 0 12.07 2c-5.46 0-9.9 4.44-9.9 9.9 0 2.23.65 3.9 1.75 5.65l-1 3.65 3.68-.97z"/></svg></a>
           </div>
         </div>
-        <div class="footer__col"><h5>Kurumsal</h5><ul><li><a href="index.html">Ana Sayfa</a></li><li><a href="hakkimizda.html">Hakkımızda</a></li><li><a href="sirket-politikasi.html">Şirket Politikası</a></li><li><a href="portfoy.html">Portföy</a></li><li><a href="gizlilik.html">Gizlilik &amp; KVKK</a></li></ul></div>
-        <div class="footer__col"><h5>Ürünler</h5><ul><li><a href="urunlerimiz.html">Işıklı Harf Tabela</a></li><li><a href="urunlerimiz.html">Totem Tabela</a></li><li><a href="urunlerimiz.html">Araç Giydirme</a></li><li><a href="urunlerimiz.html">Dijital Baskı</a></li></ul></div>
+        <div class="footer__col">
+          <h5>Kurumsal</h5>
+          <ul>
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+            <li><a href="sirket-politikasi.html">Şirket Politikası</a></li>
+            <li><a href="portfoy.html">Portföy</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h5>Ürünler</h5>
+          <ul>
+            <li><a href="urun-isikli-kutu-harf.html">Işıklı Harf Tabela</a></li>
+            <li><a href="urun-totem.html">Totem Tabela</a></li>
+            <li><a href="urun-arac-giydirme.html">Araç Giydirme</a></li>
+            <li><a href="urun-isikli-pano-billboard.html">Dijital Baskı</a></li>
+          </ul>
+        </div>
         <div class="footer__col">
           <h5>İletişim</h5>
           <ul class="footer__contact">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Seyrantepe, İbrahim Karaoğlanoğlu Cd. No:105 D:372, 34418 Kağıthane / İstanbul</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+905324868260">0532 486 82 60</a></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+905324868260">0532 486 82 60</a> · <a href="tel:+905324145264">0532 414 52 64</a></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg> <a href="mailto:info@medya-reklam.com">info@medya-reklam.com</a></li>
           </ul>
         </div>
       </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> Medya Reklam. Tüm hakları saklıdır.</span>
+        <span><a href="gizlilik.html">Gizlilik &amp; KVKK</a> · <span class="mono">Kağıthane · İstanbul · Türkiye</span></span>
+      </div>
     </div>
   </footer>
-  <script src="assets/main.js?v=3" defer></script>
+</div>
+  <script src="assets/main.js?v=8" defer></script>
 </body>
 </html>

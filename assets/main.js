@@ -3,6 +3,21 @@
 (function () {
   'use strict';
 
+
+  /* ---- Preloader Logic --------------------------------------------------- */
+  document.addEventListener('DOMContentLoaded', function() {
+    var preloader = document.getElementById('preloader');
+    if (preloader) {
+      setTimeout(function() {
+        preloader.classList.add('is-hidden');
+        // Remove from DOM after transition completes (500ms)
+        setTimeout(function() {
+          if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+        }, 500);
+      }, 1100); // kisa acilis — logo animasyonlari gorunecek kadar
+    }
+  });
+
   /* ---- Header: shadow/border on scroll ---------------------------------- */
   var header = document.querySelector('.site-header');
   function onScroll() {
@@ -50,7 +65,13 @@
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('in');
-          io.unobserve(entry.target);
+          if (!entry.target.classList.contains('reveal-repeat')) {
+            io.unobserve(entry.target);
+          }
+        } else {
+          if (entry.target.classList.contains('reveal-repeat')) {
+            entry.target.classList.remove('in');
+          }
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
@@ -164,4 +185,368 @@
       setTimeout(function () { if (bar.parentNode) bar.parentNode.removeChild(bar); }, 450);
     });
   })();
+
+  /* ---- Scroll-linked Fade (Heading Texts) -------------------------------- */
+  var scrollFadeEls = document.querySelectorAll('.scroll-fade-text');
+  if (scrollFadeEls.length) {
+    function updateScrollFades() {
+      var wh = window.innerHeight;
+      var fadeDistance = 300; 
+      
+      scrollFadeEls.forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        var opacity = 1;
+        
+        // Aşağıdan girerken
+        if (rect.top > wh - fadeDistance) {
+          opacity = (wh - rect.top) / fadeDistance;
+        }
+        // Yukarıdan çıkarken
+        else if (rect.bottom < fadeDistance) {
+          opacity = rect.bottom / fadeDistance;
+        }
+
+        opacity = Math.max(0, Math.min(1, opacity));
+        el.style.opacity = opacity;
+        
+        // Soldan sağa yüklenme efekti (clip-path inset)
+        var clipPercent = (1 - opacity) * 100;
+        el.style.clipPath = 'inset(0 ' + clipPercent + '% 0 0)';
+      });
+    }
+    window.addEventListener('scroll', updateScrollFades, { passive: true });
+    updateScrollFades();
+  }
+
+  /* ---- Scroll Text Reveal (Gradient Fill) -------------------------------- */
+  var scrollRevealEls = document.querySelectorAll('.scroll-reveal-text');
+  if (scrollRevealEls.length) {
+    function updateScrollReveals() {
+      var wh = window.innerHeight;
+      var fadeDistance = 400; // Biraz daha geniş bir alanda dolsun
+      
+      scrollRevealEls.forEach(function(el) {
+        var rect = el.getBoundingClientRect();
+        var opacity = 1;
+        
+        // Aşağıdan girerken
+        if (rect.top > wh - fadeDistance) {
+          opacity = (wh - rect.top) / fadeDistance;
+        }
+        // Yukarıdan çıkarken
+        else if (rect.bottom < fadeDistance) {
+          opacity = rect.bottom / fadeDistance;
+        }
+
+        opacity = Math.max(0, Math.min(1, opacity));
+        el.style.setProperty('--reveal-pct', (opacity * 100) + '%');
+      });
+    }
+    window.addEventListener('scroll', updateScrollReveals, { passive: true });
+    updateScrollReveals();
+  }
+
+  /* ---- Statsband Scroll Animation ---------------------------------------- */
+  var statsGrids = document.querySelectorAll('.statsband__grid');
+  if (statsGrids.length) {
+    function updateStatsAnimation() {
+      var wh = window.innerHeight;
+      
+      statsGrids.forEach(function(grid) {
+        var rect = grid.getBoundingClientRect();
+        var items = grid.querySelectorAll(':scope > div');
+        
+        // Element is outside viewport
+        if (rect.top > wh || rect.bottom < 0) {
+          items.forEach(function(el) {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(50px)';
+          });
+          return;
+        }
+
+        // Calculate progress based on the STATIC parent container
+        var totalDistance = wh + rect.height;
+        var scrolled = wh - rect.top;
+        var progress = scrolled / totalDistance; // 0 to 1
+        
+        var opacity = 1;
+        var translateY = 0;
+
+        // Opening phase: from progress 0.1 to 0.4 (when it comes into view from bottom)
+        if (progress < 0.4) {
+          var p = Math.max(0, (progress - 0.1) / 0.3); // 0 to 1
+          opacity = p;
+          translateY = 50 * (1 - p);
+        }
+        // Closing phase: from progress 0.6 to 0.9 (when it leaves from top)
+        else if (progress > 0.6) {
+          var p = Math.min(1, (progress - 0.6) / 0.3); // 0 to 1
+          opacity = 1 - p;
+          translateY = -50 * p;
+        }
+        
+        opacity = Math.max(0, Math.min(1, opacity));
+        
+        items.forEach(function(el, index) {
+          // Add a slight stagger effect based on index
+          var staggerY = translateY;
+          el.style.opacity = opacity;
+          el.style.transform = 'translateY(' + staggerY + 'px)';
+          el.style.setProperty('--reveal-pct', (opacity * 100) + '%');
+        });
+      });
+    }
+    window.addEventListener('scroll', updateStatsAnimation, { passive: true });
+    updateStatsAnimation();
+  }
+
+  /* ---- Counters -------------------------------------------- */
+  var scrollCounters = document.querySelectorAll('.scroll-counter');
+  if (scrollCounters.length) {
+    var countersObserver = new IntersectionObserver(function(entries, obs) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+          var duration = 2000; // 2 saniye
+          var startTime = null;
+          
+          function updateCount(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            
+            // easeOutExpo
+            var easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            var current = Math.floor(target * easeProgress);
+            
+            var formatted = current >= 1000 ? current.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") : current;
+            el.innerHTML = formatted;
+            
+            if (progress < 1) {
+              requestAnimationFrame(updateCount);
+            } else {
+              el.innerHTML = target >= 1000 ? target.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") : target;
+            }
+          }
+          requestAnimationFrame(updateCount);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    scrollCounters.forEach(function(el) {
+      countersObserver.observe(el);
+    });
+  }
+
+  /* ---- Hero Carousel ----------------------------------------------------- */
+  var slides = document.querySelectorAll('.hero__slide');
+  var dots = document.querySelectorAll('.hero__dot');
+  if (slides.length > 0 && dots.length > 0) {
+    var currentSlide = 0;
+    var slideInterval;
+
+    function showSlide(index) {
+      slides.forEach(function(s) { s.classList.remove('is-active'); });
+      dots.forEach(function(d) { d.classList.remove('is-active'); });
+      slides[index].classList.add('is-active');
+      dots[index].classList.add('is-active');
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      showSlide((currentSlide + 1) % slides.length);
+    }
+
+    function startSlideshow() {
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function resetSlideshow() {
+      clearInterval(slideInterval);
+      startSlideshow();
+    }
+
+    dots.forEach(function(dot, index) {
+      dot.addEventListener('click', function() {
+        showSlide(index);
+        resetSlideshow();
+      });
+    });
+
+    startSlideshow();
+  }
+
+  /* ---- LED Marquee scroll effect ----------------------------------------- */
+  var ledTrack = document.querySelector('.ledmarquee__track');
+  if (ledTrack) {
+    var lastScrollY = window.scrollY;
+    var targetRate = 1;
+    var currentRate = 1;
+    var rateAnimationActive = false;
+
+    window.addEventListener('scroll', function () {
+      var scrollY = window.scrollY;
+      var deltaY = scrollY - lastScrollY;
+      lastScrollY = scrollY;
+
+      // Yukarı kaydırmak (deltaY < 0) -> Sağa hareket (negatif rate)
+      // Aşağı kaydırmak (deltaY > 0) -> Sola hızlan (pozitif rate artışı)
+      targetRate += deltaY * 0.05; // Hassasiyet ayarı
+
+      if (targetRate > 25) targetRate = 25;
+      if (targetRate < -25) targetRate = -25;
+      
+      if (!rateAnimationActive) {
+        rateAnimationActive = true;
+        updateRate();
+      }
+    }, { passive: true });
+
+    function updateRate() {
+      var animations = ledTrack.getAnimations();
+      if (!animations || animations.length === 0) {
+        rateAnimationActive = false;
+        return;
+      }
+      var animation = animations[0];
+
+      // Kaydırma bittiğinde yavaşça normal hıza (1) dön
+      targetRate += (1 - targetRate) * 0.05;
+      currentRate += (targetRate - currentRate) * 0.1;
+
+      if (Math.abs(currentRate - 1) < 0.01 && Math.abs(targetRate - 1) < 0.01) {
+          currentRate = 1;
+          targetRate = 1;
+      }
+
+      animation.playbackRate = currentRate;
+      
+      if (currentRate !== 1 || targetRate !== 1) {
+        requestAnimationFrame(updateRate);
+      } else {
+        rateAnimationActive = false;
+      }
+    }
+  }
+
+  /* ---- Yumuşak (soft) kaydırma — mouse tekerleği momentum efekti ---------
+     Fare tekerleğiyle kaydırınca sayfa "zıplamadan" yumuşakça hedefe süzülür.
+     Dokunmatik cihazlarda ve "hareketi azalt" tercihinde devre dışıdır.
+     Ayar: SMOOTH küçük = daha yumuşak/uzun süzülme · STEP küçük = daha yavaş. */
+  (function () {
+    var fine = window.matchMedia('(pointer: fine)').matches;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!fine || reduce) return; // dokunmatik / reduced-motion → yerel kaydırma
+
+    var SMOOTH = 0.07;  // yumuşama katsayısı (0.06 çok yumuşak … 0.16 daha sıkı)
+    var STEP   = 0.9;   // her tekerlek adımının mesafe çarpanı (<1 = daha yavaş)
+
+    var docEl   = document.documentElement;
+    var target  = window.scrollY || window.pageYOffset;
+    var current = target;
+    var running = false;
+
+    function maxScroll() {
+      return Math.max(0, docEl.scrollHeight - window.innerHeight);
+    }
+    function clamp(v) {
+      var m = maxScroll();
+      return v < 0 ? 0 : (v > m ? m : v);
+    }
+
+    function frame() {
+      var diff = target - current;
+      if (Math.abs(diff) < 0.5) {
+        current = target;
+        window.scrollTo({ top: current, behavior: 'instant' });
+        running = false;
+        return;
+      }
+      current += diff * SMOOTH;
+      window.scrollTo({ top: current, behavior: 'instant' });
+      requestAnimationFrame(frame);
+    }
+    function run() {
+      if (!running) { running = true; requestAnimationFrame(frame); }
+    }
+
+    // İçteki kaydırılabilir alanlar (kendi scroll'u olan kutular) yerel kalsın
+    function scrollableAncestor(node, dir) {
+      while (node && node !== document.body && node !== docEl) {
+        if (node.nodeType === 1 && node.scrollHeight > node.clientHeight) {
+          var oy = getComputedStyle(node).overflowY;
+          if (oy === 'auto' || oy === 'scroll') {
+            if (dir < 0 && node.scrollTop > 0) return true;
+            if (dir > 0 && node.scrollTop + node.clientHeight < node.scrollHeight - 1) return true;
+          }
+        }
+        node = node.parentNode;
+      }
+      return false;
+    }
+
+    window.addEventListener('wheel', function (e) {
+      // Zoom (Ctrl), yatay niyet, Shift+tekerlek → tarayıcıya bırak
+      if (e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      if (scrollableAncestor(e.target, e.deltaY)) return;
+      if (maxScroll() <= 0) return; // kaydırılacak yer yok
+
+      var delta = e.deltaY;
+      if (e.deltaMode === 1) delta *= 40;                      // satır → px
+      else if (e.deltaMode === 2) delta *= window.innerHeight; // sayfa → px
+
+      e.preventDefault();
+      if (!running) { current = target = window.scrollY || window.pageYOffset; }
+      target = clamp(target + delta * STEP);
+      run();
+    }, { passive: false });
+
+    // Klavye / kaydırma çubuğu / çapa linki ile kaydırınca motoru senkron tut
+    window.addEventListener('scroll', function () {
+      if (!running) { current = target = window.scrollY || window.pageYOffset; }
+    }, { passive: true });
+
+    window.addEventListener('resize', function () {
+      target = clamp(target);
+    }, { passive: true });
+  })();
+
 })();
+  /* ---- About Slider ------------------------------------------------------- */
+  var aboutSlider = document.getElementById('aboutSlider');
+  if (aboutSlider) {
+    var track = document.getElementById('aboutSliderTrack');
+    var slides = aboutSlider.querySelectorAll('.about-slide');
+    var dots = document.getElementById('aboutSliderDots').querySelectorAll('.about-dot');
+    var currentSlide = 0;
+    var sliderInterval;
+
+    function goToSlide(index) {
+      dots[currentSlide].classList.remove('is-active');
+      currentSlide = index;
+      dots[currentSlide].classList.add('is-active');
+      track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    }
+
+    function nextSlide() {
+      var next = (currentSlide + 1) % slides.length;
+      goToSlide(next);
+    }
+
+    function startSlider() {
+      if (sliderInterval) clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 4000);
+    }
+
+    dots.forEach(function (dot, index) {
+      dot.addEventListener('click', function () {
+        goToSlide(index);
+        startSlider();
+      });
+    });
+
+    startSlider();
+  }
