@@ -204,7 +204,7 @@
         </div>
         <a class="link-arrow" href="portfoy.html">Tüm işleri görün <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <div class="featcards featcards--4cols">
+      <div class="featcards featcards--4cols" id="featGrid">
         <a class="featcard reveal" href="urun-isikli-kutu-harf.html">
           <div class="featcard__img"><picture><source srcset="assets/img/kizilbuk-wellness.webp" type="image/webp" /><img src="assets/img/kizilbuk-wellness.jpg" alt="Sinpaş Kızılbük" loading="lazy" /></picture></div>
           <div class="featcard__body">
@@ -720,8 +720,8 @@
           <a class="brand" href="index.html"><img class="brand__logo brand__logo--footer" src="assets/img/logo-footer.png?v=2" alt="Medya Reklam" /></a>
           <p>Güvenilir reklam ve tabela hizmetlerinin adresi. Tasarım, üretim ve montaj tek çatı altında.</p>
           <div class="footer__social">
-            <a href="https://www.instagram.com/medya_reklam34/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
-            <a href="https://wa.me/905324868260" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.06 24l1.69-6.16a11.87 11.87 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.68-1.45L.06 24zM6.6 20.13c1.68 1 3.28 1.6 5.4 1.6 5.45 0 9.9-4.43 9.9-9.88a9.85 9.85 0 0 0-2.9-7A9.82 9.82 0 0 0 12.07 2c-5.46 0-9.9 4.44-9.9 9.9 0 2.23.65 3.9 1.75 5.65l-1 3.65 3.68-.97z"/></svg></a>
+            <a href="https://www.instagram.com/medya_reklam34/" class="social-ig" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+            <a href="https://wa.me/905324868260" class="social-wa" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.06 24l1.69-6.16a11.87 11.87 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.68-1.45L.06 24zM6.6 20.13c1.68 1 3.28 1.6 5.4 1.6 5.45 0 9.9-4.43 9.9-9.88a9.85 9.85 0 0 0-2.9-7A9.82 9.82 0 0 0 12.07 2c-5.46 0-9.9 4.44-9.9 9.9 0 2.23.65 3.9 1.75 5.65l-1 3.65 3.68-.97z"/></svg></a>
           </div>
         </div>
         <div class="footer__col">
@@ -764,5 +764,47 @@
   </a>
 
   <script src="assets/main.js?v=9" defer></script>
+  <script src="assets/store.js?v=4"></script>
+  <script>
+  /* Ana sayfa "Tamamladigimiz isler" bolumunu admin/Supabase galerisinden doldur.
+     Boylece admin panelde yapilan degisiklikler burada da gorunur.
+     Supabase yoksa/erisilemezse HTML'deki statik kartlar yedek kalir. */
+  (function () {
+    'use strict';
+    function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+    var HREF = { isikli:'urun-isikli-kutu-harf.html', arac:'urun-arac-giydirme.html', cephe:'urun-cephe.html', baski:'urun-lightbox.html' };
+    function renderFeatured(items){
+      var g = document.getElementById('featGrid');
+      if(!g || !items || !items.length) return;
+      g.innerHTML = items.map(function(it, i){
+        var href = HREF[it.category] || 'portfoy.html';
+        var num = ('0' + (i + 1)).slice(-2);
+        var img = it.image || '';
+        var pic = /\.jpe?g$/i.test(img)
+          ? '<picture><source srcset="' + esc(img.replace(/\.jpe?g$/i, '.webp')) + '" type="image/webp" /><img src="' + esc(img) + '" alt="' + esc(it.title) + '" loading="lazy" /></picture>'
+          : '<img src="' + esc(img) + '" alt="' + esc(it.title) + '" loading="lazy" />';
+        return '<a class="featcard reveal in" href="' + href + '">' +
+          '<div class="featcard__img">' + pic + '</div>' +
+          '<div class="featcard__body">' +
+            '<h4>' + esc(it.title) + '</h4>' +
+            '<p>' + esc(it.subtitle || '') + '</p>' +
+            '<div class="featcard__meta">' +
+              '<div class="featcard__num">' + num + '</div>' +
+              '<div class="featcard__details">Detaylar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></div>' +
+            '</div>' +
+          '</div>' +
+        '</a>';
+      }).join('');
+    }
+    function boot(){
+      if(!window.Store || !Store.getContent) return; /* statik yedek kalir */
+      Store.getContent().then(function(c){
+        if(c && c.gallery && c.gallery.length) renderFeatured(c.gallery);
+      }).catch(function(){});
+    }
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+    else boot();
+  })();
+  </script>
 </body>
 </html>
