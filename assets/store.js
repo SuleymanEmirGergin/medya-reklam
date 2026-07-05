@@ -83,6 +83,14 @@
         heroTitle: 'Portföy',
         heroDesc: 'Tamamladığımız işlerden bir seçki. Her proje keşifle başladı, görsel onayla şekillendi ve kendi ekibimizin montajıyla tamamlandı.'
       },
+      contact: {
+        phone:     '0532 486 82 60',
+        phone2:    '0532 414 52 64',
+        email:     'info@medya-reklam.com',
+        address:   'Seyrantepe, İbrahim Karaoğlanoğlu Cd. No:105 D:372, 34418 Kağıthane / İstanbul',
+        instagram: 'https://www.instagram.com/medya_reklam34/',
+        whatsapp:  '905324868260'
+      },
       stats: [
         { id: 's1', number: '2.500', em: '+', label: 'tamamlanan proje' },
         { id: 's2', number: '30',    em: '+', label: 'yıl tecrübe' },
@@ -149,6 +157,7 @@
     if (!saved || typeof saved !== 'object') return base;
     return {
       site:         Object.assign({}, base.site, saved.site || {}),
+      contact:      Object.assign({}, base.contact, saved.contact || {}),
       stats:        Array.isArray(saved.stats)        ? saved.stats        : base.stats,
       gallery:      Array.isArray(saved.gallery)      ? saved.gallery      : base.gallery,
       videos:       Array.isArray(saved.videos)       ? saved.videos       : base.videos,

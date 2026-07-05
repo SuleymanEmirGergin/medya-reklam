@@ -137,6 +137,7 @@
     renderSection('videos');
     renderSection('testimonials');
     renderHero();
+    renderContact();
   }
 
   /* ---- Galeri kategori filtresi ---------------------------------------- */
@@ -462,6 +463,16 @@
     $('#heroDesc').value = content.site.heroDesc || '';
   }
 
+  function renderContact() {
+    var c = content.contact || {};
+    if ($('#cPhone'))     $('#cPhone').value = c.phone || '';
+    if ($('#cPhone2'))    $('#cPhone2').value = c.phone2 || '';
+    if ($('#cEmail'))     $('#cEmail').value = c.email || '';
+    if ($('#cAddress'))   $('#cAddress').value = c.address || '';
+    if ($('#cInstagram')) $('#cInstagram').value = c.instagram || '';
+    if ($('#cWhatsapp'))  $('#cWhatsapp').value = c.whatsapp || '';
+  }
+
   /* ======================================================================
      GEZİNME
      ====================================================================== */
@@ -562,6 +573,20 @@
       content.site.heroTitle = $('#heroTitle').value.trim();
       content.site.heroDesc = $('#heroDesc').value.trim();
       save('Sayfa başlığı kaydedildi');
+    });
+
+    // İletişim bilgileri
+    var contactForm = $('#contactForm');
+    if (contactForm) contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      content.contact = content.contact || {};
+      content.contact.phone     = $('#cPhone').value.trim();
+      content.contact.phone2    = $('#cPhone2').value.trim();
+      content.contact.email     = $('#cEmail').value.trim();
+      content.contact.address   = $('#cAddress').value.trim();
+      content.contact.instagram = $('#cInstagram').value.trim();
+      content.contact.whatsapp  = $('#cWhatsapp').value.trim();
+      save('İletişim bilgileri kaydedildi');
     });
 
     // Yedek

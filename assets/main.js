@@ -550,3 +550,54 @@
 
     startSlider();
   }
+
+  /* ==========================================================================
+     CMS: İletişim bilgileri (telefon/adres/e-posta/sosyal) — admin panelinden
+     tüm sayfalara uygulanır. Hafif REST çağrısı (SDK yüklenmez); hata sayfayı bozmaz.
+     ========================================================================== */
+  (function () {
+    var SB_URL = 'https://noazvsxbhzuohnpxllgp.supabase.co';
+    var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5vYXp2c3hiaHp1b2hucHhsbGdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NDgwNTYsImV4cCI6MjA5ODMyNDA1Nn0.cX0cA1OIQRuclm9xBJoe0mJZXTyJMzjAkT0mieVlCEY';
+    function digits(s){ return String(s == null ? '' : s).replace(/\D/g, ''); }
+    function telHref(num){ var d = digits(num).replace(/^0/, ''); return d ? ('tel:+90' + d) : ''; }
+    function looksLikePhone(t){ t = (t || '').trim(); return /^[\d\s()+.\-]+$/.test(t) && digits(t).length >= 7; }
+    function applyContact(c){
+      if(!c) return;
+      try {
+        Array.prototype.forEach.call(document.querySelectorAll('a[href^="tel:"]'), function(a){
+          var isSecond = digits(a.getAttribute('href') || '').slice(-6) === '145264';
+          var num = isSecond ? (c.phone2 || c.phone) : c.phone;
+          if(!num) return;
+          var h = telHref(num); if(h) a.setAttribute('href', h);
+          if(looksLikePhone(a.textContent)) a.textContent = num;
+        });
+        if(c.email) Array.prototype.forEach.call(document.querySelectorAll('a[href^="mailto:"]'), function(a){
+          a.setAttribute('href', 'mailto:' + c.email);
+          if(/@/.test(a.textContent)) a.textContent = c.email;
+        });
+        var wa = digits(c.whatsapp) || digits(c.phone).replace(/^0/, '90');
+        if(wa) Array.prototype.forEach.call(document.querySelectorAll('a[href*="wa.me/"]'), function(a){
+          a.setAttribute('href', 'https://wa.me/' + wa);
+        });
+        if(c.instagram) Array.prototype.forEach.call(document.querySelectorAll('a[href*="instagram.com"]'), function(a){
+          a.setAttribute('href', c.instagram);
+        });
+        if(c.address){
+          var li = document.querySelector('.footer__contact li');
+          if(li && li.lastChild && li.lastChild.nodeType === 3) li.lastChild.textContent = ' ' + c.address;
+        }
+      } catch(e){}
+    }
+    function run(){
+      if(!document.querySelector('a[href^="tel:"], a[href^="mailto:"], .footer__contact')) return;
+      try {
+        fetch(SB_URL + '/rest/v1/site_content?id=eq.1&select=data', {
+          headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY }
+        }).then(function(r){ return r.ok ? r.json() : null; })
+          .then(function(rows){ var d = rows && rows[0] && rows[0].data; if(d) applyContact(d.contact); })
+          .catch(function(){});
+      } catch(e){}
+    }
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+    else run();
+  })();
