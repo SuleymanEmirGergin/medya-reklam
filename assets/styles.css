@@ -607,10 +607,14 @@ p { color: var(--ink-soft); }
 }
 .footer__brand .brand__name { color: #fff; }
 .footer__brand p { color: #c0bfb5; font-size: 1rem; margin-top: 18px; max-width: 24rem; line-height: 1.6; }
-.footer__social { display: flex; gap: 12px; margin-top: 22px; }
-.footer__social a { width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.2); border-radius: 9px; display: grid; place-items: center; }
-.footer__social a:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.4); }
-.footer__social svg { width: 19px; height: 19px; }
+.footer__social { display: flex; gap: 16px; margin-top: 28px; margin-bottom: 50px; }
+.footer__social a { width: 128px; height: 128px; border: none; border-radius: 28px; display: grid; place-items: center; transition: all 0.3s ease; }
+.footer__social a:hover { transform: translateY(-6px) scale(1.05); }
+.footer__social svg { width: 68px; height: 68px; color: #fff; }
+.footer__social a.social-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); box-shadow: 0 6px 20px rgba(225, 48, 108, 0.2); }
+.footer__social a.social-ig:hover { box-shadow: 0 15px 35px rgba(225, 48, 108, 0.4); }
+.footer__social a.social-wa { background: #25D366; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.2); }
+.footer__social a.social-wa:hover { box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4); }
 .footer__col h5 { font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.1em; color: #d1d0c5; font-family: var(--mono); margin-bottom: 22px; font-weight: 600; }
 .footer__col ul { display: grid; gap: 16px; }
 .footer__col a { font-size: 1.05rem; font-weight: 500; }
