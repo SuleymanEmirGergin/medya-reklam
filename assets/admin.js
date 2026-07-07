@@ -44,6 +44,29 @@
     ]
   };
 
+  /* ---- Ana sayfa metin alanları ---------------------------------------- */
+  var HOME_FIELDS = [
+    { group: 'Üst Bölüm (Hero)' },
+    { k: 'heroEyebrow',  l: 'Üst etiket' },
+    { k: 'heroTitle1',   l: 'Başlık — 1. bölüm' },
+    { k: 'heroTitleEm',  l: 'Başlık — vurgulu (mavi) kelime' },
+    { k: 'heroTitle2',   l: 'Başlık — son bölüm' },
+    { k: 'heroLead',     l: 'Açıklama', t: 'textarea' },
+    { k: 'heroBtn1',     l: '1. buton yazısı' },
+    { k: 'heroBtn2',     l: '2. buton yazısı' },
+    { k: 'heroBtn2Link', l: '2. buton linki' },
+    { k: 'heroStat1n',   l: 'İstatistik 1 — değer' }, { k: 'heroStat1l', l: 'İstatistik 1 — açıklama' },
+    { k: 'heroStat2n',   l: 'İstatistik 2 — değer' }, { k: 'heroStat2l', l: 'İstatistik 2 — açıklama' },
+    { k: 'heroStat3n',   l: 'İstatistik 3 — değer' }, { k: 'heroStat3l', l: 'İstatistik 3 — açıklama' },
+    { group: 'Bölüm Başlıkları' },
+    { k: 'pillarsEyebrow',  l: 'Çalışma Biçimi — etiket' }, { k: 'pillarsTitle',  l: 'Çalışma Biçimi — başlık' },
+    { k: 'featuredEyebrow', l: 'İşler — etiket' },          { k: 'featuredTitle', l: 'İşler — başlık' },
+    { k: 'aboutEyebrow',    l: 'Hakkımızda — etiket' },     { k: 'aboutTitle',    l: 'Hakkımızda — başlık' },
+    { k: 'featuresEyebrow', l: 'Neden Biz — etiket' },      { k: 'featuresTitle', l: 'Neden Biz — başlık' },
+    { k: 'igEyebrow',       l: 'Instagram — etiket' },      { k: 'igTitle',       l: 'Instagram — başlık' },
+    { k: 'ctaEyebrow',      l: 'CTA — etiket' },            { k: 'ctaTitle',      l: 'CTA — başlık' }
+  ];
+
   /* ---- Durum ------------------------------------------------------------ */
   var content = null;
   var currentSection = 'gallery';
@@ -138,6 +161,7 @@
     renderSection('testimonials');
     renderHero();
     renderContact();
+    renderHomeVals();
   }
 
   /* ---- Galeri kategori filtresi ---------------------------------------- */
@@ -473,6 +497,29 @@
     if ($('#cWhatsapp'))  $('#cWhatsapp').value = c.whatsapp || '';
   }
 
+  function buildHomeForm() {
+    var box = $('#homeFields');
+    if (!box || box.getAttribute('data-built')) return;
+    box.setAttribute('data-built', '1');
+    box.innerHTML = HOME_FIELDS.map(function (f) {
+      if (f.group) return '<h4 style="margin:20px 0 8px;font-size:0.9rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">' + esc(f.group) + '</h4>';
+      var input = f.t === 'textarea'
+        ? '<textarea id="h_' + f.k + '" style="min-height:70px;"></textarea>'
+        : '<input type="text" id="h_' + f.k + '" />';
+      return '<div class="field"><label for="h_' + f.k + '">' + esc(f.l) + '</label>' + input + '</div>';
+    }).join('');
+  }
+
+  function renderHomeVals() {
+    buildHomeForm();
+    var h = content.home || {};
+    HOME_FIELDS.forEach(function (f) {
+      if (!f.k) return;
+      var el = $('#h_' + f.k);
+      if (el) el.value = h[f.k] || '';
+    });
+  }
+
   /* ======================================================================
      GEZİNME
      ====================================================================== */
@@ -587,6 +634,19 @@
       content.contact.instagram = $('#cInstagram').value.trim();
       content.contact.whatsapp  = $('#cWhatsapp').value.trim();
       save('İletişim bilgileri kaydedildi');
+    });
+
+    // Ana sayfa metinleri
+    var homeForm = $('#homeForm');
+    if (homeForm) homeForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      content.home = content.home || {};
+      HOME_FIELDS.forEach(function (f) {
+        if (!f.k) return;
+        var el = $('#h_' + f.k);
+        if (el) content.home[f.k] = el.value.trim();
+      });
+      save('Ana sayfa metinleri kaydedildi');
     });
 
     // Yedek
