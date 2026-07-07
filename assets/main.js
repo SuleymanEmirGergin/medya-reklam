@@ -588,11 +588,10 @@
         }
       } catch(e){}
     }
-    function applyProduct(products){
-      if(!products) return;
+    function applyProduct(products, pages){
       try {
         var slug = (location.pathname.split('/').pop() || '').replace(/\.html$/, '') || 'index';
-        var p = products[slug];
+        var p = (products && products[slug]) || (pages && pages[slug]);
         if(!p) return;
         Array.prototype.forEach.call(document.querySelectorAll('[data-cms-product]'), function(el){
           var k = el.getAttribute('data-cms-product');
@@ -606,7 +605,7 @@
         fetch(SB_URL + '/rest/v1/site_content?id=eq.1&select=data', {
           headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY }
         }).then(function(r){ return r.ok ? r.json() : null; })
-          .then(function(rows){ var d = rows && rows[0] && rows[0].data; if(d){ applyContact(d.contact); applyProduct(d.products); } })
+          .then(function(rows){ var d = rows && rows[0] && rows[0].data; if(d){ applyContact(d.contact); applyProduct(d.products, d.pages); } })
           .catch(function(){});
       } catch(e){}
     }

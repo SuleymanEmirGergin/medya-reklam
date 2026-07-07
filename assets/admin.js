@@ -182,6 +182,7 @@
     renderContact();
     renderHomeVals();
     renderProductVals();
+    renderPageVals();
   }
 
   /* ---- Galeri kategori filtresi ---------------------------------------- */
@@ -555,6 +556,31 @@
     });
   }
 
+  function buildPageForm() {
+    var box = $('#pageFields');
+    if (!box || box.getAttribute('data-built')) return;
+    box.setAttribute('data-built', '1');
+    var pgs = content.pages || {};
+    box.innerHTML = Object.keys(pgs).sort().map(function (slug) {
+      var p = pgs[slug] || {};
+      return '<div style="border-top:1px solid var(--line);padding-top:14px;margin-top:14px;">' +
+        '<h4 style="margin:0 0 8px;font-size:0.9rem;color:var(--ink);">' + esc(p.title || slug) + '</h4>' +
+        '<div class="field"><label>Baslik</label><input type="text" id="pg_' + slug + '_title" /></div>' +
+        '<div class="field"><label>Aciklama</label><textarea id="pg_' + slug + '_intro" style="min-height:60px;"></textarea></div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function renderPageVals() {
+    buildPageForm();
+    var pgs = content.pages || {};
+    Object.keys(pgs).forEach(function (slug) {
+      var p = pgs[slug] || {};
+      var t = $('#pg_' + slug + '_title'); if (t) t.value = p.title || '';
+      var i = $('#pg_' + slug + '_intro'); if (i) i.value = p.intro || '';
+    });
+  }
+
   function renderHomeVals() {
     buildHomeForm();
     var h = content.home || {};
@@ -711,6 +737,19 @@
         var i = $('#pr_' + slug + '_intro'); if (i) content.products[slug].intro = i.value.trim();
       });
       save('Ürün sayfaları kaydedildi');
+    });
+
+    // Kurumsal & rehber sayfaları
+    var pageForm = $('#pageForm');
+    if (pageForm) pageForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      content.pages = content.pages || {};
+      Object.keys(content.pages).forEach(function (slug) {
+        content.pages[slug] = content.pages[slug] || {};
+        var t = $('#pg_' + slug + '_title'); if (t) content.pages[slug].title = t.value.trim();
+        var i = $('#pg_' + slug + '_intro'); if (i) content.pages[slug].intro = i.value.trim();
+      });
+      save('Kurumsal & rehber sayfaları kaydedildi');
     });
 
     // Yedek

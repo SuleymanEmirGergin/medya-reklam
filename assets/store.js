@@ -163,6 +163,24 @@
         'urun-tuning-folyo': { title: 'Tuning ve Özel Kesim Folyo', intro: 'Kişiselleştirilmiş araç tasarımları için plotter kesim dekoratif şerit ve logolar.' },
         'urun-yonlendirme-otopark': { title: 'Yönlendirme ve Otopark Tabelaları', intro: 'Site, plaza ve AVM içlerinde ziyaretçilere yol gösteren fonksiyonel tabelalar.' }
       },
+      pages: {
+        'gizlilik': { title: 'Gizlilik & KVKK', intro: 'Kişisel verilerinizi nasıl işlediğimiz, hangi amaçlarla kullandığımız, çerez kullanımımız ve haklarınız hakkında bilgilendirme.' },
+        'hakkimizda': { title: 'Yılların deneyimiyle tabelacılık', intro: 'Tasarımdan üretime, montajdan teslimat sonrası desteğe kadar işin tamamını kendi ekibimizle yürüten bir aile işletmesiyiz.' },
+        'iletisim': { title: 'İletişim', intro: 'Tabela ihtiyacınızı bizimle paylaşın. Telefon, WhatsApp ya da aşağıdaki formla ulaşın; keşif ve teklifi hızla hazırlayalım.' },
+        'rehber': { title: 'Rehber', intro: 'Tabela seçimi, fiyatlandırma, bakım ve mevzuat hakkında pratik bilgiler. Doğru kararı vermenize yardımcı olacak yazılar.' },
+        'rehber-arac-giydirme-folyo-turleri-ve-bakim': { title: 'Araç Giydirmede Folyo Türleri ve Bakım Rehberi', intro: 'Döküm ve kalenderlenmiş folyo farkı, tam/kısmi kaplama ve folyonun ömrünü uzatan bakım ipuçları.' },
+        'rehber-cephe-tabelasi-secerken-7-sey': { title: 'Cephe Tabelası Seçerken Dikkat Edilecek 7 Şey', intro: 'Cephe tabelası uzun yıllar görünür kalır. Doğru kararı vermek için göz önünde bulundurmanız gereken 7 başlık.' },
+        'rehber-dijital-baski-mi-kompozit-oyma-mi': { title: 'Dijital Baskı mı, Kompozit Oyma mı?', intro: 'İki farklı üretim yöntemini görünüm, dayanıklılık, maliyet ve kullanım alanına göre karşılaştırdık.' },
+        'rehber-eczane-tabelasi-standartlar': { title: 'Eczane Tabelası: Standartlar ve Dikkat Edilecekler', intro: 'Eczane tabelalarında haç sembolü, ışıklı uygulama ve yönetmeliğe uygunluk hakkında bilmeniz gerekenler.' },
+        'rehber-isikli-tabela-fiyatini-ne-belirler': { title: 'Işıklı Tabela Fiyatını Ne Belirler?', intro: 'Işıklı tabela maliyetini etkileyen malzeme, boyut, aydınlatma ve montaj kalemlerini sade biçimde açıklıyoruz.' },
+        'rehber-istanbul-tabela-ruhsati-nasil-alinir': { title: 'İstanbul\'da Tabela İzni ve Ruhsatı Nasıl Alınır?', intro: 'Tabela asmadan önce belediyeden izin almanız gerekir. Sürecin genel adımlarını ve dikkat edilmesi gerekenleri özetledik.' },
+        'rehber-kutu-harf-mi-pleksi-harf-mi': { title: 'Kutu Harf mi, Pleksi Harf mi? Hangisini Seçmeli?', intro: 'İki popüler ışıklı harf tipini dayanıklılık, görünüm, bütçe ve kullanım yerine göre karşılaştırdık.' },
+        'rehber-led-tabelalarda-enerji-ve-omur': { title: 'LED Aydınlatmalı Tabelalarda Enerji ve Ömür', intro: 'Neden LED? Enerji tüketimi, ömür ve modül kalitesinin tabelanızın toplam maliyetine etkisi.' },
+        'rehber-tabelanin-omrunu-uzatmanin-6-yolu': { title: 'Tabelanızın Ömrünü Uzatmanın 6 Yolu', intro: 'Küçük ama düzenli bakım, tabelanızın ilk günkü gibi görünmesini ve yıllarca dayanmasını sağlar.' },
+        'rehber-totem-pilon-tabela-ne-zaman-gerekir': { title: 'Totem ve Pilon Tabela Ne Zaman Gerekir?', intro: 'Yüksek görünürlük gerektiren konumlarda totem ve pilon tabelaların ne zaman ve neden tercih edildiğini anlatıyoruz.' },
+        'sirket-politikasi': { title: 'Şirket Politikamız', intro: 'İşimizi nasıl yaptığımızı belirleyen ilkeler. Kalite, müşteri memnuniyeti, çevre ve iş güvenliği konularındaki taahhütlerimiz.' },
+        'urunlerimiz': { title: 'Tüm Ürünlerimiz', intro: 'Işıklı harften totem ve kompozit cepheye, dijital baskıdan araç giydirmeye kadar 27 kategoride üretim. Aradığınız çözümü bulamazsanız bizi arayın; markanıza özel üretelim.' }
+      },
       stats: [
         { id: 's1', number: '2.500', em: '+', label: 'tamamlanan proje' },
         { id: 's2', number: '30',    em: '+', label: 'yıl tecrübe' },
@@ -232,6 +250,7 @@
       contact:      Object.assign({}, base.contact, saved.contact || {}),
       home:         Object.assign({}, base.home, saved.home || {}),
       products:     Object.assign({}, base.products, saved.products || {}),
+      pages:        Object.assign({}, base.pages, saved.pages || {}),
       stats:        Array.isArray(saved.stats)        ? saved.stats        : base.stats,
       gallery:      Array.isArray(saved.gallery)      ? saved.gallery      : base.gallery,
       videos:       Array.isArray(saved.videos)       ? saved.videos       : base.videos,
