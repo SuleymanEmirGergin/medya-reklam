@@ -183,6 +183,7 @@
     renderHomeVals();
     renderProductVals();
     renderPageVals();
+    initBodyEditor();
   }
 
   /* ---- Galeri kategori filtresi ---------------------------------------- */
@@ -542,7 +543,6 @@
         '<h4 style="margin:0 0 8px;font-size:0.9rem;color:var(--ink);">' + esc(p.title || slug) + '</h4>' +
         '<div class="field"><label>Baslik</label><input type="text" id="pr_' + slug + '_title" /></div>' +
         '<div class="field"><label>Aciklama</label><textarea id="pr_' + slug + '_intro" style="min-height:60px;"></textarea></div>' +
-        '<div class="field"><label>Icerik (HTML - bos birakirsan mevcut kalir)</label><textarea id="pr_' + slug + '_body" style="min-height:80px;"></textarea></div>' +
         '</div>';
     }).join('');
   }
@@ -569,7 +569,6 @@
         '<h4 style="margin:0 0 8px;font-size:0.9rem;color:var(--ink);">' + esc(p.title || slug) + '</h4>' +
         '<div class="field"><label>Baslik</label><input type="text" id="pg_' + slug + '_title" /></div>' +
         '<div class="field"><label>Aciklama</label><textarea id="pg_' + slug + '_intro" style="min-height:60px;"></textarea></div>' +
-        '<div class="field"><label>Icerik (HTML - bos birakirsan mevcut kalir)</label><textarea id="pg_' + slug + '_body" style="min-height:80px;"></textarea></div>' +
         '</div>';
     }).join('');
   }
@@ -583,6 +582,49 @@
       var i = $('#pg_' + slug + '_intro'); if (i) i.value = p.intro || '';
       var b = $('#pg_' + slug + '_body'); if (b) b.value = p.body || '';
     });
+  }
+
+  /* ---- Zengin metin editoru (Quill) — sayfa govdeleri ------------------- */
+  var _quill = null;
+  function initBodyEditor() {
+    var sel = $('#bodyPageSelect');
+    if (!sel || sel.getAttribute('data-built') || typeof Quill === 'undefined') return;
+    sel.setAttribute('data-built', '1');
+    var opt = '<option value="">— sayfa secin —</option>';
+    var prods = content.products || {};
+    Object.keys(prods).sort().forEach(function (sg) { opt += '<option value="p:' + sg + '">Urun · ' + esc(prods[sg].title || sg) + '</option>'; });
+    var pgs = content.pages || {};
+    Object.keys(pgs).sort().forEach(function (sg) { opt += '<option value="g:' + sg + '">Sayfa · ' + esc(pgs[sg].title || sg) + '</option>'; });
+    sel.innerHTML = opt;
+    _quill = new Quill('#bodyEditor', { theme: 'snow', modules: { toolbar: [[{ header: [2, 3, false] }], ['bold', 'italic', 'underline'], [{ list: 'ordered' }, { list: 'bullet' }], ['link'], [{ align: [] }], ['clean']] } });
+    sel.addEventListener('change', bodyLoad);
+    var sb = $('#bodySaveBtn'); if (sb) sb.addEventListener('click', bodySave);
+  }
+  function bodyRef() {
+    var el = $('#bodyPageSelect'); if (!el || !el.value) return null;
+    return { obj: el.value.charAt(0) === 'p' ? content.products : content.pages, slug: el.value.slice(2) };
+  }
+  function bodyLoad() {
+    if (!_quill) return;
+    var ref = bodyRef();
+    if (!ref) { _quill.setContents([]); return; }
+    var stored = (ref.obj[ref.slug] || {}).body;
+    if (stored) { _quill.setContents([]); _quill.clipboard.dangerouslyPasteHTML(stored); return; }
+    _quill.setText('Yukleniyor…');
+    fetch(ref.slug + '.html').then(function (r) { return r.text(); }).then(function (h) {
+      var d = new DOMParser().parseFromString(h, 'text/html');
+      var bc = d.querySelector('[data-cms-body]');
+      _quill.setContents([]);
+      if (bc) _quill.clipboard.dangerouslyPasteHTML(bc.innerHTML);
+    }).catch(function () { _quill.setContents([]); });
+  }
+  function bodySave() {
+    var ref = bodyRef();
+    if (!ref || !_quill) { toast('Once bir sayfa secin', 'err'); return; }
+    ref.obj[ref.slug] = ref.obj[ref.slug] || {};
+    var html = _quill.getSemanticHTML ? _quill.getSemanticHTML() : _quill.root.innerHTML;
+    ref.obj[ref.slug].body = _quill.getText().trim() ? html : '';
+    save('Icerik kaydedildi');
   }
 
   function renderHomeVals() {

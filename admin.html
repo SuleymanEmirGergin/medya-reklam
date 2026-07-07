@@ -15,6 +15,7 @@
   <meta name="theme-color" content="#0D70FA" />
   <link rel="stylesheet" href="assets/styles.css?v=25" />
   <link rel="stylesheet" href="assets/admin.css?v=1" />
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 </head>
 <body class="admin-body">
 
@@ -232,6 +233,17 @@
           </div>
 
           <div class="card">
+            <h3>Sayfa İçeriği (Zengin Editör)</h3>
+            <p class="sub">Bir sayfa seçip içeriğini görsel editörle düzenle (kalın, başlık, liste, link…). Boş bırakılırsa sayfadaki mevcut içerik olduğu gibi kalır.</p>
+            <div class="field">
+              <label for="bodyPageSelect">Sayfa</label>
+              <select id="bodyPageSelect"></select>
+            </div>
+            <div id="bodyEditor" style="min-height:260px;background:#fff;border-radius:8px;"></div>
+            <button type="button" class="btn btn--primary" id="bodySaveBtn" style="margin-top:14px;">İçeriği Kaydet</button>
+          </div>
+
+          <div class="card">
             <h3>Yedek &amp; Geri Yükleme</h3>
             <p class="sub">Büyük bir değişiklik yapmadan önce içeriğini dosya olarak yedekleyebilirsin.</p>
             <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -279,7 +291,8 @@
 
   <div class="toasts" id="toasts"></div>
 
-  <script src="assets/store.js?v=4"></script>
-  <script src="assets/admin.js?v=4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  <script src="assets/store.js?v=5"></script>
+  <script src="assets/admin.js?v=5"></script>
 </body>
 </html>
