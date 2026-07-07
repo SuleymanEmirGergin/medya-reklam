@@ -129,7 +129,7 @@
 
     <!-- LED serit — MR logolu kayan hizmet yazilari (1. gorsel referansi) -->
     <div class="ledmarquee" aria-hidden="true">
-      <div class="ledmarquee__track">
+      <div class="ledmarquee__track" id="ledTrack">
         <img class="ledmarquee__logo" src="assets/img/mr-logo-spinner.png?v=2" alt="" /><span class="ledmarquee__item">Cam Reklam Uygulamaları</span>
         <img class="ledmarquee__logo" src="assets/img/mr-logo-spinner.png?v=2" alt="" /><span class="ledmarquee__item">Işıklı Vinil</span>
         <img class="ledmarquee__logo" src="assets/img/mr-logo-spinner.png?v=2" alt="" /><span class="ledmarquee__item">Germe Tabela</span>
@@ -171,24 +171,24 @@
             <span class="pillar__n">01</span>
             <span class="pillar__emoji">🎯</span>
           </div>
-          <h3>Doğru Plan, Doğru Sonuç</h3>
-          <p>Keşif, ölçü ve görsel onayla başlayan net bir üretim planı. Sürpriz yok, tahmin yok.</p>
+          <h3 data-cms="pillar1Title">Doğru Plan, Doğru Sonuç</h3>
+          <p data-cms="pillar1Text">Keşif, ölçü ve görsel onayla başlayan net bir üretim planı. Sürpriz yok, tahmin yok.</p>
         </div>
         <div class="pillar">
           <div class="pillar__top">
             <span class="pillar__n">02</span>
             <span class="pillar__emoji">💼</span>
           </div>
-          <h3>Bütçenize Uygun</h3>
-          <p>Kaliteden ödün vermeden, ihtiyacınıza ve bütçenize göre ölçeklenen çözümler sunarız.</p>
+          <h3 data-cms="pillar2Title">Bütçenize Uygun</h3>
+          <p data-cms="pillar2Text">Kaliteden ödün vermeden, ihtiyacınıza ve bütçenize göre ölçeklenen çözümler sunarız.</p>
         </div>
         <div class="pillar">
           <div class="pillar__top">
             <span class="pillar__n">03</span>
             <span class="pillar__emoji">🛠️</span>
           </div>
-          <h3>İş, Uygulamada Belli Olur</h3>
-          <p>Asıl fark montajda ve son kontrolde ortaya çıkar. İşçiliği detayda gösteririz.</p>
+          <h3 data-cms="pillar3Title">İş, Uygulamada Belli Olur</h3>
+          <p data-cms="pillar3Text">Asıl fark montajda ve son kontrolde ortaya çıkar. İşçiliği detayda gösteririz.</p>
         </div>
       </div>
     </div>
@@ -597,15 +597,15 @@
         <div class="split__body reveal" data-delay="1">
           <span class="eyebrow" data-cms="aboutEyebrow">Hakkımızda</span>
           <h2 class="scroll-fade-text" data-cms="aboutTitle">Web sitemize hoş geldiniz</h2>
-          <p>Medya Reklam, uzun yıllardır reklam ve tabela sektöründe üretim yapan bir aile işletmesidir. Tasarım, üretim ve montajı tek çatı altında toplayarak işin her aşamasını kendi ekibimizle yürütürüz.</p>
-          <p>Amacımız; estetik, dayanıklı ve markanıza değer katan çözümleri, kaliteden ödün vermeden ve zamanında teslim etmektir.</p>
+          <p data-cms="aboutP1">Medya Reklam, uzun yıllardır reklam ve tabela sektöründe üretim yapan bir aile işletmesidir. Tasarım, üretim ve montajı tek çatı altında toplayarak işin her aşamasını kendi ekibimizle yürütürüz.</p>
+          <p data-cms="aboutP2">Amacımız; estetik, dayanıklı ve markanıza değer katan çözümleri, kaliteden ödün vermeden ve zamanında teslim etmektir.</p>
           <ul class="checklist">
-            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span> Tasarımdan montaja kadar tek elden hizmet</li>
-            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span> Kendi atölyemizde üretim, dış bağımlılık yok</li>
-            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span> İstanbul geneli yerinde keşif ve montaj</li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span> <span data-cms="aboutCheck1">Tasarımdan montaja kadar tek elden hizmet</span></li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span> <span data-cms="aboutCheck2">Kendi atölyemizde üretim, dış bağımlılık yok</span></li>
+            <li><span class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span> <span data-cms="aboutCheck3">İstanbul geneli yerinde keşif ve montaj</span></li>
           </ul>
           <div style="margin-top:30px;">
-            <a class="btn btn--ghost" href="hakkimizda.html">Hikâyemizi okuyun
+            <a class="btn btn--ghost" href="hakkimizda.html"><span data-cms="aboutBtn">Hikâyemizi okuyun</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
           </div>
@@ -638,33 +638,33 @@
       <div class="bento">
         <div class="feature reveal">
           <div class="feature__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h4>Uzman Kadro</h4>
-          <p>Otuz yılı aşan tabelacılık deneyimine sahip, montajda da işin başında olan bir ekip.</p>
+          <h4 data-cms="feat1Title">Uzman Kadro</h4>
+          <p data-cms="feat1Text">Otuz yılı aşan tabelacılık deneyimine sahip, montajda da işin başında olan bir ekip.</p>
         </div>
         <div class="feature reveal" data-delay="1">
           <div class="feature__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg></div>
-          <h4>Kalite Kontrol Süreci</h4>
-          <p>Üretimin her aşamasında titiz kontrol; sahaya yalnızca onaylanan iş çıkar.</p>
+          <h4 data-cms="feat2Title">Kalite Kontrol Süreci</h4>
+          <p data-cms="feat2Text">Üretimin her aşamasında titiz kontrol; sahaya yalnızca onaylanan iş çıkar.</p>
         </div>
         <div class="feature reveal" data-delay="2">
           <div class="feature__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h4>Memnuniyet Garantisi</h4>
-          <p>Teslimat sonrası destek ve garanti ile arkanızdayız; iş bitince ilişki bitmez.</p>
+          <h4 data-cms="feat3Title">Memnuniyet Garantisi</h4>
+          <p data-cms="feat3Text">Teslimat sonrası destek ve garanti ile arkanızdayız; iş bitince ilişki bitmez.</p>
         </div>
         <div class="feature reveal">
           <div class="feature__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></div>
-          <h4>Her Ölçekte Hizmet</h4>
-          <p>Tek bir dükkân tabelasından zincir mağaza projelerine kadar her ölçekte çözüm.</p>
+          <h4 data-cms="feat4Title">Her Ölçekte Hizmet</h4>
+          <p data-cms="feat4Text">Tek bir dükkân tabelasından zincir mağaza projelerine kadar her ölçekte çözüm.</p>
         </div>
         <div class="feature reveal" data-delay="1">
           <div class="feature__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 2 2.4 7.4H22l-6 4.5 2.3 7.1-6.3-4.6L5.7 21 8 13.9 2 9.4h7.6z"/></svg></div>
-          <h4>Estetik ve Dayanıklılık</h4>
-          <p>Dış mekâna uygun, uzun ömürlü malzeme ve markanıza yakışan temiz bir bitiş.</p>
+          <h4 data-cms="feat5Title">Estetik ve Dayanıklılık</h4>
+          <p data-cms="feat5Text">Dış mekâna uygun, uzun ömürlü malzeme ve markanıza yakışan temiz bir bitiş.</p>
         </div>
         <div class="feature reveal" data-delay="2">
           <div class="feature__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg></div>
-          <h4>Yenilikçi Tasarım Anlayışı</h4>
-          <p>Hazır kalıp değil; markanıza özgü, özgün ve uygulanabilir tasarımlar geliştiririz.</p>
+          <h4 data-cms="feat6Title">Yenilikçi Tasarım Anlayışı</h4>
+          <p data-cms="feat6Text">Hazır kalıp değil; markanıza özgü, özgün ve uygulanabilir tasarımlar geliştiririz.</p>
         </div>
       </div>
     </div>
@@ -682,7 +682,7 @@
         <div class="split__body">
           <span class="eyebrow" data-cms="igEyebrow">Instagram</span>
           <h2 class="scroll-fade-text" style="margin:18px 0 20px;" data-cms="igTitle">Daha fazla iş, @medya_reklam34'te</h2>
-          <p>Tamamladığımız tabela, araç giydirme ve dijital baskı işlerinin güncel fotoğraf ve videolarını Instagram hesabımızda paylaşıyoruz.</p>
+          <p data-cms="igText">Tamamladığımız tabela, araç giydirme ve dijital baskı işlerinin güncel fotoğraf ve videolarını Instagram hesabımızda paylaşıyoruz.</p>
           <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:30px;">
             <a class="btn btn--primary ig-follow" href="https://www.instagram.com/medya_reklam34/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> Takip Et</a>
             <a class="btn btn--ghost" href="portfoy.html">Tüm işlerimiz <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -700,7 +700,7 @@
         <div class="cta reveal">
           <span class="eyebrow" style="justify-content:center;color:#d9a328;" data-cms="ctaEyebrow">Reklama yapılan yatırım</span>
           <h2 data-cms="ctaTitle">Geri dönüşü en hızlı yatırımdır</h2>
-          <p>Tabela ihtiyacınızı bizimle paylaşın; keşif, ölçü ve fiyat teklifini hızla hazırlayalım.</p>
+          <p data-cms="ctaText">Tabela ihtiyacınızı bizimle paylaşın; keşif, ölçü ve fiyat teklifini hızla hazırlayalım.</p>
           <div class="cta__actions">
             <a class="btn btn--light" href="tel:+905324868260">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -805,6 +805,16 @@
           var lk = el.getAttribute('data-cms-link');
           if(lk && h[lk]) el.setAttribute('href', h[lk]);
         });
+        if(Array.isArray(h.marquee) && h.marquee.length){
+          var track = document.getElementById('ledTrack');
+          if(track){
+            var logo = 'assets/img/mr-logo-spinner.png?v=2';
+            var one = h.marquee.map(function(p){
+              return '<img class="ledmarquee__logo" src="'+logo+'" alt="" /><span class="ledmarquee__item">'+esc(p)+'</span>';
+            }).join('');
+            track.innerHTML = one + one;
+          }
+        }
       } catch(e){}
     }
     function boot(){

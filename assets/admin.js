@@ -64,7 +64,26 @@
     { k: 'aboutEyebrow',    l: 'Hakkımızda — etiket' },     { k: 'aboutTitle',    l: 'Hakkımızda — başlık' },
     { k: 'featuresEyebrow', l: 'Neden Biz — etiket' },      { k: 'featuresTitle', l: 'Neden Biz — başlık' },
     { k: 'igEyebrow',       l: 'Instagram — etiket' },      { k: 'igTitle',       l: 'Instagram — başlık' },
-    { k: 'ctaEyebrow',      l: 'CTA — etiket' },            { k: 'ctaTitle',      l: 'CTA — başlık' }
+    { k: 'ctaEyebrow',      l: 'CTA — etiket' },            { k: 'ctaTitle',      l: 'CTA — başlık' },
+    { group: 'Çalışma Adımları' },
+    { k: 'pillar1Title', l: '1. adım — başlık' }, { k: 'pillar1Text', l: '1. adım — metin', t: 'textarea' },
+    { k: 'pillar2Title', l: '2. adım — başlık' }, { k: 'pillar2Text', l: '2. adım — metin', t: 'textarea' },
+    { k: 'pillar3Title', l: '3. adım — başlık' }, { k: 'pillar3Text', l: '3. adım — metin', t: 'textarea' },
+    { group: 'Neden Biz — Özellikler' },
+    { k: 'feat1Title', l: '1 — başlık' }, { k: 'feat1Text', l: '1 — metin', t: 'textarea' },
+    { k: 'feat2Title', l: '2 — başlık' }, { k: 'feat2Text', l: '2 — metin', t: 'textarea' },
+    { k: 'feat3Title', l: '3 — başlık' }, { k: 'feat3Text', l: '3 — metin', t: 'textarea' },
+    { k: 'feat4Title', l: '4 — başlık' }, { k: 'feat4Text', l: '4 — metin', t: 'textarea' },
+    { k: 'feat5Title', l: '5 — başlık' }, { k: 'feat5Text', l: '5 — metin', t: 'textarea' },
+    { k: 'feat6Title', l: '6 — başlık' }, { k: 'feat6Text', l: '6 — metin', t: 'textarea' },
+    { group: 'Hakkımızda' },
+    { k: 'aboutP1', l: 'Paragraf 1', t: 'textarea' }, { k: 'aboutP2', l: 'Paragraf 2', t: 'textarea' },
+    { k: 'aboutCheck1', l: 'Madde 1' }, { k: 'aboutCheck2', l: 'Madde 2' }, { k: 'aboutCheck3', l: 'Madde 3' },
+    { k: 'aboutBtn', l: 'Buton yazısı' },
+    { group: 'Instagram / CTA / LED Şerit' },
+    { k: 'igText', l: 'Instagram açıklaması', t: 'textarea' },
+    { k: 'ctaText', l: 'CTA açıklaması', t: 'textarea' },
+    { k: 'marquee', l: 'LED şerit yazıları (her satıra bir tane)', t: 'marquee' }
   ];
 
   /* ---- Durum ------------------------------------------------------------ */
@@ -503,8 +522,8 @@
     box.setAttribute('data-built', '1');
     box.innerHTML = HOME_FIELDS.map(function (f) {
       if (f.group) return '<h4 style="margin:20px 0 8px;font-size:0.9rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">' + esc(f.group) + '</h4>';
-      var input = f.t === 'textarea'
-        ? '<textarea id="h_' + f.k + '" style="min-height:70px;"></textarea>'
+      var input = (f.t === 'textarea' || f.t === 'marquee')
+        ? '<textarea id="h_' + f.k + '" style="min-height:' + (f.t === 'marquee' ? '120' : '70') + 'px;"></textarea>'
         : '<input type="text" id="h_' + f.k + '" />';
       return '<div class="field"><label for="h_' + f.k + '">' + esc(f.l) + '</label>' + input + '</div>';
     }).join('');
@@ -516,7 +535,10 @@
     HOME_FIELDS.forEach(function (f) {
       if (!f.k) return;
       var el = $('#h_' + f.k);
-      if (el) el.value = h[f.k] || '';
+      if (!el) return;
+      if (f.t === 'marquee') el.value = (Array.isArray(h[f.k]) ? h[f.k] : []).join('
+');
+      else el.value = h[f.k] || '';
     });
   }
 
@@ -644,7 +666,10 @@
       HOME_FIELDS.forEach(function (f) {
         if (!f.k) return;
         var el = $('#h_' + f.k);
-        if (el) content.home[f.k] = el.value.trim();
+        if (!el) return;
+        if (f.t === 'marquee') content.home[f.k] = el.value.split('
+').map(function(x){return x.trim();}).filter(Boolean);
+        else content.home[f.k] = el.value.trim();
       });
       save('Ana sayfa metinleri kaydedildi');
     });
