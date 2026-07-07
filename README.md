@@ -46,13 +46,3 @@ portföy galerisinde sergiler ve teklif formuyla iletişim sağlar.
 - **Güvenlik:** `anon` (public) anahtar herkese açıktır ve sorun değildir — yazma yetkisini Supabase
   **RLS** korur (okuma herkese açık, **yazma yalnızca giriş yapmış kullanıcıya**).
   Gizli `service_role` anahtarı ve DB şifresi **asla** repoya konmaz.
-
-## Yayın (Vercel)
-Statik site olduğu için derleme gerekmez. Vercel'de **"Other / Static"** olarak içe aktarın;
-kök dizin doğrudan sunulur, `404.html` otomatik kullanılır.
-
-## Yayın sonrası yapılacaklar
-- İletişim formu: ilk gönderimde `info@medya-reklam.com` adresine gelen FormSubmit onay
-  e-postasındaki bağlantıyı tıklayarak formu aktifleştirin.
-- `sitemap.xml`'i Google Search Console'a gönderin.
-- Yayın alan adınız `www.medya-reklam.com` değilse, meta/sitemap/robots içindeki adresleri güncelleyin.
