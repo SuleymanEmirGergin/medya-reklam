@@ -181,6 +181,7 @@
     renderHero();
     renderContact();
     renderHomeVals();
+    renderProductVals();
   }
 
   /* ---- Galeri kategori filtresi ---------------------------------------- */
@@ -529,6 +530,31 @@
     }).join('');
   }
 
+  function buildProductForm() {
+    var box = $('#productFields');
+    if (!box || box.getAttribute('data-built')) return;
+    box.setAttribute('data-built', '1');
+    var prods = content.products || {};
+    box.innerHTML = Object.keys(prods).sort().map(function (slug) {
+      var p = prods[slug] || {};
+      return '<div style="border-top:1px solid var(--line);padding-top:14px;margin-top:14px;">' +
+        '<h4 style="margin:0 0 8px;font-size:0.9rem;color:var(--ink);">' + esc(p.title || slug) + '</h4>' +
+        '<div class="field"><label>Baslik</label><input type="text" id="pr_' + slug + '_title" /></div>' +
+        '<div class="field"><label>Aciklama</label><textarea id="pr_' + slug + '_intro" style="min-height:60px;"></textarea></div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function renderProductVals() {
+    buildProductForm();
+    var prods = content.products || {};
+    Object.keys(prods).forEach(function (slug) {
+      var p = prods[slug] || {};
+      var t = $('#pr_' + slug + '_title'); if (t) t.value = p.title || '';
+      var i = $('#pr_' + slug + '_intro'); if (i) i.value = p.intro || '';
+    });
+  }
+
   function renderHomeVals() {
     buildHomeForm();
     var h = content.home || {};
@@ -672,6 +698,19 @@
         else content.home[f.k] = el.value.trim();
       });
       save('Ana sayfa metinleri kaydedildi');
+    });
+
+    // Ürün sayfaları
+    var productForm = $('#productForm');
+    if (productForm) productForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      content.products = content.products || {};
+      Object.keys(content.products).forEach(function (slug) {
+        content.products[slug] = content.products[slug] || {};
+        var t = $('#pr_' + slug + '_title'); if (t) content.products[slug].title = t.value.trim();
+        var i = $('#pr_' + slug + '_intro'); if (i) content.products[slug].intro = i.value.trim();
+      });
+      save('Ürün sayfaları kaydedildi');
     });
 
     // Yedek

@@ -588,13 +588,25 @@
         }
       } catch(e){}
     }
+    function applyProduct(products){
+      if(!products) return;
+      try {
+        var slug = (location.pathname.split('/').pop() || '').replace(/\.html$/, '') || 'index';
+        var p = products[slug];
+        if(!p) return;
+        Array.prototype.forEach.call(document.querySelectorAll('[data-cms-product]'), function(el){
+          var k = el.getAttribute('data-cms-product');
+          if(p[k] != null && p[k] !== '') el.textContent = p[k];
+        });
+      } catch(e){}
+    }
     function run(){
       if(!document.querySelector('a[href^="tel:"], a[href^="mailto:"], .footer__contact')) return;
       try {
         fetch(SB_URL + '/rest/v1/site_content?id=eq.1&select=data', {
           headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY }
         }).then(function(r){ return r.ok ? r.json() : null; })
-          .then(function(rows){ var d = rows && rows[0] && rows[0].data; if(d) applyContact(d.contact); })
+          .then(function(rows){ var d = rows && rows[0] && rows[0].data; if(d){ applyContact(d.contact); applyProduct(d.products); } })
           .catch(function(){});
       } catch(e){}
     }
