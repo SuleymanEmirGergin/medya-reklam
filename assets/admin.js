@@ -542,6 +542,7 @@
         '<h4 style="margin:0 0 8px;font-size:0.9rem;color:var(--ink);">' + esc(p.title || slug) + '</h4>' +
         '<div class="field"><label>Baslik</label><input type="text" id="pr_' + slug + '_title" /></div>' +
         '<div class="field"><label>Aciklama</label><textarea id="pr_' + slug + '_intro" style="min-height:60px;"></textarea></div>' +
+        '<div class="field"><label>Icerik (HTML - bos birakirsan mevcut kalir)</label><textarea id="pr_' + slug + '_body" style="min-height:80px;"></textarea></div>' +
         '</div>';
     }).join('');
   }
@@ -553,6 +554,7 @@
       var p = prods[slug] || {};
       var t = $('#pr_' + slug + '_title'); if (t) t.value = p.title || '';
       var i = $('#pr_' + slug + '_intro'); if (i) i.value = p.intro || '';
+      var b = $('#pr_' + slug + '_body'); if (b) b.value = p.body || '';
     });
   }
 
@@ -567,6 +569,7 @@
         '<h4 style="margin:0 0 8px;font-size:0.9rem;color:var(--ink);">' + esc(p.title || slug) + '</h4>' +
         '<div class="field"><label>Baslik</label><input type="text" id="pg_' + slug + '_title" /></div>' +
         '<div class="field"><label>Aciklama</label><textarea id="pg_' + slug + '_intro" style="min-height:60px;"></textarea></div>' +
+        '<div class="field"><label>Icerik (HTML - bos birakirsan mevcut kalir)</label><textarea id="pg_' + slug + '_body" style="min-height:80px;"></textarea></div>' +
         '</div>';
     }).join('');
   }
@@ -578,6 +581,7 @@
       var p = pgs[slug] || {};
       var t = $('#pg_' + slug + '_title'); if (t) t.value = p.title || '';
       var i = $('#pg_' + slug + '_intro'); if (i) i.value = p.intro || '';
+      var b = $('#pg_' + slug + '_body'); if (b) b.value = p.body || '';
     });
   }
 
@@ -735,6 +739,7 @@
         content.products[slug] = content.products[slug] || {};
         var t = $('#pr_' + slug + '_title'); if (t) content.products[slug].title = t.value.trim();
         var i = $('#pr_' + slug + '_intro'); if (i) content.products[slug].intro = i.value.trim();
+        var b = $('#pr_' + slug + '_body'); if (b) content.products[slug].body = b.value.trim();
       });
       save('Ürün sayfaları kaydedildi');
     });
@@ -748,6 +753,7 @@
         content.pages[slug] = content.pages[slug] || {};
         var t = $('#pg_' + slug + '_title'); if (t) content.pages[slug].title = t.value.trim();
         var i = $('#pg_' + slug + '_intro'); if (i) content.pages[slug].intro = i.value.trim();
+        var b = $('#pg_' + slug + '_body'); if (b) content.pages[slug].body = b.value.trim();
       });
       save('Kurumsal & rehber sayfaları kaydedildi');
     });

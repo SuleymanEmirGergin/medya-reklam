@@ -618,7 +618,7 @@
   <section class="section--tight">
     <div class="container">
       <div class="statsband reveal">
-        <div class="statsband__grid">
+        <div class="statsband__grid" id="statsBand">
           <div><div class="n"><span class="scroll-counter stats-reveal-text" data-target="2500">0</span><em class="stats-reveal-text">+</em></div><div class="l stats-reveal-text">tamamlanan proje</div></div>
           <div><div class="n"><span class="scroll-counter stats-reveal-text" data-target="30">0</span><em class="stats-reveal-text">+</em></div><div class="l stats-reveal-text">yıl tecrübe</div></div>
           <div><div class="n"><span class="stats-reveal-text">İstanbul</span></div><div class="l stats-reveal-text">geneli montaj</div></div>
@@ -796,6 +796,16 @@
         '</a>';
       }).join('');
     }
+    function renderStatsBand(stats){
+      var g=document.getElementById('statsBand'); if(!g||!stats||!stats.length) return;
+      g.innerHTML = stats.map(function(s){
+        var raw=String(s.number==null?'':s.number), digits=raw.replace(/[^0-9]/g,'');
+        var num=(digits && /^[0-9][0-9.\s]*$/.test(raw.trim()))
+          ? '<span class="scroll-counter stats-reveal-text" data-target="'+digits+'">'+esc(raw)+'</span>'
+          : '<span class="stats-reveal-text">'+esc(raw)+'</span>';
+        return '<div><div class="n">'+num+(s.em?'<em class="stats-reveal-text">'+esc(s.em)+'</em>':'')+'</div><div class="l stats-reveal-text">'+esc(s.label||'')+'</div></div>';
+      }).join('');
+    }
     function renderHome(h){
       if(!h) return;
       try {
@@ -821,6 +831,7 @@
       if(!window.Store || !Store.getContent) return; /* statik yedek kalir */
       Store.getContent().then(function(c){
         if(c && c.home) renderHome(c.home);
+        if(c && c.stats) renderStatsBand(c.stats);
         if(c && c.gallery && c.gallery.length) renderFeatured(c.gallery);
       }).catch(function(){});
     }

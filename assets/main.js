@@ -597,6 +597,7 @@
           var k = el.getAttribute('data-cms-product');
           if(p[k] != null && p[k] !== '') el.textContent = p[k];
         });
+        if(p.body){ var bc = document.querySelector('[data-cms-body]'); if(bc) bc.innerHTML = p.body; }
       } catch(e){}
     }
     function run(){
