@@ -142,7 +142,6 @@
         'urun-cati-tabelasi': { title: 'Çatı Tabelası', intro: 'Kilometrelerce uzaktan fark edilmenizi sağlayan devasa kutu harf çatı uygulamaları.' },
         'urun-cephe': { title: 'Cephe Kaplama & Giydirme', intro: 'Bina cephenizin kompozit panel ile komple yenilenmesi.' },
         'urun-eczane': { title: 'Eczane Tabelası', intro: 'Yönetmeliğe uygun standart veya özel tasarım eczane tabelaları.' },
-        'urun-filo-arac-giydirme': { title: 'Filo Araç Giydirme', intro: 'Şirketinizin tüm araçları için standartlaştırılmış, profesyonel seri kaplama hizmeti.' },
         'urun-fuar-standi': { title: 'Fuar Standı & Display Ürünleri', intro: 'Fuar ve etkinlikleriniz için dikkat çekici, taşınabilir reklam ve sergileme çözümleri.' },
         'urun-ic-mekan': { title: 'İç Mekan & Kurumsal Tabela', intro: 'Resepsiyon, banko arkası veya ofis içi estetik logo uygulamaları.' },
         'urun-is-makinesi-giydirme': { title: 'İş Makinesi Giydirme', intro: 'Vinç, kamyon ve ağır vasıtalar için dayanıklı folyo reklam uygulamaları.' },
@@ -150,17 +149,15 @@
         'urun-isikli-pano-billboard': { title: 'Işıklı Pano & Billboard', intro: 'Geniş ebatlı, yüksek görünürlüğe sahip aydınlatmalı dış mekan panoları.' },
         'urun-karsilama-bankosu': { title: 'Karşılama Bankosu Tabelası', intro: 'Misafirlerinizi karşılayan, şirket prestijinizi yansıtan resepsiyon tabelaları.' },
         'urun-kompozit-oyma': { title: 'Kompozit Oyma Tabela', intro: 'CNC oyma kompozit, arkadan aydınlatmalı şık dış mekan çözümü.' },
-        'urun-kumas-lightbox': { title: 'Kumaş Baskı Lightbox', intro: 'Alüminyum kasa içine gerilen, UV baskılı ve kolay değişen ışıklı kumaş panolar.' },
         'urun-kurumsal-cephe': { title: 'Kurumsal Dış Cephe Tabela', intro: 'Firmaların ana binalarında kullanılan, kurumsal kimliği yansıtan büyük ölçekli projeler.' },
         'urun-led-harf': { title: 'LED Aydınlatmalı Harf', intro: 'Enerji tasarruflu, homojen ışık dağılımı sağlayan şık harf tabelalar.' },
         'urun-lightbox': { title: 'Lightbox Reklam Panoları', intro: 'Kumaş baskılı, kolay değiştirilebilir arkadan aydınlatmalı panolar.' },
         'urun-otobus-minibus-giydirme': { title: 'Otobüs & Minibüs Giydirme', intro: 'Toplu taşıma ve personel servis araçları için geniş yüzey kaplamaları.' },
         'urun-ozel-arac-kaplama': { title: 'Özel Araç Kaplama', intro: 'Spor, yarış veya şahsi araçlarınız için premium folyo renk değişimi ve koruma.' },
         'urun-paslanmaz-harf': { title: 'Paslanmaz Harf Tabela', intro: 'Uzun ömürlü ve prestijli, krom veya gold paslanmazdan üretilen harfler.' },
-        'urun-pleksi-kutu-harf': { title: 'Pleksi Kutu Harf Tabela', intro: 'Canlı renk seçenekleri sunan, ışık geçirgenliği yüksek akrilik tabelalar.' },
         'urun-ppf-arac-koruma': { title: 'Şeffaf PPF Araç Koruma', intro: 'Aracınızın boyasını taş vurukları ve çiziklerden koruyan görünmez film kaplama.' },
         'urun-santiye-insaat-tabelasi': { title: 'Şantiye & İnşaat Tabelası', intro: 'İnşaat alanlarında bilgi ve reklam amaçlı kullanılan devasa sac/vinil tabelalar.' },
-        'urun-ticari-arac-kaplama': { title: 'Ticari Araç & Kamyonet Kaplama', intro: 'Kasa ve gövdeye özel tasarlanmış, hareketli reklam alanınız olan ticari giydirmeler.' },
+        'urun-ticari-arac-kaplama': { title: 'Ticari & Filo Araç Giydirme', intro: 'Kasa ve gövdeye özel tasarlanmış, hareketli reklam alanınız olan ticari giydirmeler.' },
         'urun-totem': { title: 'Totem & Pilon Tabela', intro: 'Açık alanlarda yüksek görünürlük sağlayan devasa reklam üniteleri.' },
         'urun-tuning-folyo': { title: 'Tuning ve Özel Kesim Folyo', intro: 'Kişiselleştirilmiş araç tasarımları için plotter kesim dekoratif şerit ve logolar.' },
         'urun-yonlendirme-otopark': { title: 'Yönlendirme ve Otopark Tabelaları', intro: 'Site, plaza ve AVM içlerinde ziyaretçilere yol gösteren fonksiyonel tabelalar.' }
@@ -251,7 +248,10 @@
       site:         Object.assign({}, base.site, saved.site || {}),
       contact:      Object.assign({}, base.contact, saved.contact || {}),
       home:         Object.assign({}, base.home, saved.home || {}),
-      products:     Object.assign({}, base.products, saved.products || {}),
+      products:     Object.keys(base.products).reduce(function (products, slug) {
+        products[slug] = Object.assign({}, base.products[slug], saved.products && saved.products[slug] || {});
+        return products;
+      }, {}),
       pages:        Object.assign({}, base.pages, saved.pages || {}),
       stats:        Array.isArray(saved.stats)        ? saved.stats        : base.stats,
       gallery:      Array.isArray(saved.gallery)      ? saved.gallery      : base.gallery,

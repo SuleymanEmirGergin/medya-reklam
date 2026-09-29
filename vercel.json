@@ -1,4 +1,12 @@
 {
+  "redirects": [
+    { "source": "/urun-kumas-lightbox.html", "destination": "/urun-lightbox.html", "permanent": true },
+    { "source": "/urun-kumas-lightbox", "destination": "/urun-lightbox.html", "permanent": true },
+    { "source": "/urun-pleksi-kutu-harf.html", "destination": "/urun-isikli-kutu-harf.html", "permanent": true },
+    { "source": "/urun-pleksi-kutu-harf", "destination": "/urun-isikli-kutu-harf.html", "permanent": true },
+    { "source": "/urun-filo-arac-giydirme.html", "destination": "/urun-ticari-arac-kaplama.html", "permanent": true },
+    { "source": "/urun-filo-arac-giydirme", "destination": "/urun-ticari-arac-kaplama.html", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
