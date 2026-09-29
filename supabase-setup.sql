@@ -27,14 +27,25 @@ create policy "site_content_read"
   for select
   using (true);
 
--- Sadece GIRIS YAPMIS kullanici (admin) yazabilir (insert + update + delete):
+-- Yalnizca admin e-postasi yazabilir (insert + update; delete politikasi yok = yasak):
 drop policy if exists "site_content_write" on public.site_content;
-create policy "site_content_write"
+drop policy if exists "site_content_insert" on public.site_content;
+drop policy if exists "site_content_update" on public.site_content;
+drop policy if exists "site_content_delete" on public.site_content;
+create policy "site_content_insert"
   on public.site_content
-  for all
+  for insert
   to authenticated
-  using (true)
-  with check (true);
+  with check ((auth.jwt() ->> 'email') = 'info@medya-reklam.com');
+create policy "site_content_update"
+  on public.site_content
+  for update
+  to authenticated
+  using ((auth.jwt() ->> 'email') = 'info@medya-reklam.com')
+  with check ((auth.jwt() ->> 'email') = 'info@medya-reklam.com');
+
+-- Storage kullanilmiyor (gorseller assets/ altinda). Ileride bucket acilirsa
+-- storage.objects icin de ayni e-posta kosuluyla insert/update/delete politikasi yazin.
 
 -- Bitti. Sonraki adim: Authentication > Users > "Add user" ile admin
 -- e-postasi + sifresi olusturun (SUPABASE-KURULUM.md'ye bakin).
