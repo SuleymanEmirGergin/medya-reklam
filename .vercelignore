@@ -7,3 +7,4 @@ __pycache__/
 supabase-setup.sql
 tools/
 partials/
+docs/

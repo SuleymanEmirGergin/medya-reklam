@@ -273,7 +273,8 @@
       }).then(function (r) {
         if (!r.ok) throw new Error('site_content HTTP ' + r.status);
         return r.json();
-      }).then(function (rows) { return rows && rows[0] ? rows[0].data : null; });
+      }).then(function (rows) { return rows && rows[0] ? rows[0].data : null; })
+        .catch(function (e) { global.__mrContent = null; throw e; }); // başarısızsa sonraki çağrı yeniden denesin
     }
     return global.__mrContent;
   }
