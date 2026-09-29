@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>document.documentElement.classList.add('js')</script>
   <title>Tabela Projelerimiz: Tamamlanan İşler | Medya Reklam</title>
   <meta name="description" content="Medya Reklam'ın İstanbul'da ürettiği ışıklı harf, totem, cephe, araç giydirme ve dijital baskı projelerinden örnekler. Projeniz için ücretsiz keşif." />
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Handjet:wght@700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#0D70FA" />
-  <link rel="stylesheet" href="assets/styles.css?v=28" />
+  <link rel="stylesheet" href="assets/styles.css?v=29" />
   <!-- Canonical + Open Graph / Twitter (yayin domaini: https://www.medya-reklam.com -- farkliysa guncelleyin) -->
   <link rel="canonical" href="https://www.medya-reklam.com/portfoy.html" />
   <meta property="og:type" content="website" />
@@ -50,19 +50,13 @@
 </head>
 <body>
 
-  <!-- Preloader -->
-  <div id="preloader" class="preloader">
-    <div class="preloader__spinner">
-      <img src="assets/img/logo-icon.png" alt="Medya Reklam Yükleniyor" class="preloader__logo" />
-    </div>
-  </div>
   <!-- ===================== Header ===================== -->
   <!-- partial:header -->
   <a class="skip-link" href="#main">Ana içeriğe geç</a>
 <header class="site-header">
     <div class="container">
       <nav class="nav" aria-label="Ana menü">
-        <a class="brand" href="index.html"><img class="brand__logo" src="assets/img/logo.png?v=3" alt="Medya Reklam" /></a>
+        <a class="brand" href="index.html"><img class="brand__logo" src="assets/img/logo.png?v=3" alt="Medya Reklam" width="514" height="152" /></a>
 
         <ul class="nav__menu" id="navMenu">
           <li class="nav__item"><a class="nav__link" href="index.html">Ana Sayfa</a></li>
@@ -133,28 +127,28 @@
         <button class="folio-filter__btn" data-filter="baski" aria-pressed="false">Dijital Baskı</button>
       </div>
       <div class="folio" id="folioGrid">
-        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/isikli-tabela-gece.webp" type="image/webp" /><img src="assets/img/isikli-tabela-gece.jpg" alt="Gece ışıklı tabela" loading="lazy"  /></picture><div class="folio__cap"><b>Gece Işıklı Tabela</b><span>Işıklı Bayrak Tabela</span></div></div>
-        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-ddiamond.webp" type="image/webp" /><img src="assets/img/kutu-harf-ddiamond.jpg" alt="D-Diamond ışıklı kutu harf" loading="lazy"  /></picture><div class="folio__cap"><b>D-Diamond</b><span>Işıklı Kutu Harf</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-otobus-ozkardesler.webp" type="image/webp" /><img src="assets/img/arac-otobus-ozkardesler.jpg" alt="Özkardeşler otobüs" loading="lazy"  /></picture><div class="folio__cap"><b>Özkardeşler Otobüs</b><span>Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="baski"><picture><source srcset="assets/img/lightbox-ddiamond-2.webp" type="image/webp" /><img src="assets/img/lightbox-ddiamond-2.jpg" alt="D-Diamond lightbox" loading="lazy"  /></picture><div class="folio__cap"><b>Lightbox Reklam</b><span>Dijital Baskı</span></div></div>
-        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/eczane-tabela.webp" type="image/webp" /><img src="assets/img/eczane-tabela.jpg" alt="Eczane ışıklı tabela" loading="lazy"  /></picture><div class="folio__cap"><b>Eczane Tabela</b><span>Işıklı Kutu Harf</span></div></div>
-        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-vivo.webp" type="image/webp" /><img src="assets/img/kutu-harf-vivo.jpg" alt="Vivo ışıklı kutu harf" loading="lazy"  /></picture><div class="folio__cap"><b>Vivo</b><span>Işıklı Kutu Harf</span></div></div>
-        <div class="folio__item reveal" data-cat="cephe"><picture><source srcset="assets/img/cephe-mahir.webp" type="image/webp" /><img src="assets/img/cephe-mahir.jpg" alt="Lokanta cephe tabelası" loading="lazy"  /></picture><div class="folio__cap"><b>Lokanta Cephe</b><span>Cephe Uygulama</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-golf.webp" type="image/webp" /><img src="assets/img/arac-golf.jpg" alt="VW Golf renkli kaplama" loading="lazy"  /></picture><div class="folio__cap"><b>VW Golf</b><span>Özel Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-bigo.webp" type="image/webp" /><img src="assets/img/kutu-harf-bigo.jpg" alt="BIGO ışıklı kutu harf" loading="lazy"  /></picture><div class="folio__cap"><b>BIGO</b><span>Işıklı Kutu Harf</span></div></div>
-        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-mavi-hayal.webp" type="image/webp" /><img src="assets/img/kutu-harf-mavi-hayal.jpg" alt="Seyahat acentesi kutu harf" loading="lazy"  /></picture><div class="folio__cap"><b>Mavi Hayal Travel</b><span>Kutu Harf &amp; Cam</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-nurpool-2.webp" type="image/webp" /><img src="assets/img/arac-nurpool-2.jpg" alt="Nurpool araç giydirme" loading="lazy"  /></picture><div class="folio__cap"><b>Nurpool</b><span>Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="baski"><picture><source srcset="assets/img/lightbox-ddiamond.webp" type="image/webp" /><img src="assets/img/lightbox-ddiamond.jpg" alt="D-Diamond lightbox reklam" loading="lazy"  /></picture><div class="folio__cap"><b>D-Diamond Lightbox</b><span>Dijital Baskı</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-skypool-2.webp" type="image/webp" /><img src="assets/img/arac-skypool-2.jpg" alt="Skypool araç giydirme" loading="lazy"  /></picture><div class="folio__cap"><b>Skypool</b><span>Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-eminol-yan.webp" type="image/webp" /><img src="assets/img/arac-eminol-yan.jpg" alt="Eminol Catering aracı" loading="lazy"  /></picture><div class="folio__cap"><b>Eminol Catering</b><span>Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-otobus-ozkardesler-arka.webp" type="image/webp" /><img src="assets/img/arac-otobus-ozkardesler-arka.jpg" alt="Özkardeşler otobüs arka" loading="lazy"  /></picture><div class="folio__cap"><b>Otobüs Arka</b><span>Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-aktas-vinc.webp" type="image/webp" /><img src="assets/img/arac-aktas-vinc.jpg" alt="Aktaş Vinç aracı" loading="lazy"  /></picture><div class="folio__cap"><b>Aktaş Vinç</b><span>Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-okul-tasiti.webp" type="image/webp" /><img src="assets/img/arac-okul-tasiti.jpg" alt="Okul taşıtı folyo" loading="lazy"  /></picture><div class="folio__cap"><b>Okul Taşıtı</b><span>Folyo Uygulama</span></div></div>
-        <div class="folio__item reveal" data-cat="baski"><picture><source srcset="assets/img/pano-petrol-ofisi.webp" type="image/webp" /><img src="assets/img/pano-petrol-ofisi.jpg" alt="Petrol Ofisi reklam panosu" loading="lazy"  /></picture><div class="folio__cap"><b>Reklam Panosu</b><span>Dijital Baskı</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/f1-render.webp" type="image/webp" /><img src="assets/img/f1-render.jpg" alt="Petrol Ofisi F1 tasarım" loading="lazy"  /></picture><div class="folio__cap"><b>Petrol Ofisi F1</b><span>Araç Giydirme Tasarım</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/spor-araba.webp" type="image/webp" /><img src="assets/img/spor-araba.jpg" alt="Petrol Ofisi spor araç" loading="lazy"  /></picture><div class="folio__cap"><b>Spor Araç</b><span>Araç Giydirme</span></div></div>
-        <div class="folio__item reveal" data-cat="uretim"><picture><source srcset="assets/img/atolye.webp" type="image/webp" /><img src="assets/img/atolye.jpg" alt="Atölyeden bir kare" loading="lazy"  /></picture><div class="folio__cap"><b>Atölyemizden</b><span>Üretim</span></div></div>
-        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-aktas-vinc-2.webp" type="image/webp" /><img src="assets/img/arac-aktas-vinc-2.jpg" alt="Atölyede araç giydirme" loading="lazy"  /></picture><div class="folio__cap"><b>Atölyede Uygulama</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/isikli-tabela-gece.webp" type="image/webp" /><img src="assets/img/isikli-tabela-gece.jpg" alt="Gece ışıklı tabela" loading="lazy" width="1200" height="1002"  /></picture><div class="folio__cap"><b>Gece Işıklı Tabela</b><span>Işıklı Bayrak Tabela</span></div></div>
+        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-ddiamond.webp" type="image/webp" /><img src="assets/img/kutu-harf-ddiamond.jpg" alt="D-Diamond ışıklı kutu harf" loading="lazy" width="1080" height="607"  /></picture><div class="folio__cap"><b>D-Diamond</b><span>Işıklı Kutu Harf</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-otobus-ozkardesler.webp" type="image/webp" /><img src="assets/img/arac-otobus-ozkardesler.jpg" alt="Özkardeşler otobüs" loading="lazy" width="1080" height="809"  /></picture><div class="folio__cap"><b>Özkardeşler Otobüs</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="baski"><picture><source srcset="assets/img/lightbox-ddiamond-2.webp" type="image/webp" /><img src="assets/img/lightbox-ddiamond-2.jpg" alt="D-Diamond lightbox" loading="lazy" width="1080" height="1080"  /></picture><div class="folio__cap"><b>Lightbox Reklam</b><span>Dijital Baskı</span></div></div>
+        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/eczane-tabela.webp" type="image/webp" /><img src="assets/img/eczane-tabela.jpg" alt="Eczane ışıklı tabela" loading="lazy" width="1440" height="1354"  /></picture><div class="folio__cap"><b>Eczane Tabela</b><span>Işıklı Kutu Harf</span></div></div>
+        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-vivo.webp" type="image/webp" /><img src="assets/img/kutu-harf-vivo.jpg" alt="Vivo ışıklı kutu harf" loading="lazy" width="750" height="937"  /></picture><div class="folio__cap"><b>Vivo</b><span>Işıklı Kutu Harf</span></div></div>
+        <div class="folio__item reveal" data-cat="cephe"><picture><source srcset="assets/img/cephe-mahir.webp" type="image/webp" /><img src="assets/img/cephe-mahir.jpg" alt="Lokanta cephe tabelası" loading="lazy" width="1331" height="1107"  /></picture><div class="folio__cap"><b>Lokanta Cephe</b><span>Cephe Uygulama</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-golf.webp" type="image/webp" /><img src="assets/img/arac-golf.jpg" alt="VW Golf renkli kaplama" loading="lazy" width="1440" height="1800"  /></picture><div class="folio__cap"><b>VW Golf</b><span>Özel Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-bigo.webp" type="image/webp" /><img src="assets/img/kutu-harf-bigo.jpg" alt="BIGO ışıklı kutu harf" loading="lazy" width="1080" height="1346"  /></picture><div class="folio__cap"><b>BIGO</b><span>Işıklı Kutu Harf</span></div></div>
+        <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/kutu-harf-mavi-hayal.webp" type="image/webp" /><img src="assets/img/kutu-harf-mavi-hayal.jpg" alt="Seyahat acentesi kutu harf" loading="lazy" width="1440" height="1354"  /></picture><div class="folio__cap"><b>Mavi Hayal Travel</b><span>Kutu Harf &amp; Cam</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-nurpool-2.webp" type="image/webp" /><img src="assets/img/arac-nurpool-2.jpg" alt="Nurpool araç giydirme" loading="lazy" width="1080" height="814"  /></picture><div class="folio__cap"><b>Nurpool</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="baski"><picture><source srcset="assets/img/lightbox-ddiamond.webp" type="image/webp" /><img src="assets/img/lightbox-ddiamond.jpg" alt="D-Diamond lightbox reklam" loading="lazy" width="1080" height="1080"  /></picture><div class="folio__cap"><b>D-Diamond Lightbox</b><span>Dijital Baskı</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-skypool-2.webp" type="image/webp" /><img src="assets/img/arac-skypool-2.jpg" alt="Skypool araç giydirme" loading="lazy" width="1080" height="814"  /></picture><div class="folio__cap"><b>Skypool</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-eminol-yan.webp" type="image/webp" /><img src="assets/img/arac-eminol-yan.jpg" alt="Eminol Catering aracı" loading="lazy" width="1440" height="1080"  /></picture><div class="folio__cap"><b>Eminol Catering</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-otobus-ozkardesler-arka.webp" type="image/webp" /><img src="assets/img/arac-otobus-ozkardesler-arka.jpg" alt="Özkardeşler otobüs arka" loading="lazy" width="1080" height="810"  /></picture><div class="folio__cap"><b>Otobüs Arka</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-aktas-vinc.webp" type="image/webp" /><img src="assets/img/arac-aktas-vinc.jpg" alt="Aktaş Vinç aracı" loading="lazy" width="1080" height="810"  /></picture><div class="folio__cap"><b>Aktaş Vinç</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-okul-tasiti.webp" type="image/webp" /><img src="assets/img/arac-okul-tasiti.jpg" alt="Okul taşıtı folyo" loading="lazy" width="1440" height="1800"  /></picture><div class="folio__cap"><b>Okul Taşıtı</b><span>Folyo Uygulama</span></div></div>
+        <div class="folio__item reveal" data-cat="baski"><picture><source srcset="assets/img/pano-petrol-ofisi.webp" type="image/webp" /><img src="assets/img/pano-petrol-ofisi.jpg" alt="Petrol Ofisi reklam panosu" loading="lazy" width="1080" height="1364"  /></picture><div class="folio__cap"><b>Reklam Panosu</b><span>Dijital Baskı</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/f1-render.webp" type="image/webp" /><img src="assets/img/f1-render.jpg" alt="Petrol Ofisi F1 tasarım" loading="lazy" width="720" height="478"  /></picture><div class="folio__cap"><b>Petrol Ofisi F1</b><span>Araç Giydirme Tasarım</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/spor-araba.webp" type="image/webp" /><img src="assets/img/spor-araba.jpg" alt="Petrol Ofisi spor araç" loading="lazy" width="1080" height="718"  /></picture><div class="folio__cap"><b>Spor Araç</b><span>Araç Giydirme</span></div></div>
+        <div class="folio__item reveal" data-cat="uretim"><picture><source srcset="assets/img/atolye.webp" type="image/webp" /><img src="assets/img/atolye.jpg" alt="Atölyeden bir kare" loading="lazy" width="1080" height="718"  /></picture><div class="folio__cap"><b>Atölyemizden</b><span>Üretim</span></div></div>
+        <div class="folio__item reveal" data-cat="arac"><picture><source srcset="assets/img/arac-aktas-vinc-2.webp" type="image/webp" /><img src="assets/img/arac-aktas-vinc-2.jpg" alt="Atölyede araç giydirme" loading="lazy" width="768" height="576"  /></picture><div class="folio__cap"><b>Atölyede Uygulama</b><span>Araç Giydirme</span></div></div>
       </div>
     </div>
   </section>
@@ -168,21 +162,21 @@
       </div>
       <div class="videogrid" id="videoGrid">
         <div class="video-item reveal">
-          <video class="videocard" controls preload="none" playsinline poster="assets/img/arac-eminol-yan.jpg"><source src="assets/video/video-1.mp4" type="video/mp4" /></video>
+          <video class="videocard" controls preload="none" playsinline poster="assets/img/arac-eminol-yan.webp"><source src="assets/video/video-1.mp4" type="video/mp4" /></video>
           <div class="video-caption">
             <h4>Eminol Catering</h4>
             <p>Araç Giydirme</p>
           </div>
         </div>
         <div class="video-item reveal" data-delay="1">
-          <video class="videocard" controls preload="none" playsinline poster="assets/img/video-3-poster.jpg"><source src="assets/video/video-3.mp4" type="video/mp4" /></video>
+          <video class="videocard" controls preload="none" playsinline poster="assets/img/video-3-poster.webp"><source src="assets/video/video-3.mp4" type="video/mp4" /></video>
           <div class="video-caption">
             <h4>Işıklı Kutu Harf</h4>
             <p>Atölyemizden</p>
           </div>
         </div>
         <div class="video-item reveal" data-delay="2">
-          <video class="videocard" controls preload="none" playsinline poster="assets/img/f1-render.jpg"><source src="assets/video/video-2.mp4" type="video/mp4" /></video>
+          <video class="videocard" controls preload="none" playsinline poster="assets/img/f1-render.webp"><source src="assets/video/video-2.mp4" type="video/mp4" /></video>
           <div class="video-caption">
             <h4>Petrol Ofisi F1</h4>
             <p>Araç Giydirme Tasarım</p>
@@ -232,7 +226,7 @@
       <div class="container">
         <div class="footer__grid">
         <div class="footer__brand">
-          <a class="brand" href="index.html"><img class="brand__logo brand__logo--footer" src="assets/img/logo-footer.png?v=2" alt="Medya Reklam" /></a>
+          <a class="brand" href="index.html"><img class="brand__logo brand__logo--footer" src="assets/img/logo-footer.png?v=2" alt="Medya Reklam" width="363" height="400" /></a>
           <p>Güvenilir reklam ve tabela hizmetlerinin adresi. Tasarım, üretim ve montaj tek çatı altında.</p>
           <div class="footer__social">
             <a href="https://www.instagram.com/medya_reklam34/" class="social-ig" aria-label="Instagram" target="_blank" rel="noopener" style="background:none;box-shadow:none;width:auto;height:auto;border-radius:0;padding:0;display:inline-flex;align-items:center"><svg viewBox="0 0 24 24" width="56" height="56" style="width:56px;height:56px" aria-hidden="true"><defs><linearGradient id="ig-grad" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEDA75"/><stop offset=".25" stop-color="#FA7E1E"/><stop offset=".5" stop-color="#D62976"/><stop offset=".75" stop-color="#962FBF"/><stop offset="1" stop-color="#4F5BD5"/></linearGradient></defs><path fill="url(#ig-grad)" d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
@@ -287,8 +281,8 @@
 <script src="assets/chat.js?v=1" defer></script>
   <!-- /partial:float-cta -->
 
-  <script src="assets/main.js?v=13" defer></script>
-  <script src="assets/store.js?v=8"></script>
+  <script src="assets/main.js?v=14" defer></script>
+  <script src="assets/store.js?v=9"></script>
   <script>
     (function () {
       'use strict';
@@ -340,11 +334,18 @@
         }).join('');
       }
 
+      var VIDEO_POSTER_WEBP = {
+        'assets/img/arac-eminol-yan.jpg': 'assets/img/arac-eminol-yan.webp',
+        'assets/img/video-3-poster.jpg': 'assets/img/video-3-poster.webp',
+        'assets/img/f1-render.jpg': 'assets/img/f1-render.webp'
+      };
+
       function renderVideos(vids) {
         var g = document.getElementById('videoGrid'); if (!g || !vids || !vids.length) return;
         g.innerHTML = vids.map(function (v, i) {
+          var poster = VIDEO_POSTER_WEBP[v.poster] || v.poster;
           return '<div class="video-item reveal"' + (i ? ' data-delay="' + i + '"' : '') + '>' +
-            '<video class="videocard" controls preload="none" playsinline' + (v.poster ? ' poster="' + esc(v.poster) + '"' : '') + '><source src="' + esc(v.src) + '" type="video/mp4" /></video>' +
+            '<video class="videocard" controls preload="none" playsinline' + (poster ? ' poster="' + esc(poster) + '"' : '') + '><source src="' + esc(v.src) + '" type="video/mp4" /></video>' +
             '<div class="video-caption"><h4>' + esc(v.title) + '</h4><p>' + esc(v.subtitle || '') + '</p></div></div>';
         }).join('');
       }

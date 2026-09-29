@@ -123,13 +123,13 @@
     1600,
     1200
   ],
-  "assets/img/cephe-mahir-1440.avif": [
-    1440,
-    1198
+  "assets/img/cephe-mahir-1024.avif": [
+    1024,
+    852
   ],
-  "assets/img/cephe-mahir-1440.webp": [
-    1440,
-    1198
+  "assets/img/cephe-mahir-1024.webp": [
+    1024,
+    852
   ],
   "assets/img/cephe-mahir-640.avif": [
     640,
@@ -138,14 +138,6 @@
   "assets/img/cephe-mahir-640.webp": [
     640,
     532
-  ],
-  "assets/img/cephe-mahir-960.avif": [
-    960,
-    798
-  ],
-  "assets/img/cephe-mahir-960.webp": [
-    960,
-    798
   ],
   "assets/img/cephe-mahir.jpg": [
     1331,
@@ -171,15 +163,7 @@
     1080,
     718
   ],
-  "assets/img/f1-new2.png": [
-    1024,
-    262
-  ],
   "assets/img/f1-po.jpg": [
-    734,
-    542
-  ],
-  "assets/img/f1-po.png": [
     734,
     542
   ],

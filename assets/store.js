@@ -5,8 +5,8 @@
 
    Varsayılan: tarayıcı (localStorage).
    SUPABASE_URL + SUPABASE_KEY doldurulursa OTOMATİK olarak canlı Supabase
-   veritabanına geçer (kütüphane gerektiğinde dinamik yüklenir; boşken hiç
-   yüklenmez, hiçbir şeyi etkilemez).  Kurulum: SUPABASE-KURULUM.md
+   veritabanına geçer (okuma: tek REST fetch; supabase-js yalnızca admin
+   giriş/kayıt için gerektiğinde dinamik yüklenir).  Kurulum: SUPABASE-KURULUM.md
 
    Çağıran kod (admin.js / portfoy.html) hep `await Store.xxx()` kullanır;
    imzalar aynı kaldığı için onlarda değişiklik gerekmez.
@@ -264,21 +264,27 @@
      PUBLIC API  (Supabase modunda otomatik DB; değilse localStorage)
      ====================================================================== */
 
+  // Ham içerik: tek REST isteği, main.js ile paylaşılır (window.__mrContent).
+  // supabase-js yalnızca yazma/auth için yüklenir (ensureLib).
+  function fetchRaw() {
+    if (!global.__mrContent) {
+      global.__mrContent = fetch(SUPABASE_URL + '/rest/v1/' + SB_TABLE + '?id=eq.' + SB_ROW_ID + '&select=data', {
+        headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }
+      }).then(function (r) {
+        if (!r.ok) throw new Error('site_content HTTP ' + r.status);
+        return r.json();
+      }).then(function (rows) { return rows && rows[0] ? rows[0].data : null; });
+    }
+    return global.__mrContent;
+  }
+
   // Tüm içeriği oku.
   function getContent() {
-    return ensureLib().then(function (sb) {
-      if (sb) {
-        return sb.from(SB_TABLE).select('data').eq('id', SB_ROW_ID).maybeSingle()
-          .then(function (res) {
-            if (res.error) throw res.error;
-            return merge(res.data ? res.data.data : null);
-          });
-      }
-      try {
-        var raw = global.localStorage.getItem(LS_KEY);
-        return merge(raw ? JSON.parse(raw) : null);
-      } catch (e) { return defaults(); }
-    });
+    if (isSupabase()) return fetchRaw().then(merge);
+    try {
+      var raw = global.localStorage.getItem(LS_KEY);
+      return Promise.resolve(merge(raw ? JSON.parse(raw) : null));
+    } catch (e) { return Promise.resolve(defaults()); }
   }
 
   // Tüm içeriği kaydet.  Supabase modunda yalnızca giriş yapmış admin yazabilir (RLS).
@@ -287,7 +293,7 @@
       if (sb) {
         return sb.from(SB_TABLE)
           .upsert({ id: SB_ROW_ID, data: content, updated_at: new Date().toISOString() })
-          .then(function (res) { if (res.error) throw res.error; return true; });
+          .then(function (res) { if (res.error) throw res.error; global.__mrContent = null; return true; });
       }
       global.localStorage.setItem(LS_KEY, JSON.stringify(content));
       return true;
@@ -301,7 +307,7 @@
       if (sb) {
         return sb.from(SB_TABLE)
           .upsert({ id: SB_ROW_ID, data: d, updated_at: new Date().toISOString() })
-          .then(function () { return d; });
+          .then(function () { global.__mrContent = null; return d; });
       }
       try { global.localStorage.removeItem(LS_KEY); } catch (e) {}
       return d;

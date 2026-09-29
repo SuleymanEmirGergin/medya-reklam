@@ -4,19 +4,7 @@
   'use strict';
 
 
-  /* ---- Preloader Logic --------------------------------------------------- */
-  document.addEventListener('DOMContentLoaded', function() {
-    var preloader = document.getElementById('preloader');
-    if (preloader) {
-      setTimeout(function() {
-        preloader.classList.add('is-hidden');
-        // Remove from DOM after transition completes (500ms)
-        setTimeout(function() {
-          if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-        }, 500);
-      }, 1100); // kisa acilis — logo animasyonlari gorunecek kadar
-    }
-  });
+  document.documentElement.classList.add('js');
 
   /* ---- Header: shadow/border on scroll ---------------------------------- */
   var header = document.querySelector('.site-header');
@@ -654,11 +642,13 @@
     function run(){
       if(!document.querySelector('a[href^="tel:"], a[href^="mailto:"], .footer__contact')) return;
       try {
-        fetch(SB_URL + '/rest/v1/site_content?id=eq.1&select=data', {
+        // store.js yüklüyse aynı istek paylaşılır (window.__mrContent); ikinci fetch atılmaz.
+        window.__mrContent = window.__mrContent || fetch(SB_URL + '/rest/v1/site_content?id=eq.1&select=data', {
           headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY }
-        }).then(function(r){ return r.ok ? r.json() : null; })
-          .then(function(rows){ var d = rows && rows[0] && rows[0].data; if(d){ applyContact(d.contact); applyProduct(d.products, d.pages); } })
-          .catch(function(){});
+        }).then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function(rows){ return rows && rows[0] ? rows[0].data : null; });
+        window.__mrContent.then(function(d){ if(d){ applyContact(d.contact); applyProduct(d.products, d.pages); } })
+          .catch(function(e){ console.warn('İçerik yüklenemedi, statik içerik korunuyor:', e && e.message); });
       } catch(e){}
     }
     if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);

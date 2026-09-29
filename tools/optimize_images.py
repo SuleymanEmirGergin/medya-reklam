@@ -27,7 +27,7 @@ CSS_PATH = ROOT / "assets" / "styles.css"
 MANIFEST_PATH = ROOT / "tools" / "image-dims.json"
 LARGE_FILE_LIMIT = 150 * 1024
 MAX_WIDTH = 1920
-HERO_WIDTHS = (640, 960, 1440)
+HERO_WIDTHS = (640, 1024)  # kaynak 1024px; büyütme yok
 
 
 def css_px(css: str, selector: str, property_name: str) -> float:
