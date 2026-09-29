@@ -1,4 +1,4 @@
-/* Eray Tabela — interactions
+/* Medya Reklam — interactions
    Vanilla JS, no dependencies. Loaded with `defer`. */
 (function () {
   'use strict';
@@ -588,6 +588,30 @@
         }
       } catch(e){}
     }
+    // Quill HTML allowlist sanitizer: izinli etiket disindakiler unwrap edilir, script/style/iframe/object/embed silinir.
+    var SAN_TAGS = /^(H2|H3|H4|P|STRONG|B|EM|I|U|S|UL|OL|LI|A|BR|BLOCKQUOTE|SPAN)$/;
+    var SAN_DROP = /^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|NOSCRIPT|TEMPLATE|SVG|MATH)$/;
+    var SAN_HREF = /^(https?:|mailto:|tel:|#|\/|\.\.?\/|[^:]*$)/i;
+    function sanitizeNode(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(ch){
+        if(ch.nodeType === 3) return;
+        if(ch.nodeType !== 1 || SAN_DROP.test(ch.tagName)){ node.removeChild(ch); return; }
+        sanitizeNode(ch);
+        if(!SAN_TAGS.test(ch.tagName)){
+          while(ch.firstChild) node.insertBefore(ch.firstChild, ch);
+          node.removeChild(ch); return;
+        }
+        var href = ch.tagName === 'A' ? (ch.getAttribute('href') || '').replace(/[\u0000- ]/g, '') : null;
+        Array.prototype.slice.call(ch.attributes).forEach(function(at){ ch.removeAttribute(at.name); });
+        if(href && SAN_HREF.test(href)){ ch.setAttribute('href', href); ch.setAttribute('rel', 'noopener'); }
+      });
+    }
+    function sanitizeHTML(html){
+      var d = new DOMParser().parseFromString('<body>' + String(html == null ? '' : html), 'text/html').body;
+      sanitizeNode(d);
+      return d.innerHTML;
+    }
+    window.mrSanitizeHTML = sanitizeHTML;
     function applyProduct(products, pages){
       try {
         var slug = (location.pathname.split('/').pop() || '').replace(/\.html$/, '') || 'index';
@@ -597,7 +621,7 @@
           var k = el.getAttribute('data-cms-product');
           if(p[k] != null && p[k] !== '') el.textContent = p[k];
         });
-        if(p.body){ var bc = document.querySelector('[data-cms-body]'); if(bc) bc.innerHTML = p.body; }
+        if(p.body){ var bc = document.querySelector('[data-cms-body]'); if(bc) bc.innerHTML = sanitizeHTML(p.body); }
       } catch(e){}
     }
     function run(){

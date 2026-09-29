@@ -41,7 +41,9 @@
     if (_libPromise) return _libPromise;
     _libPromise = new Promise(function (resolve) {
       var s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js';
+      s.integrity = 'sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok';
+      s.crossOrigin = 'anonymous';
       s.async = true;
       s.onload = function () { resolve(client()); };
       s.onerror = function () { resolve(null); };
