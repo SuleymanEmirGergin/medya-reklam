@@ -119,6 +119,12 @@ export default async function handler(req, res) {
   const origin = req.headers.origin || req.headers.referer;
   if (!isAllowedOrigin(origin)) return send(res, 403, { error: 'İzin verilmeyen kaynak.' });
 
+  // Yalnızca JSON: tarayıcı çapraz kaynaklı isteklerde CORS ön kontrolü yapar (CORS başlığı vermiyoruz → engellenir);
+  // text/plain gibi "basit" isteklerle başka sitelerden ücretli çağrı tetiklenemez.
+  if (!String(req.headers['content-type'] || '').toLowerCase().startsWith('application/json')) {
+    return send(res, 415, { error: 'Geçersiz içerik türü.' });
+  }
+
   const ip = String(req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'unknown').split(',')[0].trim();
   if (rateLimited(ip)) return send(res, 429, { error: 'Çok fazla istek, lütfen biraz sonra tekrar deneyin.' });
 

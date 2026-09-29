@@ -6,8 +6,8 @@ const KEY = 'sk-test-SECRET-123';
 const OK_ORIGIN = 'https://www.medya-reklam.com';
 const okBody = (content = 'totem fiyatı') => ({ messages: [{ role: 'user', content }], sessionId: 'abc-123' });
 
-async function call({ method = 'POST', origin = OK_ORIGIN, body = okBody(), ip = '1.1.1.1' } = {}) {
-  const req = { method, headers: { origin, 'x-forwarded-for': ip }, body };
+async function call({ method = 'POST', origin = OK_ORIGIN, body = okBody(), ip = '1.1.1.1', type = 'application/json' } = {}) {
+  const req = { method, headers: { origin, 'x-forwarded-for': ip, 'content-type': type }, body };
   const out = { headers: {} };
   const res = { setHeader: (k, v) => (out.headers[k] = v), status(c) { out.status = c; return this; }, json(p) { out.body = p; } };
   await handler(req, res);
@@ -38,6 +38,7 @@ assert.equal((await call({ body: { messages: [{ role: 'assistant', content: 'x' 
 assert.equal((await call({ origin: 'https://evil.example' })).status, 403);
 assert.equal((await call({ origin: 'http://localhost:3000' })).status, 200);
 assert.equal((await call({ method: 'GET' })).status, 405);
+assert.equal((await call({ type: 'text/plain', body: JSON.stringify(okBody()) })).status, 415, 'text/plain CSRF engellenmeli');
 
 // Wiro hatası -> 502, anahtar yanıtta yok
 globalThis.fetch = async () => ({ ok: false, status: 500 });
