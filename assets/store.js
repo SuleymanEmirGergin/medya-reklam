@@ -122,9 +122,9 @@
         pillar1Title: 'Doğru Plan, Doğru Sonuç', pillar1Text: 'Keşif, ölçü ve görsel onayla başlayan net bir üretim planı. Sürpriz yok, tahmin yok.',
         pillar2Title: 'Bütçenize Uygun',          pillar2Text: 'Kaliteden ödün vermeden, ihtiyacınıza ve bütçenize göre ölçeklenen çözümler sunarız.',
         pillar3Title: 'İş, Uygulamada Belli Olur', pillar3Text: 'Asıl fark montajda ve son kontrolde ortaya çıkar. İşçiliği detayda gösteririz.',
-        feat1Title: 'Uzman Kadro',            feat1Text: 'Otuz yılı aşan tabelacılık deneyimine sahip, montajda da işin başında olan bir ekip.',
+        feat1Title: 'Uzman Kadro',            feat1Text: '2004\'ten bu yana, 20 yılı aşkın tabelacılık deneyimine sahip, montajda da işin başında olan bir ekip.',
         feat2Title: 'Kalite Kontrol Süreci',  feat2Text: 'Üretimin her aşamasında titiz kontrol; sahaya yalnızca onaylanan iş çıkar.',
-        feat3Title: 'Memnuniyet Garantisi',   feat3Text: 'Teslimat sonrası destek ve garanti ile arkanızdayız; iş bitince ilişki bitmez.',
+        feat3Title: 'Memnuniyet Garantisi',   feat3Text: '2 ay garanti ve teslimat sonrası destek ile arkanızdayız; iş bitince ilişki bitmez.',
         feat4Title: 'Her Ölçekte Hizmet',     feat4Text: 'Tek bir dükkân tabelasından zincir mağaza projelerine kadar her ölçekte çözüm.',
         feat5Title: 'Estetik ve Dayanıklılık', feat5Text: 'Dış mekâna uygun, uzun ömürlü malzeme ve markanıza yakışan temiz bir bitiş.',
         feat6Title: 'Yenilikçi Tasarım Anlayışı', feat6Text: 'Hazır kalıp değil; markanıza özgü, özgün ve uygulanabilir tasarımlar geliştiririz.',
@@ -182,7 +182,7 @@
       },
       stats: [
         { id: 's1', number: '2.500', em: '+', label: 'tamamlanan proje' },
-        { id: 's2', number: '30',    em: '+', label: 'yıl tecrübe' },
+        { id: 's2', number: '20',    em: '+', label: 'yıl tecrübe' },
         { id: 's3', number: 'İstanbul', em: '', label: 'geneli montaj' },
         { id: 's4', number: '81',    em: '', label: 'ile teslimat imkânı' }
       ],
