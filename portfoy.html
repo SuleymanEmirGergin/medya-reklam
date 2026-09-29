@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#0D70FA" />
-  <link rel="stylesheet" href="assets/styles.css?v=27" />
+  <link rel="stylesheet" href="assets/styles.css?v=28" />
   <!-- Canonical + Open Graph / Twitter (yayin domaini: https://www.medya-reklam.com -- farkliysa guncelleyin) -->
   <link rel="canonical" href="https://www.medya-reklam.com/portfoy.html" />
   <meta property="og:type" content="website" />
@@ -58,15 +58,16 @@
   </div>
   <!-- ===================== Header ===================== -->
   <!-- partial:header -->
-  <header class="site-header">
+  <a class="skip-link" href="#main">Ana içeriğe geç</a>
+<header class="site-header">
     <div class="container">
       <nav class="nav" aria-label="Ana menü">
         <a class="brand" href="index.html"><img class="brand__logo" src="assets/img/logo.png?v=3" alt="Medya Reklam" /></a>
 
-        <ul class="nav__menu">
+        <ul class="nav__menu" id="navMenu">
           <li class="nav__item"><a class="nav__link" href="index.html">Ana Sayfa</a></li>
           <li class="nav__item nav__item--has-drop">
-            <a class="nav__link" href="hakkimizda.html" aria-haspopup="true">Kurumsal
+            <a class="nav__link" href="hakkimizda.html">Kurumsal
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
             </a>
             <div class="nav__drop">
@@ -83,7 +84,7 @@
         <div class="nav__cta">
           <a class="nav__tel" href="tel:+905324868260" aria-label="Bizi arayın: 0532 486 82 60"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>0532 486 82 60</a>
           <a class="btn btn--primary" href="iletisim.html">Teklif Alın</a>
-          <button class="nav__toggle" aria-label="Menüyü aç/kapat" aria-expanded="false"><span></span></button>
+          <button class="nav__toggle" aria-label="Menüyü aç/kapat" aria-controls="navMenu" aria-expanded="false"><span></span></button>
         </div>
       </nav>
     </div>
@@ -91,7 +92,7 @@
   <!-- /partial:header -->
 
   <!-- ===================== Page hero ===================== -->
-  <section class="pagehero-angled" style="--hero-img:url('img/kutu-harf-ddiamond.jpg');--hero-opacity:0.6">
+  <section id="main" tabindex="-1" class="pagehero-angled" style="--hero-img:url('img/kutu-harf-ddiamond.jpg');--hero-opacity:0.6">
     <div class="container">
       <nav class="crumbs"><a href="index.html">Ana Sayfa</a><span>/</span> Portföy</nav>
       <h1 id="pfTitle">Portföy</h1>
@@ -124,12 +125,12 @@
         </div>
         <a class="btn btn--ghost ig-follow" href="https://www.instagram.com/medya_reklam34/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg> @medya_reklam34</a>
       </div>
-      <div class="folio-filter reveal" role="tablist" aria-label="Proje filtreleri">
-        <button class="folio-filter__btn is-active" data-filter="all">Tümü</button>
-        <button class="folio-filter__btn" data-filter="isikli">Işıklı Harf</button>
-        <button class="folio-filter__btn" data-filter="arac">Araç Giydirme</button>
-        <button class="folio-filter__btn" data-filter="cephe">Cephe</button>
-        <button class="folio-filter__btn" data-filter="baski">Dijital Baskı</button>
+      <div class="folio-filter reveal" role="group" aria-label="Proje filtreleri">
+        <button class="folio-filter__btn is-active" data-filter="all" aria-pressed="true">Tümü</button>
+        <button class="folio-filter__btn" data-filter="isikli" aria-pressed="false">Işıklı Harf</button>
+        <button class="folio-filter__btn" data-filter="arac" aria-pressed="false">Araç Giydirme</button>
+        <button class="folio-filter__btn" data-filter="cephe" aria-pressed="false">Cephe</button>
+        <button class="folio-filter__btn" data-filter="baski" aria-pressed="false">Dijital Baskı</button>
       </div>
       <div class="folio" id="folioGrid">
         <div class="folio__item reveal" data-cat="isikli"><picture><source srcset="assets/img/isikli-tabela-gece.webp" type="image/webp" /><img src="assets/img/isikli-tabela-gece.jpg" alt="Gece ışıklı tabela" loading="lazy"  /></picture><div class="folio__cap"><b>Gece Işıklı Tabela</b><span>Işıklı Bayrak Tabela</span></div></div>
@@ -283,9 +284,10 @@
     <a class="is-wa" href="https://wa.me/905324868260" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M.06 24l1.69-6.16a11.87 11.87 0 0 1-1.59-5.95C.16 5.34 5.5 0 12.06 0a11.82 11.82 0 0 1 8.41 3.49 11.82 11.82 0 0 1 3.48 8.42c0 6.56-5.34 11.9-11.9 11.9a11.9 11.9 0 0 1-5.68-1.45L.06 24z"/></svg>WhatsApp</a>
     <a class="is-primary" href="iletisim.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>Teklif</a>
   </nav>
+<script src="assets/chat.js?v=1" defer></script>
   <!-- /partial:float-cta -->
 
-  <script src="assets/main.js?v=12" defer></script>
+  <script src="assets/main.js?v=13" defer></script>
   <script src="assets/store.js?v=8"></script>
   <script>
     (function () {
@@ -367,8 +369,9 @@
         btns.forEach(function (btn) {
           btn.addEventListener('click', function () {
             var f = btn.getAttribute('data-filter');
-            btns.forEach(function (b) { b.classList.remove('is-active'); });
+            btns.forEach(function (b) { b.classList.remove('is-active'); b.setAttribute('aria-pressed', 'false'); });
             btn.classList.add('is-active');
+            btn.setAttribute('aria-pressed', 'true');
             items.forEach(function (it) {
               var show = f === 'all' || it.getAttribute('data-cat') === f;
               it.classList.toggle('is-hidden', !show);
@@ -381,6 +384,7 @@
         lb.className = 'lightbox';
         lb.setAttribute('role', 'dialog');
         lb.setAttribute('aria-modal', 'true');
+        lb.setAttribute('aria-label', 'Proje görseli');
         lb.innerHTML =
           '<button class="lightbox__close" aria-label="Kapat">&times;</button>' +
           '<button class="lightbox__nav lightbox__prev" aria-label="Önceki">&#8249;</button>' +
@@ -390,6 +394,8 @@
         var lbImg = lb.querySelector('img');
         var lbCap = lb.querySelector('figcaption');
         var idx = -1;
+        var opener = null;
+        var closeBtn = lb.querySelector('.lightbox__close');
 
         function shown() { return items.filter(function (it) { return !it.classList.contains('is-hidden'); }); }
         function open(list, i) {
@@ -400,13 +406,17 @@
           lbImg.setAttribute('src', img.getAttribute('src'));
           lbImg.setAttribute('alt', img.getAttribute('alt') || '');
           lbCap.innerHTML = cap ? cap.innerHTML : '';
+          if (!lb.classList.contains('is-open')) opener = document.activeElement;
           lb.classList.add('is-open');
           document.body.style.overflow = 'hidden';
+          closeBtn.focus();
         }
         function close() {
           lb.classList.remove('is-open');
           document.body.style.overflow = '';
           lbImg.removeAttribute('src');
+          if (opener && opener.focus) opener.focus();
+          opener = null;
         }
         function step(d) {
           var list = shown();
@@ -414,9 +424,17 @@
           open(list, (idx + d + list.length) % list.length);
         }
         items.forEach(function (it) {
-          it.addEventListener('click', function () {
+          var im = it.querySelector('img');
+          it.setAttribute('tabindex', '0');
+          it.setAttribute('role', 'button');
+          it.setAttribute('aria-label', (im && im.getAttribute('alt') || 'Proje') + ' — büyüt');
+          function openIt() {
             var list = shown();
             open(list, list.indexOf(it));
+          }
+          it.addEventListener('click', openIt);
+          it.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openIt(); }
           });
         });
         lb.querySelector('.lightbox__close').addEventListener('click', close);
@@ -428,6 +446,12 @@
           if (e.key === 'Escape') close();
           else if (e.key === 'ArrowLeft') step(-1);
           else if (e.key === 'ArrowRight') step(1);
+          else if (e.key === 'Tab') {
+            var f = lb.querySelectorAll('button');
+            var first = f[0], last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+          }
         });
       }
 

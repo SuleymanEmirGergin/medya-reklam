@@ -31,20 +31,38 @@
   var toggle = document.querySelector('.nav__toggle');
   var menu = document.querySelector('.nav__menu');
   if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      var open = menu.classList.toggle('is-open');
+    var menuFocusables = function () {
+      // Görünür (display:none olmayan) bağlantılar
+      return Array.prototype.filter.call(menu.querySelectorAll('a[href]'), function (a) { return a.offsetParent !== null; });
+    };
+    var setMenu = function (open, returnFocus) {
+      menu.classList.toggle('is-open', open);
       toggle.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        var first = menuFocusables()[0];
+        if (first) first.focus();
+      } else if (returnFocus) {
+        toggle.focus();
+      }
+    };
+    toggle.addEventListener('click', function () {
+      setMenu(!menu.classList.contains('is-open'), false);
     });
     // Close on link click (except dropdown parents)
     menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        menu.classList.remove('is-open');
-        toggle.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      a.addEventListener('click', function () { setMenu(false, false); });
+    });
+    // Escape kapatır; Tab menü + toggle arasında döner (basit odak hapsi)
+    document.addEventListener('keydown', function (e) {
+      if (!menu.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { setMenu(false, true); return; }
+      if (e.key !== 'Tab') return;
+      var f = menuFocusables().concat(toggle);
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
   }
 
@@ -122,6 +140,15 @@
       e.preventDefault();
       if (okMsg) okMsg.classList.remove('show');
       if (errMsg) errMsg.classList.remove('show');
+
+      // Zorunlu alan doğrulaması: hatalı alanlara aria-invalid, ilkine odak
+      var firstBad = null;
+      form.querySelectorAll('[required]').forEach(function (f) {
+        var bad = !f.value.trim();
+        f.setAttribute('aria-invalid', String(bad));
+        if (bad && !firstBad) firstBad = f;
+      });
+      if (firstBad) { firstBad.focus(); if (firstBad.reportValidity) firstBad.reportValidity(); return; }
 
       // Honeypot dolu ise sessizce çık (bot koruması)
       var honey = form.querySelector('[name="_honey"]');
