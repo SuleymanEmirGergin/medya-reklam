@@ -15,7 +15,7 @@
 
   var css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = (script && script.src ? script.src.replace(/chat\.js.*$/, '') : 'assets/') + 'chat.css?v=1';
+  css.href = (script && script.src ? script.src.replace(/chat\.js.*$/, '') : 'assets/') + 'chat.css?v=2';
   document.head.appendChild(css);
 
   // ---- oturum (sessionStorage; erişilemezse bellekte) ----
@@ -108,8 +108,14 @@
   panel.appendChild(head);
   panel.appendChild(log);
   panel.appendChild(form);
+  // Show the assistant only when the server reports it is configured (WIRO_API_KEY set)
+  fab.hidden = true;
   document.body.appendChild(fab);
   document.body.appendChild(panel);
+  fetch(ENDPOINT, { method: 'GET' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (s) { if (s && s.enabled) fab.hidden = false; })
+    .catch(function () {});
 
   function bubble(cls, text) {
     var b = el('div', 'mrc-msg ' + cls);

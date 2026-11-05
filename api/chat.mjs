@@ -114,7 +114,9 @@ const send = (res, status, payload) => {
 };
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') { res.setHeader('Allow', 'POST'); return send(res, 405, { error: 'Yalnızca POST.' }); }
+  // GET: status probe used by assets/chat.js to decide whether to show the assistant
+  if (req.method === 'GET') return send(res, 200, { enabled: Boolean(process.env.WIRO_API_KEY) });
+  if (req.method !== 'POST') { res.setHeader('Allow', 'GET, POST'); return send(res, 405, { error: 'Yalnızca POST.' }); }
 
   const origin = req.headers.origin || req.headers.referer;
   if (!isAllowedOrigin(origin)) return send(res, 403, { error: 'İzin verilmeyen kaynak.' });

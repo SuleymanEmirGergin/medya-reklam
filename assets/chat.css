@@ -18,7 +18,7 @@
   border: 1px solid var(--line, #eaeaea); border-radius: var(--radius, 12px);
   box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.35); font-size: 0.9rem;
 }
-.mrc-panel[hidden] { display: none; }
+.mrc-panel[hidden], .mrc-fab[hidden] { display: none; }
 .mrc-head { display: flex; align-items: flex-start; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--line, #eaeaea); }
 .mrc-head div { flex: 1; }
 .mrc-title { margin: 0; font-size: 0.95rem; font-weight: 600; }

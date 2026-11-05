@@ -37,7 +37,10 @@ assert.equal((await call({ body: okBody('a'.repeat(1001)) })).status, 400);
 assert.equal((await call({ body: { messages: [{ role: 'assistant', content: 'x' }] } })).status, 400);
 assert.equal((await call({ origin: 'https://evil.example' })).status, 403);
 assert.equal((await call({ origin: 'http://localhost:3000' })).status, 200);
-assert.equal((await call({ method: 'GET' })).status, 405);
+r = await call({ method: 'GET' });
+assert.equal(r.status, 200);
+assert.equal(r.body.enabled, true);
+assert.equal((await call({ method: 'PUT' })).status, 405);
 assert.equal((await call({ type: 'text/plain', body: JSON.stringify(okBody()) })).status, 415, 'text/plain CSRF engellenmeli');
 
 // Wiro hatası -> 502, anahtar yanıtta yok
