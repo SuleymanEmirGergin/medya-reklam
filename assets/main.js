@@ -1,22 +1,10 @@
-/* Eray Tabela — interactions
+/* Medya Reklam — interactions
    Vanilla JS, no dependencies. Loaded with `defer`. */
 (function () {
   'use strict';
 
 
-  /* ---- Preloader Logic --------------------------------------------------- */
-  document.addEventListener('DOMContentLoaded', function() {
-    var preloader = document.getElementById('preloader');
-    if (preloader) {
-      setTimeout(function() {
-        preloader.classList.add('is-hidden');
-        // Remove from DOM after transition completes (500ms)
-        setTimeout(function() {
-          if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-        }, 500);
-      }, 1100); // kisa acilis — logo animasyonlari gorunecek kadar
-    }
-  });
+  document.documentElement.classList.add('js');
 
   /* ---- Header: shadow/border on scroll ---------------------------------- */
   var header = document.querySelector('.site-header');
@@ -31,20 +19,38 @@
   var toggle = document.querySelector('.nav__toggle');
   var menu = document.querySelector('.nav__menu');
   if (toggle && menu) {
-    toggle.addEventListener('click', function () {
-      var open = menu.classList.toggle('is-open');
+    var menuFocusables = function () {
+      // Görünür (display:none olmayan) bağlantılar
+      return Array.prototype.filter.call(menu.querySelectorAll('a[href]'), function (a) { return a.offsetParent !== null; });
+    };
+    var setMenu = function (open, returnFocus) {
+      menu.classList.toggle('is-open', open);
       toggle.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
+      if (open) {
+        var first = menuFocusables()[0];
+        if (first) first.focus();
+      } else if (returnFocus) {
+        toggle.focus();
+      }
+    };
+    toggle.addEventListener('click', function () {
+      setMenu(!menu.classList.contains('is-open'), false);
     });
     // Close on link click (except dropdown parents)
     menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        menu.classList.remove('is-open');
-        toggle.classList.remove('is-open');
-        toggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
+      a.addEventListener('click', function () { setMenu(false, false); });
+    });
+    // Escape kapatır; Tab menü + toggle arasında döner (basit odak hapsi)
+    document.addEventListener('keydown', function (e) {
+      if (!menu.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { setMenu(false, true); return; }
+      if (e.key !== 'Tab') return;
+      var f = menuFocusables().concat(toggle);
+      var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
   }
 
@@ -122,6 +128,15 @@
       e.preventDefault();
       if (okMsg) okMsg.classList.remove('show');
       if (errMsg) errMsg.classList.remove('show');
+
+      // Zorunlu alan doğrulaması: hatalı alanlara aria-invalid, ilkine odak
+      var firstBad = null;
+      form.querySelectorAll('[required]').forEach(function (f) {
+        var bad = !f.value.trim();
+        f.setAttribute('aria-invalid', String(bad));
+        if (bad && !firstBad) firstBad = f;
+      });
+      if (firstBad) { firstBad.focus(); if (firstBad.reportValidity) firstBad.reportValidity(); return; }
 
       // Honeypot dolu ise sessizce çık (bot koruması)
       var honey = form.querySelector('[name="_honey"]');
@@ -588,6 +603,30 @@
         }
       } catch(e){}
     }
+    // Quill HTML allowlist sanitizer: izinli etiket disindakiler unwrap edilir, script/style/iframe/object/embed silinir.
+    var SAN_TAGS = /^(H2|H3|H4|P|STRONG|B|EM|I|U|S|UL|OL|LI|A|BR|BLOCKQUOTE|SPAN)$/;
+    var SAN_DROP = /^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|NOSCRIPT|TEMPLATE|SVG|MATH)$/;
+    var SAN_HREF = /^(https?:|mailto:|tel:|#|\/|\.\.?\/|[^:]*$)/i;
+    function sanitizeNode(node){
+      Array.prototype.slice.call(node.childNodes).forEach(function(ch){
+        if(ch.nodeType === 3) return;
+        if(ch.nodeType !== 1 || SAN_DROP.test(ch.tagName)){ node.removeChild(ch); return; }
+        sanitizeNode(ch);
+        if(!SAN_TAGS.test(ch.tagName)){
+          while(ch.firstChild) node.insertBefore(ch.firstChild, ch);
+          node.removeChild(ch); return;
+        }
+        var href = ch.tagName === 'A' ? (ch.getAttribute('href') || '').replace(/[\u0000- ]/g, '') : null;
+        Array.prototype.slice.call(ch.attributes).forEach(function(at){ ch.removeAttribute(at.name); });
+        if(href && SAN_HREF.test(href)){ ch.setAttribute('href', href); ch.setAttribute('rel', 'noopener'); }
+      });
+    }
+    function sanitizeHTML(html){
+      var d = new DOMParser().parseFromString('<body>' + String(html == null ? '' : html), 'text/html').body;
+      sanitizeNode(d);
+      return d.innerHTML;
+    }
+    window.mrSanitizeHTML = sanitizeHTML;
     function applyProduct(products, pages){
       try {
         var slug = (location.pathname.split('/').pop() || '').replace(/\.html$/, '') || 'index';
@@ -597,17 +636,19 @@
           var k = el.getAttribute('data-cms-product');
           if(p[k] != null && p[k] !== '') el.textContent = p[k];
         });
-        if(p.body){ var bc = document.querySelector('[data-cms-body]'); if(bc) bc.innerHTML = p.body; }
+        if(p.body){ var bc = document.querySelector('[data-cms-body]'); if(bc) bc.innerHTML = sanitizeHTML(p.body); }
       } catch(e){}
     }
     function run(){
       if(!document.querySelector('a[href^="tel:"], a[href^="mailto:"], .footer__contact')) return;
       try {
-        fetch(SB_URL + '/rest/v1/site_content?id=eq.1&select=data', {
+        // store.js yüklüyse aynı istek paylaşılır (window.__mrContent); ikinci fetch atılmaz.
+        window.__mrContent = window.__mrContent || fetch(SB_URL + '/rest/v1/site_content?id=eq.1&select=data', {
           headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY }
-        }).then(function(r){ return r.ok ? r.json() : null; })
-          .then(function(rows){ var d = rows && rows[0] && rows[0].data; if(d){ applyContact(d.contact); applyProduct(d.products, d.pages); } })
-          .catch(function(){});
+        }).then(function(r){ if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+          .then(function(rows){ return rows && rows[0] ? rows[0].data : null; });
+        window.__mrContent.then(function(d){ if(d){ applyContact(d.contact); applyProduct(d.products, d.pages); } })
+          .catch(function(e){ console.warn('İçerik yüklenemedi, statik içerik korunuyor:', e && e.message); });
       } catch(e){}
     }
     if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);

@@ -61,3 +61,29 @@ mevcut site içeriği tohum veri olarak Supabase'e yazılır. Sonra düzenleyip 
 ## Geri dönüş
 `SUPABASE_URL` / `SUPABASE_KEY`'i tekrar boşaltırsan site anında `localStorage`
 moduna döner (hiçbir şey bozulmaz).
+
+---
+
+## Güvenlik güncellemesi (2026-09)
+Yazma yetkisi artık "giriş yapmış herhangi biri" değil, **yalnızca `info@medya-reklam.com`**.
+
+1. **SQL Editor**'da güncel `supabase-setup.sql` dosyasının **2) Row Level Security** bölümünü
+   çalıştır (idempotent; eski `site_content_write` politikasını siler, insert/update politikalarını
+   e-posta koşuluyla yeniden oluşturur, delete kapalı kalır):
+
+```sql
+drop policy if exists "site_content_write" on public.site_content;
+drop policy if exists "site_content_insert" on public.site_content;
+drop policy if exists "site_content_update" on public.site_content;
+drop policy if exists "site_content_delete" on public.site_content;
+create policy "site_content_insert" on public.site_content for insert to authenticated
+  with check ((auth.jwt() ->> 'email') = 'info@medya-reklam.com');
+create policy "site_content_update" on public.site_content for update to authenticated
+  using ((auth.jwt() ->> 'email') = 'info@medya-reklam.com')
+  with check ((auth.jwt() ->> 'email') = 'info@medya-reklam.com');
+```
+
+2. **Authentication > Sign In / Providers (Email)**: **"Allow new users to sign up" KAPALI** olsun
+   (aksi halde herkes hesap açıp giriş yapabilir).
+3. Authentication > Users: yalnızca admin kullanıcısı olsun ve e-postası **Confirmed** görünsün
+   (e-posta doğrulama kapalıysa başkası bu adresle kayıt olmaya çalışabilir; sign-up kapalıyken risk yok).

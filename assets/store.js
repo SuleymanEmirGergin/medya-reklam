@@ -5,8 +5,8 @@
 
    Varsayılan: tarayıcı (localStorage).
    SUPABASE_URL + SUPABASE_KEY doldurulursa OTOMATİK olarak canlı Supabase
-   veritabanına geçer (kütüphane gerektiğinde dinamik yüklenir; boşken hiç
-   yüklenmez, hiçbir şeyi etkilemez).  Kurulum: SUPABASE-KURULUM.md
+   veritabanına geçer (okuma: tek REST fetch; supabase-js yalnızca admin
+   giriş/kayıt için gerektiğinde dinamik yüklenir).  Kurulum: SUPABASE-KURULUM.md
 
    Çağıran kod (admin.js / portfoy.html) hep `await Store.xxx()` kullanır;
    imzalar aynı kaldığı için onlarda değişiklik gerekmez.
@@ -41,7 +41,9 @@
     if (_libPromise) return _libPromise;
     _libPromise = new Promise(function (resolve) {
       var s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js';
+      s.integrity = 'sha384-Rj26LVGvoeRVR6+mwQmFfcR3QOBEwT+ZmuCWpuiqeTzJpCs0ER4ITAWGb4Hiy3Ok';
+      s.crossOrigin = 'anonymous';
       s.async = true;
       s.onload = function () { resolve(client()); };
       s.onerror = function () { resolve(null); };
@@ -120,9 +122,9 @@
         pillar1Title: 'Doğru Plan, Doğru Sonuç', pillar1Text: 'Keşif, ölçü ve görsel onayla başlayan net bir üretim planı. Sürpriz yok, tahmin yok.',
         pillar2Title: 'Bütçenize Uygun',          pillar2Text: 'Kaliteden ödün vermeden, ihtiyacınıza ve bütçenize göre ölçeklenen çözümler sunarız.',
         pillar3Title: 'İş, Uygulamada Belli Olur', pillar3Text: 'Asıl fark montajda ve son kontrolde ortaya çıkar. İşçiliği detayda gösteririz.',
-        feat1Title: 'Uzman Kadro',            feat1Text: 'Otuz yılı aşan tabelacılık deneyimine sahip, montajda da işin başında olan bir ekip.',
+        feat1Title: 'Uzman Kadro',            feat1Text: '2004\'ten bu yana, 20 yılı aşkın tabelacılık deneyimine sahip, montajda da işin başında olan bir ekip.',
         feat2Title: 'Kalite Kontrol Süreci',  feat2Text: 'Üretimin her aşamasında titiz kontrol; sahaya yalnızca onaylanan iş çıkar.',
-        feat3Title: 'Memnuniyet Garantisi',   feat3Text: 'Teslimat sonrası destek ve garanti ile arkanızdayız; iş bitince ilişki bitmez.',
+        feat3Title: 'Memnuniyet Garantisi',   feat3Text: '2 ay garanti ve teslimat sonrası destek ile arkanızdayız; iş bitince ilişki bitmez.',
         feat4Title: 'Her Ölçekte Hizmet',     feat4Text: 'Tek bir dükkân tabelasından zincir mağaza projelerine kadar her ölçekte çözüm.',
         feat5Title: 'Estetik ve Dayanıklılık', feat5Text: 'Dış mekâna uygun, uzun ömürlü malzeme ve markanıza yakışan temiz bir bitiş.',
         feat6Title: 'Yenilikçi Tasarım Anlayışı', feat6Text: 'Hazır kalıp değil; markanıza özgü, özgün ve uygulanabilir tasarımlar geliştiririz.',
@@ -140,7 +142,6 @@
         'urun-cati-tabelasi': { title: 'Çatı Tabelası', intro: 'Kilometrelerce uzaktan fark edilmenizi sağlayan devasa kutu harf çatı uygulamaları.' },
         'urun-cephe': { title: 'Cephe Kaplama & Giydirme', intro: 'Bina cephenizin kompozit panel ile komple yenilenmesi.' },
         'urun-eczane': { title: 'Eczane Tabelası', intro: 'Yönetmeliğe uygun standart veya özel tasarım eczane tabelaları.' },
-        'urun-filo-arac-giydirme': { title: 'Filo Araç Giydirme', intro: 'Şirketinizin tüm araçları için standartlaştırılmış, profesyonel seri kaplama hizmeti.' },
         'urun-fuar-standi': { title: 'Fuar Standı & Display Ürünleri', intro: 'Fuar ve etkinlikleriniz için dikkat çekici, taşınabilir reklam ve sergileme çözümleri.' },
         'urun-ic-mekan': { title: 'İç Mekan & Kurumsal Tabela', intro: 'Resepsiyon, banko arkası veya ofis içi estetik logo uygulamaları.' },
         'urun-is-makinesi-giydirme': { title: 'İş Makinesi Giydirme', intro: 'Vinç, kamyon ve ağır vasıtalar için dayanıklı folyo reklam uygulamaları.' },
@@ -148,17 +149,15 @@
         'urun-isikli-pano-billboard': { title: 'Işıklı Pano & Billboard', intro: 'Geniş ebatlı, yüksek görünürlüğe sahip aydınlatmalı dış mekan panoları.' },
         'urun-karsilama-bankosu': { title: 'Karşılama Bankosu Tabelası', intro: 'Misafirlerinizi karşılayan, şirket prestijinizi yansıtan resepsiyon tabelaları.' },
         'urun-kompozit-oyma': { title: 'Kompozit Oyma Tabela', intro: 'CNC oyma kompozit, arkadan aydınlatmalı şık dış mekan çözümü.' },
-        'urun-kumas-lightbox': { title: 'Kumaş Baskı Lightbox', intro: 'Alüminyum kasa içine gerilen, UV baskılı ve kolay değişen ışıklı kumaş panolar.' },
         'urun-kurumsal-cephe': { title: 'Kurumsal Dış Cephe Tabela', intro: 'Firmaların ana binalarında kullanılan, kurumsal kimliği yansıtan büyük ölçekli projeler.' },
         'urun-led-harf': { title: 'LED Aydınlatmalı Harf', intro: 'Enerji tasarruflu, homojen ışık dağılımı sağlayan şık harf tabelalar.' },
         'urun-lightbox': { title: 'Lightbox Reklam Panoları', intro: 'Kumaş baskılı, kolay değiştirilebilir arkadan aydınlatmalı panolar.' },
         'urun-otobus-minibus-giydirme': { title: 'Otobüs & Minibüs Giydirme', intro: 'Toplu taşıma ve personel servis araçları için geniş yüzey kaplamaları.' },
         'urun-ozel-arac-kaplama': { title: 'Özel Araç Kaplama', intro: 'Spor, yarış veya şahsi araçlarınız için premium folyo renk değişimi ve koruma.' },
         'urun-paslanmaz-harf': { title: 'Paslanmaz Harf Tabela', intro: 'Uzun ömürlü ve prestijli, krom veya gold paslanmazdan üretilen harfler.' },
-        'urun-pleksi-kutu-harf': { title: 'Pleksi Kutu Harf Tabela', intro: 'Canlı renk seçenekleri sunan, ışık geçirgenliği yüksek akrilik tabelalar.' },
         'urun-ppf-arac-koruma': { title: 'Şeffaf PPF Araç Koruma', intro: 'Aracınızın boyasını taş vurukları ve çiziklerden koruyan görünmez film kaplama.' },
         'urun-santiye-insaat-tabelasi': { title: 'Şantiye & İnşaat Tabelası', intro: 'İnşaat alanlarında bilgi ve reklam amaçlı kullanılan devasa sac/vinil tabelalar.' },
-        'urun-ticari-arac-kaplama': { title: 'Ticari Araç & Kamyonet Kaplama', intro: 'Kasa ve gövdeye özel tasarlanmış, hareketli reklam alanınız olan ticari giydirmeler.' },
+        'urun-ticari-arac-kaplama': { title: 'Ticari & Filo Araç Giydirme', intro: 'Kasa ve gövdeye özel tasarlanmış, hareketli reklam alanınız olan ticari giydirmeler.' },
         'urun-totem': { title: 'Totem & Pilon Tabela', intro: 'Açık alanlarda yüksek görünürlük sağlayan devasa reklam üniteleri.' },
         'urun-tuning-folyo': { title: 'Tuning ve Özel Kesim Folyo', intro: 'Kişiselleştirilmiş araç tasarımları için plotter kesim dekoratif şerit ve logolar.' },
         'urun-yonlendirme-otopark': { title: 'Yönlendirme ve Otopark Tabelaları', intro: 'Site, plaza ve AVM içlerinde ziyaretçilere yol gösteren fonksiyonel tabelalar.' }
@@ -183,7 +182,7 @@
       },
       stats: [
         { id: 's1', number: '2.500', em: '+', label: 'tamamlanan proje' },
-        { id: 's2', number: '30',    em: '+', label: 'yıl tecrübe' },
+        { id: 's2', number: '20',    em: '+', label: 'yıl tecrübe' },
         { id: 's3', number: 'İstanbul', em: '', label: 'geneli montaj' },
         { id: 's4', number: '81',    em: '', label: 'ile teslimat imkânı' }
       ],
@@ -249,7 +248,10 @@
       site:         Object.assign({}, base.site, saved.site || {}),
       contact:      Object.assign({}, base.contact, saved.contact || {}),
       home:         Object.assign({}, base.home, saved.home || {}),
-      products:     Object.assign({}, base.products, saved.products || {}),
+      products:     Object.keys(base.products).reduce(function (products, slug) {
+        products[slug] = Object.assign({}, base.products[slug], saved.products && saved.products[slug] || {});
+        return products;
+      }, {}),
       pages:        Object.assign({}, base.pages, saved.pages || {}),
       stats:        Array.isArray(saved.stats)        ? saved.stats        : base.stats,
       gallery:      Array.isArray(saved.gallery)      ? saved.gallery      : base.gallery,
@@ -262,21 +264,28 @@
      PUBLIC API  (Supabase modunda otomatik DB; değilse localStorage)
      ====================================================================== */
 
+  // Ham içerik: tek REST isteği, main.js ile paylaşılır (window.__mrContent).
+  // supabase-js yalnızca yazma/auth için yüklenir (ensureLib).
+  function fetchRaw() {
+    if (!global.__mrContent) {
+      global.__mrContent = fetch(SUPABASE_URL + '/rest/v1/' + SB_TABLE + '?id=eq.' + SB_ROW_ID + '&select=data', {
+        headers: { apikey: SUPABASE_KEY, Authorization: 'Bearer ' + SUPABASE_KEY }
+      }).then(function (r) {
+        if (!r.ok) throw new Error('site_content HTTP ' + r.status);
+        return r.json();
+      }).then(function (rows) { return rows && rows[0] ? rows[0].data : null; })
+        .catch(function (e) { global.__mrContent = null; throw e; }); // başarısızsa sonraki çağrı yeniden denesin
+    }
+    return global.__mrContent;
+  }
+
   // Tüm içeriği oku.
   function getContent() {
-    return ensureLib().then(function (sb) {
-      if (sb) {
-        return sb.from(SB_TABLE).select('data').eq('id', SB_ROW_ID).maybeSingle()
-          .then(function (res) {
-            if (res.error) throw res.error;
-            return merge(res.data ? res.data.data : null);
-          });
-      }
-      try {
-        var raw = global.localStorage.getItem(LS_KEY);
-        return merge(raw ? JSON.parse(raw) : null);
-      } catch (e) { return defaults(); }
-    });
+    if (isSupabase()) return fetchRaw().then(merge);
+    try {
+      var raw = global.localStorage.getItem(LS_KEY);
+      return Promise.resolve(merge(raw ? JSON.parse(raw) : null));
+    } catch (e) { return Promise.resolve(defaults()); }
   }
 
   // Tüm içeriği kaydet.  Supabase modunda yalnızca giriş yapmış admin yazabilir (RLS).
@@ -285,7 +294,7 @@
       if (sb) {
         return sb.from(SB_TABLE)
           .upsert({ id: SB_ROW_ID, data: content, updated_at: new Date().toISOString() })
-          .then(function (res) { if (res.error) throw res.error; return true; });
+          .then(function (res) { if (res.error) throw res.error; global.__mrContent = null; return true; });
       }
       global.localStorage.setItem(LS_KEY, JSON.stringify(content));
       return true;
@@ -299,7 +308,7 @@
       if (sb) {
         return sb.from(SB_TABLE)
           .upsert({ id: SB_ROW_ID, data: d, updated_at: new Date().toISOString() })
-          .then(function () { return d; });
+          .then(function () { global.__mrContent = null; return d; });
       }
       try { global.localStorage.removeItem(LS_KEY); } catch (e) {}
       return d;

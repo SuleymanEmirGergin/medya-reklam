@@ -600,6 +600,29 @@
     sel.addEventListener('change', bodyLoad);
     var sb = $('#bodySaveBtn'); if (sb) sb.addEventListener('click', bodySave);
   }
+  // Quill HTML allowlist sanitizer: izinli etiket disindakiler unwrap edilir, script/style/iframe/object/embed silinir.
+  var SAN_TAGS = /^(H2|H3|H4|P|STRONG|B|EM|I|U|S|UL|OL|LI|A|BR|BLOCKQUOTE|SPAN)$/;
+  var SAN_DROP = /^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED|NOSCRIPT|TEMPLATE|SVG|MATH)$/;
+  var SAN_HREF = /^(https?:|mailto:|tel:|#|\/|\.\.?\/|[^:]*$)/i;
+  function sanitizeNode(node){
+    Array.prototype.slice.call(node.childNodes).forEach(function(ch){
+      if(ch.nodeType === 3) return;
+      if(ch.nodeType !== 1 || SAN_DROP.test(ch.tagName)){ node.removeChild(ch); return; }
+      sanitizeNode(ch);
+      if(!SAN_TAGS.test(ch.tagName)){
+        while(ch.firstChild) node.insertBefore(ch.firstChild, ch);
+        node.removeChild(ch); return;
+      }
+      var href = ch.tagName === 'A' ? (ch.getAttribute('href') || '').replace(/[\u0000- ]/g, '') : null;
+      Array.prototype.slice.call(ch.attributes).forEach(function(at){ ch.removeAttribute(at.name); });
+      if(href && SAN_HREF.test(href)){ ch.setAttribute('href', href); ch.setAttribute('rel', 'noopener'); }
+    });
+  }
+  function sanitizeHTML(html){
+    var d = new DOMParser().parseFromString('<body>' + String(html == null ? '' : html), 'text/html').body;
+    sanitizeNode(d);
+    return d.innerHTML;
+  }
   function bodyRef() {
     var el = $('#bodyPageSelect'); if (!el || !el.value) return null;
     return { obj: el.value.charAt(0) === 'p' ? content.products : content.pages, slug: el.value.slice(2) };
@@ -609,13 +632,13 @@
     var ref = bodyRef();
     if (!ref) { _quill.setContents([]); return; }
     var stored = (ref.obj[ref.slug] || {}).body;
-    if (stored) { _quill.setContents([]); _quill.clipboard.dangerouslyPasteHTML(stored); return; }
+    if (stored) { _quill.setContents([]); _quill.clipboard.dangerouslyPasteHTML(sanitizeHTML(stored)); return; }
     _quill.setText('Yukleniyor…');
     fetch(ref.slug + '.html').then(function (r) { return r.text(); }).then(function (h) {
       var d = new DOMParser().parseFromString(h, 'text/html');
       var bc = d.querySelector('[data-cms-body]');
       _quill.setContents([]);
-      if (bc) _quill.clipboard.dangerouslyPasteHTML(bc.innerHTML);
+      if (bc) _quill.clipboard.dangerouslyPasteHTML(sanitizeHTML(bc.innerHTML));
     }).catch(function () { _quill.setContents([]); });
   }
   function bodySave() {
@@ -623,7 +646,7 @@
     if (!ref || !_quill) { toast('Once bir sayfa secin', 'err'); return; }
     ref.obj[ref.slug] = ref.obj[ref.slug] || {};
     var html = _quill.getSemanticHTML ? _quill.getSemanticHTML() : _quill.root.innerHTML;
-    ref.obj[ref.slug].body = _quill.getText().trim() ? html : '';
+    ref.obj[ref.slug].body = _quill.getText().trim() ? sanitizeHTML(html) : '';
     save('Icerik kaydedildi');
   }
 
@@ -634,8 +657,7 @@
       if (!f.k) return;
       var el = $('#h_' + f.k);
       if (!el) return;
-      if (f.t === 'marquee') el.value = (Array.isArray(h[f.k]) ? h[f.k] : []).join('
-');
+      if (f.t === 'marquee') el.value = (Array.isArray(h[f.k]) ? h[f.k] : []).join('\n');
       else el.value = h[f.k] || '';
     });
   }
@@ -765,8 +787,7 @@
         if (!f.k) return;
         var el = $('#h_' + f.k);
         if (!el) return;
-        if (f.t === 'marquee') content.home[f.k] = el.value.split('
-').map(function(x){return x.trim();}).filter(Boolean);
+        if (f.t === 'marquee') content.home[f.k] = el.value.split('\n').map(function(x){return x.trim();}).filter(Boolean);
         else content.home[f.k] = el.value.trim();
       });
       save('Ana sayfa metinleri kaydedildi');
