@@ -1,5 +1,6 @@
 # Medya Reklam - tüm arama motorlarına ve AI arama/eğitim botlarına açık.
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 User-agent: OAI-SearchBot
