@@ -1074,7 +1074,7 @@ p { color: var(--ink-soft); }
 }
 
 /* pagehero-angled: per-page background image via --hero-img */
-.pagehero-angled::after { background-image: var(--hero-img, url('img/isikli-tabela-gece.jpg')); }
+.pagehero-angled::after { background-image: var(--hero-img, url('img/isikli-tabela-gece.webp')); }
 
 .pagehero-angled::after { opacity: var(--hero-opacity, 0.4); }
 
@@ -1438,3 +1438,11 @@ picture { display: contents; }
 @view-transition { navigation: auto; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.22s; }
 @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* Cookie bar: bottom-left card on desktop so it stops covering the page centre. */
+@media (min-width: 721px) {
+  .cookie-consent { left: 16px; right: auto; max-width: 420px; margin: 0; }
+}
+
+.cookie-consent .btn--primary { background: #fff; color: var(--ink); border-color: #fff; }
+.cookie-consent .btn--primary:hover { background: #e9e8e4; }

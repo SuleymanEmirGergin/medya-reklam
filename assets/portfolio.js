@@ -143,7 +143,11 @@
       var im = it.querySelector('img');
       it.setAttribute('tabindex', '0');
       it.setAttribute('role', 'button');
-      it.setAttribute('aria-label', (im && im.getAttribute('alt') || 'Proje') + ' — büyüt');
+      var cp = it.querySelector('.folio__cap');
+      var cb = cp && cp.querySelector('b');
+      if (cb) cb.after(' '); // keeps the visible text and the accessible name word-separated
+      var vis = cp ? cp.innerText.replace(/\s+/g, ' ').trim() : '';
+      it.setAttribute('aria-label', (vis || (im && im.getAttribute('alt')) || 'Proje') + ' — büyüt');
       function openIt() {
         var list = shown();
         open(list, list.indexOf(it));
